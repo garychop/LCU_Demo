@@ -1,0 +1,15 @@
+LCU_DEMO/ipch/*
+LCU_DEMO/LCU_DEMO.sdf
+LCU_DEMO/LCU_DEMO.suo
+LCU_DEMO/Debug/LCU_Demo.ilk
+LCU_DEMO/Debug/LCU_Demo.pdb
+./LCU_DEMO/LCU_Demo/Release/*.obj
+./LCU_DEMO/LCU_Demo/Release/*.log
+./LCU_DEMO/LCU_Demo/Release/*.tlog
+./LCU_DEMO/LCU_Demo/Debug/*.obj
+./LCU_DEMO/LCU_DEMO/debug/*.log
+./LCU_DEMO/LCU_DEMO/debug/*.tlog
+
+
+
+
