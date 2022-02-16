@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 12. 2.2022   Time (hh:mm): 16:05                        */
+/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 08:22                        */
 /*******************************************************************************/
 
 
@@ -22,7 +22,7 @@ SAMPLE_TICK_WINDOW_CONTROL_BLOCK Sample_Tick_Window;
 GX_DISPLAY LCU_MainDisplay_control_block;
 GX_WINDOW_ROOT LCU_MainDisplay_root_window;
 GX_CANVAS  LCU_MainDisplay_canvas_control_block;
-ULONG      LCU_MainDisplay_canvas_memory[153600];
+ULONG      LCU_MainDisplay_canvas_memory[172800];
 
 
 UINT gx_studio_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent)
@@ -186,15 +186,7 @@ UINT gx_studio_template_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *contr
 }
 GX_WINDOW_PROPERTIES PrimaryTemplate_properties =
 {
-    GX_PIXELMAP_ID_BACKDROPA                 /* wallpaper pixelmap id          */
-};
-GX_TEXT_BUTTON_PROPERTIES PrimaryTemplate_LimitSwitch_Button_properties =
-{
-    GX_STRING_ID_STRING_19,                  /* string id                      */
-    GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
-    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+    GX_PIXELMAP_ID_BACKDROP                  /* wallpaper pixelmap id          */
 };
 GX_ICON_BUTTON_PROPERTIES PrimaryTemplate_LimitSwitchStatus_IconButton_properties =
 {
@@ -216,7 +208,7 @@ GX_TEXT_BUTTON_PROPERTIES PrimaryTemplate_EEPROM_Fail_Button_properties =
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_TEXT_BUTTON_PROPERTIES PrimaryTemplate_EEPROM_Pass_Button_properties =
+GX_TEXT_BUTTON_PROPERTIES PrimaryTemplate_EEPROM_OK_Button_properties =
 {
     GX_STRING_ID_STRING_3,                   /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
@@ -236,20 +228,36 @@ GX_ICON_BUTTON_PROPERTIES PrimaryTemplate_Play_Button_properties =
 {
     GX_PIXELMAP_ID_RIGHTARROW_80X60          /* pixelmap id                    */
 };
-GX_PROMPT_PROPERTIES PrimaryTemplate_LimitSwitchStatus_prompt_properties =
+GX_ML_TEXT_BUTTON_PROPERTIES PrimaryTemplate_SystemError_Button_properties =
 {
-    GX_STRING_ID_STRING_20,                  /* string id                      */
-    GX_FONT_ID_SYSTEM,                       /* font id                        */
+    GX_STRING_ID_STRING_24,                  /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES PrimaryTemplate_Mouthpiece_Prompt_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
     GX_COLOR_ID_TEXT,                        /* normal text color              */
     GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_TEXT_BUTTON_PROPERTIES PrimaryTemplate_SystemError_Button_properties =
+GX_TEXT_BUTTON_PROPERTIES PrimaryTemplate_LimitSwitch_Button_properties =
 {
-    GX_STRING_ID_STRING_24,                  /* string id                      */
+    GX_STRING_ID_STRING_19,                  /* string id                      */
     GX_FONT_ID_BUTTON,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_SCROLL_BUTTON,               /* selected text color            */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES PrimaryTemplate_LimitSwitchStatus_prompt_properties =
+{
+    GX_STRING_ID_STRING_20,                  /* string id                      */
+    GX_FONT_ID_SYSTEM,                       /* font id                        */
+    GX_COLOR_ID_SELECTED_TEXT,               /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
 
@@ -270,18 +278,18 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_EEPROM_Expired_Button_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {182, 327, 295, 354},                    /* widget size                    */
+    {181, 428, 294, 455},                    /* widget size                    */
     GX_NULL,                                 /* no next widget                 */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_EEPROM_Expired_Button), /* control block */
     (void *) &PrimaryTemplate_EEPROM_Expired_Button_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_EEPROM_Pass_Button_define =
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_EEPROM_OK_Button_define =
 {
-    "EEPROM_Pass_Button",
+    "EEPROM_OK_Button",
     GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    EEPROM_PASS_BTN_ID,                      /* widget id                      */
+    EEPROM_OK_BTN_ID,                        /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -294,11 +302,11 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_EEPROM_Pass_Button_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {182, 292, 231, 319},                    /* widget size                    */
+    {181, 393, 230, 420},                    /* widget size                    */
     &PrimaryTemplate_EEPROM_Expired_Button_define, /* next widget definition   */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_EEPROM_Pass_Button), /* control block */
-    (void *) &PrimaryTemplate_EEPROM_Pass_Button_properties /* extended properties */
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_EEPROM_OK_Button), /* control block */
+    (void *) &PrimaryTemplate_EEPROM_OK_Button_properties /* extended properties */
 };
 
 GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_EEPROM_Fail_Button_define =
@@ -318,35 +326,11 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_EEPROM_Fail_Button_define =
     gx_studio_text_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {244, 292, 293, 319},                    /* widget size                    */
-    &PrimaryTemplate_EEPROM_Pass_Button_define, /* next widget definition      */
+    {243, 393, 292, 420},                    /* widget size                    */
+    &PrimaryTemplate_EEPROM_OK_Button_define, /* next widget definition        */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_EEPROM_Fail_Button), /* control block */
     (void *) &PrimaryTemplate_EEPROM_Fail_Button_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_SystemError_Button_define =
-{
-    "SystemError_Button",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    SYSTEM_ERROR_BTN_ID,                     /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_RED_BURNT,                   /* normal color id                */
-    GX_COLOR_ID_RED_BURNT,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {41, 369, 290, 398},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_SystemError_Button), /* control block */
-    (void *) &PrimaryTemplate_SystemError_Button_properties /* extended properties */
 };
 
 GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_LimitSwitchStatus_prompt_define =
@@ -360,17 +344,89 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_LimitSwitchStatus_prompt_define =
     GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
     sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    GX_COLOR_ID_SHADOW,                      /* normal color id                */
+    GX_COLOR_ID_SHADOW,                      /* selected color id              */
+    GX_COLOR_ID_SHADOW,                      /* disabled color id              */
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {176, 250, 255, 273},                    /* widget size                    */
-    &PrimaryTemplate_SystemError_Button_define, /* next widget definition      */
+    {192, 343, 271, 366},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_LimitSwitchStatus_prompt), /* control block */
     (void *) &PrimaryTemplate_LimitSwitchStatus_prompt_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_LimitSwitch_Button_define =
+{
+    "LimitSwitch_Button",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    LIMIT_SWITCH_BTN_ID,                     /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {41, 340, 172, 369},                     /* widget size                    */
+    &PrimaryTemplate_LimitSwitchStatus_prompt_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_LimitSwitch_Button), /* control block */
+    (void *) &PrimaryTemplate_LimitSwitch_Button_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Mouthpiece_Prompt_define =
+{
+    "Mouthpiece_Prompt",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    MOUTHPIECE_PROMPT_ID,                    /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_RIGHT,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_SHADOW,                      /* normal color id                */
+    GX_COLOR_ID_SHADOW,                      /* selected color id              */
+    GX_COLOR_ID_SHADOW,                      /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 328, 309, 381},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    &PrimaryTemplate_LimitSwitch_Button_define, /* child widget definition     */
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_Mouthpiece_Prompt), /* control block */
+    (void *) &PrimaryTemplate_Mouthpiece_Prompt_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_SystemError_Button_define =
+{
+    "SystemError_Button",
+    GX_TYPE_MULTI_LINE_TEXT_BUTTON,          /* widget type                    */
+    SYSTEM_ERROR_BTN_ID,                     /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_BUTTON),       /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_button_create,     /* create function            */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {165, 470, 244, 533},                    /* widget size                    */
+    &PrimaryTemplate_Mouthpiece_Prompt_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_SystemError_Button), /* control block */
+    (void *) &PrimaryTemplate_SystemError_Button_properties /* extended properties */
 };
 
 GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Play_Button_define =
@@ -384,14 +440,14 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Play_Button_define =
     GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_HALIGN_CENTER|GX_STYLE_VALIGN_CENTER,   /* style flags */
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
     sizeof(GX_ICON_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_TEXT_INPUT_TEXT,             /* selected color id              */
     GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
     gx_studio_icon_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {113, 408, 192, 467},                    /* widget size                    */
-    &PrimaryTemplate_LimitSwitchStatus_prompt_define, /* next widget definition */
+    {59, 471, 138, 530},                     /* widget size                    */
+    &PrimaryTemplate_SystemError_Button_define, /* next widget definition      */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_Play_Button), /* control block */
     (void *) &PrimaryTemplate_Play_Button_properties /* extended properties    */
@@ -408,13 +464,13 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_EEPROM_Is_Prompt_define =
     GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
     sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_WIDGET_FILL,                 /* selected color id              */
-    GX_COLOR_ID_WIDGET_FILL,                 /* disabled color id              */
+    GX_COLOR_ID_SHADOW,                      /* normal color id                */
+    GX_COLOR_ID_SHADOW,                      /* selected color id              */
+    GX_COLOR_ID_SHADOW,                      /* disabled color id              */
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {20, 285, 308, 361},                     /* widget size                    */
+    {19, 386, 308, 463},                     /* widget size                    */
     &PrimaryTemplate_Play_Button_define,     /* next widget definition         */
     &PrimaryTemplate_EEPROM_Fail_Button_define, /* child widget definition     */
     offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_EEPROM_Is_Prompt), /* control block */
@@ -445,30 +501,6 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_LimitSwitchStatus_IconButton_define =
     (void *) &PrimaryTemplate_LimitSwitchStatus_IconButton_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_LimitSwitch_Button_define =
-{
-    "LimitSwitch_Button",
-    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
-    LIMIT_SWITCH_BTN_ID,                     /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
-    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
-    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_text_button_create,            /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 247, 151, 276},                     /* widget size                    */
-    &PrimaryTemplate_LimitSwitchStatus_IconButton_define, /* next widget definition */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_LimitSwitch_Button), /* control block */
-    (void *) &PrimaryTemplate_LimitSwitch_Button_properties /* extended properties */
-};
-
 GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_define =
 {
     "PrimaryTemplate",
@@ -481,14 +513,14 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_define =
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
     sizeof(PRIMARYTEMPLATE_CONTROL_BLOCK),   /* control block size             */
     GX_COLOR_ID_SHADOW,                      /* normal color id                */
-    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    GX_COLOR_ID_SHADOW,                      /* selected color id              */
+    GX_COLOR_ID_SHADOW,                      /* disabled color id              */
     gx_studio_window_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {0, 0, 319, 479},                        /* widget size                    */
+    {0, 0, 319, 539},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
-    &PrimaryTemplate_LimitSwitch_Button_define, /* child widget                */
+    &PrimaryTemplate_LimitSwitchStatus_IconButton_define, /* child widget      */
     0,                                       /* control block                  */
     (void *) &PrimaryTemplate_properties     /* extended properties            */
 };
@@ -496,19 +528,19 @@ GX_TEMPLATE_PROPERTIES ReadyScreen_properties =
 {
     &PrimaryTemplate_define,                 /* base info                      */
     gx_studio_window_create,                 /* base create function           */
-    {0, 0, 319, 479}                         /* widget size                    */
+    {0, 0, 319, 539}                         /* widget size                    */
 };
 GX_ICON_PROPERTIES ReadyScreen_StatusRing_Icon_properties =
 {
-    GX_PIXELMAP_ID_STATUSRING_WHITE,         /* normal pixelmap id             */
+    GX_PIXELMAP_ID_STATUSRING_BLUE,          /* normal pixelmap id             */
     0                                        /* selected pixelmap id           */
 };
 GX_RADIAL_PROGRESS_BAR_INFO ReadyScreen_TherpayTime_RadialProgressBar_properties =
 {
     160,                                     /* xcenter                        */
-    109,                                     /* ycenter                        */
-    76,                                      /* radius                         */
-    -180,                                    /* current val                    */
+    159,                                     /* ycenter                        */
+    96,                                      /* radius                         */
+    359,                                     /* current val                    */
     90,                                      /* anchor val                     */
     GX_FONT_ID_SYSTEM,                       /* font_id                        */
     GX_COLOR_ID_WHITE,                       /* normal text color              */
@@ -533,7 +565,7 @@ GX_PROMPT_PROPERTIES ReadyScreen_Time_Prompt_properties =
 };
 GX_ML_TEXT_BUTTON_PROPERTIES ReadyScreen_Information_Button_properties =
 {
-    GX_STRING_ID_STRING_9,                   /* string id                      */
+    GX_STRING_ID_STRING_34,                  /* string id                      */
     GX_FONT_ID_ARIAL_20,                     /* font id                        */
     GX_COLOR_ID_WHITE,                       /* normal text color              */
     GX_COLOR_ID_WHITE,                       /* selected text color            */
@@ -543,6 +575,35 @@ GX_ICON_PROPERTIES ReadyScreen_GreenTick_Icon_properties =
 {
     GX_PIXELMAP_ID_GREENTICKS,               /* normal pixelmap id             */
     0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES ReadyScreen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+
+GX_CONST GX_STUDIO_WIDGET ReadyScreen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_WhiteBox_Icon), /* control block */
+    (void *) &ReadyScreen_WhiteBox_Icon_properties /* extended properties      */
 };
 
 GX_CONST GX_STUDIO_WIDGET ReadyScreen_GreenTick_Icon_define =
@@ -562,8 +623,8 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_GreenTick_Icon_define =
     gx_studio_icon_create,                   /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {476, 21, 647, 197},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    {476, 20, 647, 196},                     /* widget size                    */
+    &ReadyScreen_WhiteBox_Icon_define,       /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_GreenTick_Icon), /* control block */
     (void *) &ReadyScreen_GreenTick_Icon_properties /* extended properties     */
@@ -586,7 +647,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_Information_Button_define =
     gx_studio_multi_line_text_button_create,     /* create function            */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {92, 63, 231, 153},                      /* widget size                    */
+    {92, 110, 231, 200},                     /* widget size                    */
     &ReadyScreen_GreenTick_Icon_define,      /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_Information_Button), /* control block */
@@ -610,7 +671,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_Time_Prompt_define =
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {106, 104, 215, 143},                    /* widget size                    */
+    {110, 146, 219, 185},                    /* widget size                    */
     &ReadyScreen_Information_Button_define,  /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_Time_Prompt), /* control block */
@@ -634,7 +695,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_PauseIcon_Button_define =
     gx_studio_icon_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {169, 108, 194, 125},                    /* widget size                    */
+    {164, 156, 189, 173},                    /* widget size                    */
     &ReadyScreen_Time_Prompt_define,         /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_PauseIcon_Button), /* control block */
@@ -658,7 +719,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_TherpayTime_RadialProgressBar_define =
     gx_studio_radial_progress_bar_create,     /* create function               */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {477, 24, 645, 192},                     /* widget size                    */
+    {83, 79, 245, 241},                      /* widget size                    */
     &ReadyScreen_PauseIcon_Button_define,    /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_TherpayTime_RadialProgressBar), /* control block */
@@ -682,7 +743,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_StatusRing_Icon_define =
     gx_studio_icon_create,                   /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {52, 0, 271, 219},                       /* widget size                    */
+    {14, 14, 303, 303},                      /* widget size                    */
     &ReadyScreen_TherpayTime_RadialProgressBar_define, /* next widget definition */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_StatusRing_Icon), /* control block */
@@ -706,7 +767,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_define =
     gx_studio_template_create,               /* create function                */
     (VOID (*)(GX_WIDGET *)) ReadyScreen_Draw_Function, /* drawing function override */
     (UINT (*)(GX_WIDGET *, GX_EVENT *)) ReadyScreen_Event_Function, /* event function override */
-    {0, 0, 319, 479},                        /* widget size                    */
+    {0, 0, 319, 539},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &ReadyScreen_StatusRing_Icon_define,     /* child widget                   */
     0,                                       /* control block                  */
@@ -716,7 +777,7 @@ GX_TEMPLATE_PROPERTIES Splash_Window_properties =
 {
     &PrimaryTemplate_define,                 /* base info                      */
     gx_studio_window_create,                 /* base create function           */
-    {0, 0, 319, 479}                         /* widget size                    */
+    {0, 0, 319, 539}                         /* widget size                    */
 };
 GX_ICON_PROPERTIES Splash_Window_MuReva_Logo_properties =
 {
@@ -725,8 +786,8 @@ GX_ICON_PROPERTIES Splash_Window_MuReva_Logo_properties =
 };
 GX_ICON_PROPERTIES Splash_Window_StatusRing_Icon_properties =
 {
-    GX_PIXELMAP_ID_STATUSRING_WHITE,         /* normal pixelmap id             */
-    0                                        /* selected pixelmap id           */
+    GX_PIXELMAP_ID_STATUSRING_OFF,           /* normal pixelmap id             */
+    GX_PIXELMAP_ID_STATUSRING_GREEN          /* selected pixelmap id           */
 };
 GX_PROMPT_PROPERTIES Splash_Window_prompt_properties =
 {
@@ -735,6 +796,35 @@ GX_PROMPT_PROPERTIES Splash_Window_prompt_properties =
     GX_COLOR_ID_WIDGET_FILL,                 /* normal text color              */
     GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_ICON_PROPERTIES Splash_Window_Mureva_Logo_320x240_properties =
+{
+    GX_PIXELMAP_ID_MUREVA_LOGO_ROUNDWHITE,   /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+
+GX_CONST GX_STUDIO_WIDGET Splash_Window_Mureva_Logo_320x240_define =
+{
+    "Mureva_Logo_320x240",
+    GX_TYPE_ICON,                            /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {1, 1, 320, 320},                        /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SPLASH_WINDOW_CONTROL_BLOCK, Splash_Window_Mureva_Logo_320x240), /* control block */
+    (void *) &Splash_Window_Mureva_Logo_320x240_properties /* extended properties */
 };
 
 GX_CONST GX_STUDIO_WIDGET Splash_Window_prompt_define =
@@ -754,8 +844,8 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_prompt_define =
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {114, 158, 204, 181},                    /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    {120, 216, 210, 239},                    /* widget size                    */
+    &Splash_Window_Mureva_Logo_320x240_define, /* next widget definition       */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SPLASH_WINDOW_CONTROL_BLOCK, Splash_Window_prompt), /* control block */
     (void *) &Splash_Window_prompt_properties /* extended properties           */
@@ -769,7 +859,7 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_StatusRing_Icon_define =
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
     GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
     sizeof(GX_ICON),                         /* control block size             */
     GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
@@ -778,7 +868,7 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_StatusRing_Icon_define =
     gx_studio_icon_create,                   /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {52, 0, 271, 219},                       /* widget size                    */
+    {14, 14, 303, 303},                      /* widget size                    */
     &Splash_Window_prompt_define,            /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SPLASH_WINDOW_CONTROL_BLOCK, Splash_Window_StatusRing_Icon), /* control block */
@@ -802,7 +892,7 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_MuReva_Logo_define =
     gx_studio_icon_create,                   /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {96, 36, 228, 161},                      /* widget size                    */
+    {500, 69, 632, 194},                     /* widget size                    */
     &Splash_Window_StatusRing_Icon_define,   /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SPLASH_WINDOW_CONTROL_BLOCK, Splash_Window_MuReva_Logo), /* control block */
@@ -813,7 +903,7 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_define =
 {
     "Splash_Window",
     GX_TYPE_TEMPLATE,                        /* widget type                    */
-    SPLAS_WINDOW,                            /* widget id                      */
+    SPLASH_WINDOW,                           /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
@@ -826,7 +916,7 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_define =
     gx_studio_template_create,               /* create function                */
     GX_NULL,                                 /* drawing function override      */
     (UINT (*)(GX_WIDGET *, GX_EVENT *)) SplashScreen_Event_Function, /* event function override */
-    {0, 0, 319, 479},                        /* widget size                    */
+    {0, 0, 319, 539},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &Splash_Window_MuReva_Logo_define,       /* child widget                   */
     0,                                       /* control block                  */
@@ -836,7 +926,7 @@ GX_TEMPLATE_PROPERTIES Sample_Tick_Window_properties =
 {
     &PrimaryTemplate_define,                 /* base info                      */
     gx_studio_window_create,                 /* base create function           */
-    {0, 0, 319, 479}                         /* widget size                    */
+    {0, 0, 319, 539}                         /* widget size                    */
 };
 GX_ICON_PROPERTIES Sample_Tick_Window_OneOfSixtyTicks_icon_properties =
 {
@@ -885,7 +975,7 @@ GX_CONST GX_STUDIO_WIDGET Sample_Tick_Window_define =
     gx_studio_template_create,               /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {0, 0, 319, 479},                        /* widget size                    */
+    {0, 0, 319, 539},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &Sample_Tick_Window_OneOfSixtyTicks_icon_define, /* child widget           */
     0,                                       /* control block                  */
@@ -1034,12 +1124,12 @@ GX_STUDIO_DISPLAY_INFO MuReva_LCU_Demo_display_table[1] =
     LCU_MAINDISPLAY_LANGUAGE_TABLE_SIZE,
     LCU_MAINDISPLAY_STRING_TABLE_SIZE,
     320,                                     /* x resolution                   */
-    480,                                     /* y resolution                   */
+    540,                                     /* y resolution                   */
     &LCU_MainDisplay_control_block,
     &LCU_MainDisplay_canvas_control_block,
     &LCU_MainDisplay_root_window,
     LCU_MainDisplay_canvas_memory,           /* canvas memory area             */
-    614400                                   /* canvas memory size in bytes    */
+    691200                                   /* canvas memory size in bytes    */
     }
 };
 

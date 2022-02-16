@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 12. 2.2022   Time (hh:mm): 16:05                        */
+/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 08:22                        */
 /*******************************************************************************/
 
 
@@ -26,13 +26,15 @@ extern   "C" {
 #define TIME_PROMPT_ID 2
 #define INFORMATION_BUTTON 3
 #define GREEN_TICK_ICON 4
-#define SPLAS_WINDOW 5
-#define LIMIT_SWITCH_BTN_ID 6
+#define WHITE_BOX_ICON 5
+#define SPLASH_WINDOW 6
 #define EEPROM_FAIL_BTN_ID 7
-#define EEPROM_PASS_BTN_ID 8
+#define EEPROM_OK_BTN_ID 8
 #define EEPROM_EXPIRED_BTN_ID 9
 #define PLAY_BTN_ID 10
 #define SYSTEM_ERROR_BTN_ID 11
+#define MOUTHPIECE_PROMPT_ID 12
+#define LIMIT_SWITCH_BTN_ID 13
 
 
 /* Define animation ids                                                        */
@@ -133,15 +135,16 @@ typedef struct
 typedef struct PRIMARYTEMPLATE_CONTROL_BLOCK_STRUCT
 {
     GX_WINDOW_MEMBERS_DECLARE
-    GX_TEXT_BUTTON PrimaryTemplate_LimitSwitch_Button;
     GX_ICON_BUTTON PrimaryTemplate_LimitSwitchStatus_IconButton;
     GX_PROMPT PrimaryTemplate_EEPROM_Is_Prompt;
     GX_TEXT_BUTTON PrimaryTemplate_EEPROM_Fail_Button;
-    GX_TEXT_BUTTON PrimaryTemplate_EEPROM_Pass_Button;
+    GX_TEXT_BUTTON PrimaryTemplate_EEPROM_OK_Button;
     GX_TEXT_BUTTON PrimaryTemplate_EEPROM_Expired_Button;
     GX_ICON_BUTTON PrimaryTemplate_Play_Button;
+    GX_MULTI_LINE_TEXT_BUTTON PrimaryTemplate_SystemError_Button;
+    GX_PROMPT PrimaryTemplate_Mouthpiece_Prompt;
+    GX_TEXT_BUTTON PrimaryTemplate_LimitSwitch_Button;
     GX_PROMPT PrimaryTemplate_LimitSwitchStatus_prompt;
-    GX_TEXT_BUTTON PrimaryTemplate_SystemError_Button;
 } PRIMARYTEMPLATE_CONTROL_BLOCK;
 
 typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
@@ -153,6 +156,7 @@ typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
     GX_PROMPT ReadyScreen_Time_Prompt;
     GX_MULTI_LINE_TEXT_BUTTON ReadyScreen_Information_Button;
     GX_ICON ReadyScreen_GreenTick_Icon;
+    GX_ICON ReadyScreen_WhiteBox_Icon;
 } READYSCREEN_CONTROL_BLOCK;
 
 typedef struct SPLASH_WINDOW_CONTROL_BLOCK_STRUCT
@@ -161,6 +165,7 @@ typedef struct SPLASH_WINDOW_CONTROL_BLOCK_STRUCT
     GX_ICON Splash_Window_MuReva_Logo;
     GX_ICON Splash_Window_StatusRing_Icon;
     GX_PROMPT Splash_Window_prompt;
+    GX_ICON Splash_Window_Mureva_Logo_320x240;
 } SPLASH_WINDOW_CONTROL_BLOCK;
 
 typedef struct SAMPLE_TICK_WINDOW_CONTROL_BLOCK_STRUCT

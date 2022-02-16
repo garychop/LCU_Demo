@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 12. 2.2022   Time (hh:mm): 16:05                        */
+/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 08:22                        */
 /*******************************************************************************/
 
 
@@ -20,7 +20,7 @@
 #define LCU_MAINDISPLAY 0
 #define LCU_MAINDISPLAY_COLOR_FORMAT GX_COLOR_FORMAT_24XRGB
 #define LCU_MAINDISPLAY_X_RESOLUTION 320
-#define LCU_MAINDISPLAY_Y_RESOLUTION 480
+#define LCU_MAINDISPLAY_Y_RESOLUTION 540
 #define LCU_MAINDISPLAY_THEME_1 0
 #define LCU_MAINDISPLAY_THEME_TABLE_SIZE 1
 
@@ -94,16 +94,20 @@
 #define GX_PIXELMAP_ID_GREENTICKS 9
 #define GX_PIXELMAP_ID_MUREVA_LOGO_133X126 10
 #define GX_PIXELMAP_ID_MUREVA_LOGO_180X180 11
-#define GX_PIXELMAP_ID_ONESECONDTICKSAMPLE 12
-#define GX_PIXELMAP_ID_PAUSEBUTTON_24X16 13
-#define GX_PIXELMAP_ID_PAUSEBUTTON_30X20 14
-#define GX_PIXELMAP_ID_PAUSEBUTTON_30X30 15
-#define GX_PIXELMAP_ID_RIGHTARROW_80X60 16
-#define GX_PIXELMAP_ID_STATUSRING_BLUE 17
-#define GX_PIXELMAP_ID_STATUSRING_GREEN 18
-#define GX_PIXELMAP_ID_STATUSRING_RED 19
-#define GX_PIXELMAP_ID_STATUSRING_WHITE 20
-#define LCU_MAINDISPLAY_PIXELMAP_TABLE_SIZE 21
+#define GX_PIXELMAP_ID_MUREVA_LOGO_REV2 12
+#define GX_PIXELMAP_ID_MUREVA_LOGO_ROUNDWHITE 13
+#define GX_PIXELMAP_ID_ONESECONDTICKSAMPLE 14
+#define GX_PIXELMAP_ID_PAUSEBUTTON_24X16 15
+#define GX_PIXELMAP_ID_PAUSEBUTTON_30X20 16
+#define GX_PIXELMAP_ID_PAUSEBUTTON_30X30 17
+#define GX_PIXELMAP_ID_RIGHTARROW_80X60 18
+#define GX_PIXELMAP_ID_STATUSRING_BLUE 19
+#define GX_PIXELMAP_ID_STATUSRING_GREEN 20
+#define GX_PIXELMAP_ID_STATUSRING_OFF 21
+#define GX_PIXELMAP_ID_STATUSRING_RED 22
+#define GX_PIXELMAP_ID_STATUSRING_WHITE 23
+#define GX_PIXELMAP_ID_WHITE_TEXT_BOX 24
+#define LCU_MAINDISPLAY_PIXELMAP_TABLE_SIZE 25
 
 /* String Ids                                                                  */
 
@@ -138,6 +142,9 @@
 #define GX_STRING_ID_STRING_23 29
 #define GX_STRING_ID_STRING_24 30
 #define GX_STRING_ID_STRING_31 31
-#define LCU_MAINDISPLAY_STRING_TABLE_SIZE 32
+#define GX_STRING_ID_STRING_32 32
+#define GX_STRING_ID_STRING_33 33
+#define GX_STRING_ID_STRING_34 34
+#define LCU_MAINDISPLAY_STRING_TABLE_SIZE 35
 
 #endif                                       /* sentry                         */
