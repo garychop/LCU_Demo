@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 08:22                        */
+/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 10:41                        */
 /*******************************************************************************/
 
 
@@ -20187,10 +20187,12 @@ GX_CONST GX_UBYTE LCU_MainDisplay_STRING_31_English[8] = "EXPIRED";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_32_English[20] = "multi\rline\rbutton";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_33_English[26] = "CONTINUE?\rPress         ";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_34_English[27] = "Select\rMouthpiece\rStatus";
+GX_CONST GX_UBYTE LCU_MainDisplay_STRING_39_English[7] = "  S/N:";
+GX_CONST GX_UBYTE LCU_MainDisplay_STRING_40_English[2] = "1";
 
 /* String Table for LCU_MainDisplay language English                           */
 
-GX_CONST GX_UBYTE *LCU_MainDisplay_English_string_table[35] =
+GX_CONST GX_UBYTE *LCU_MainDisplay_English_string_table[37] =
 {
     GX_NULL,
     LCU_MainDisplay_STRING_1_English,
@@ -20226,7 +20228,9 @@ GX_CONST GX_UBYTE *LCU_MainDisplay_English_string_table[35] =
     LCU_MainDisplay_STRING_31_English,
     LCU_MainDisplay_STRING_32_English,
     LCU_MainDisplay_STRING_33_English,
-    LCU_MainDisplay_STRING_34_English
+    LCU_MainDisplay_STRING_34_English,
+    LCU_MainDisplay_STRING_39_English,
+    LCU_MainDisplay_STRING_40_English
 
 };
 

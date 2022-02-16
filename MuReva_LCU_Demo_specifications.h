@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 08:22                        */
+/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 10:41                        */
 /*******************************************************************************/
 
 
@@ -35,6 +35,9 @@ extern   "C" {
 #define SYSTEM_ERROR_BTN_ID 11
 #define MOUTHPIECE_PROMPT_ID 12
 #define LIMIT_SWITCH_BTN_ID 13
+#define MOUTCHPIECE_IS_LABEL_ID 14
+#define SERIAL_NUMBER_PROMPT_ID 15
+#define SERIAL_NUMBER_TEXT_INPUT_ID 16
 
 
 /* Define animation ids                                                        */
@@ -124,6 +127,19 @@ typedef struct
 
 typedef struct
 {
+    GX_RESOURCE_ID string_id;
+    GX_RESOURCE_ID font_id;
+    GX_RESOURCE_ID normal_text_color_id;
+    GX_RESOURCE_ID selected_text_color_id;
+    GX_RESOURCE_ID disabled_text_color_id;
+    GX_RESOURCE_ID readonly_fill_color_id;
+    GX_RESOURCE_ID readonly_text_color_id;
+    GX_CHAR *buffer;
+    UINT buffer_size;
+} GX_SINGLE_LINE_TEXT_INPUT_PROPERTIES;
+
+typedef struct
+{
    GX_CONST GX_STUDIO_WIDGET *base_info;
    UINT (*base_create_function) (GX_CONST struct GX_STUDIO_WIDGET_STRUCT *, GX_WIDGET *, GX_WIDGET *);
    GX_RECTANGLE size;
@@ -145,6 +161,9 @@ typedef struct PRIMARYTEMPLATE_CONTROL_BLOCK_STRUCT
     GX_PROMPT PrimaryTemplate_Mouthpiece_Prompt;
     GX_TEXT_BUTTON PrimaryTemplate_LimitSwitch_Button;
     GX_PROMPT PrimaryTemplate_LimitSwitchStatus_prompt;
+    GX_PROMPT PrimaryTemplate_Mouthpiece_Label;
+    GX_PROMPT PrimaryTemplate_SerialNumber_Prompt;
+    GX_SINGLE_LINE_TEXT_INPUT PrimaryTemplate_SerialNumber_TextInput;
 } PRIMARYTEMPLATE_CONTROL_BLOCK;
 
 typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
@@ -221,6 +240,7 @@ UINT gx_studio_icon_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_b
 UINT gx_studio_radial_progress_bar_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_prompt_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
+UINT gx_studio_text_input_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_template_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 GX_WIDGET *gx_studio_widget_create(GX_BYTE *storage, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
 UINT gx_studio_named_widget_create(char *name, GX_WIDGET *parent, GX_WIDGET **new_widget);

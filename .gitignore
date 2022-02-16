@@ -7,7 +7,7 @@
 *.idb
 *.pdb
 *.opensdf
-
+*.ipch
 
 
 

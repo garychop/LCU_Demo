@@ -53,6 +53,10 @@ UINT g_Used = 39;
 GX_BOOL g_RingOn = FALSE;
 char g_TimeString[16];
 
+int g_MouthPiece_SerialNumber = 1;
+char g_SerialNumberString[32] = "1";
+GX_CHAR *g_PromptString = NULL;
+
 GX_BOOL g_LimitSwitchClosed = FALSE;
 INT g_TherapyTime = 0;
 GX_BOOL g_TherapyInProcess = FALSE;
@@ -123,6 +127,7 @@ VOID ReadyScreen_Draw_Function (GX_WINDOW *window)
 UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 {
 	ULONG widgetStyle;
+	UINT mySize, myBufSize;
 
 	switch (event_ptr->gx_event_type)
 	{
@@ -289,7 +294,11 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 	case GX_SIGNAL (EEPROM_OK_BTN_ID, GX_EVENT_CLICKED):
 		if (g_State == STATE_CABLE_INSERTED)
 		{
-			gx_multi_line_text_button_text_id_set (&ReadyScreen.ReadyScreen_Information_Button, GX_STRING_ID_STRING_8); // "SN: xxxxxxxxx, OK? PRESS PLAY"
+			gx_single_line_text_input_buffer_get (&ReadyScreen.base.PrimaryTemplate_SerialNumber_TextInput, &g_PromptString, &mySize, &myBufSize);
+			g_MouthPiece_SerialNumber = atoi (g_PromptString);
+			sprintf (g_SerialNumberString, "SN:\rMCA%06d\rPress          \rif correct", g_MouthPiece_SerialNumber);
+			//gx_multi_line_text_button_text_id_set (&ReadyScreen.ReadyScreen_Information_Button, GX_STRING_ID_STRING_8); // "SN: xxxxxxxxx, OK? PRESS PLAY"
+			gx_multi_line_text_button_text_set (&ReadyScreen.ReadyScreen_Information_Button, g_SerialNumberString);
 			gx_widget_show (&ReadyScreen.ReadyScreen_PauseIcon_Button);
 			g_State = STATE_SERIAL_NUMBER_PROMPT;
 			EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE);

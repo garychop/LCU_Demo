@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 08:22                        */
+/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 10:41                        */
 /*******************************************************************************/
 
 
@@ -131,6 +131,34 @@ UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control
     return status;
 }
 
+UINT gx_studio_text_input_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent)
+{
+    UINT status;
+    GX_CONST GX_CHAR *text;
+    GX_SINGLE_LINE_TEXT_INPUT *input = (GX_SINGLE_LINE_TEXT_INPUT *) control_block;
+    GX_PROMPT *prompt = (GX_PROMPT *) input;
+    GX_SINGLE_LINE_TEXT_INPUT_PROPERTIES *props = (GX_SINGLE_LINE_TEXT_INPUT_PROPERTIES *) info->properties;
+    status = gx_single_line_text_input_create(input, info->widget_name, parent, props->buffer, props->buffer_size, info->style, info->widget_id, &info->size);
+    if (status == GX_SUCCESS)
+    {
+        gx_prompt_font_set(prompt, props->font_id);
+        gx_single_line_text_input_text_color_set(input, props->normal_text_color_id, props->selected_text_color_id,
+                                                 props->disabled_text_color_id, props->readonly_text_color_id);
+        gx_single_line_text_input_fill_color_set(input, input->gx_widget_normal_fill_color, input->gx_widget_selected_fill_color,
+                                                 input->gx_widget_disabled_fill_color, props->readonly_fill_color_id);
+        if (props->buffer && props->buffer_size > 0 && props->string_id)
+        {
+             gx_system_string_get(props->string_id, &text);
+
+             if (text)
+             {
+                 gx_single_line_text_input_text_set(input, text);
+             }
+        }
+    }
+    return status;
+}
+
 UINT gx_studio_template_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent)
 {
     UINT status = GX_SUCCESS;
@@ -194,7 +222,7 @@ GX_ICON_BUTTON_PROPERTIES PrimaryTemplate_LimitSwitchStatus_IconButton_propertie
 };
 GX_PROMPT_PROPERTIES PrimaryTemplate_EEPROM_Is_Prompt_properties =
 {
-    GX_STRING_ID_STRING_6,                   /* string id                      */
+    0,                                       /* string id                      */
     GX_FONT_ID_PROMPT,                       /* font id                        */
     GX_COLOR_ID_TEXT,                        /* normal text color              */
     GX_COLOR_ID_TEXT,                        /* selected text color            */
@@ -259,6 +287,35 @@ GX_PROMPT_PROPERTIES PrimaryTemplate_LimitSwitchStatus_prompt_properties =
     GX_COLOR_ID_SELECTED_TEXT,               /* normal text color              */
     GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES PrimaryTemplate_Mouthpiece_Label_properties =
+{
+    GX_STRING_ID_STRING_6,                   /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_TEXT                         /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES PrimaryTemplate_SerialNumber_Prompt_properties =
+{
+    GX_STRING_ID_STRING_39,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_CHAR PrimaryTemplate_SerialNumber_TextInput_buffer[32];
+GX_SINGLE_LINE_TEXT_INPUT_PROPERTIES PrimaryTemplate_SerialNumber_TextInput_properties =
+{
+    GX_STRING_ID_STRING_40,                  /* string id                      */
+    GX_FONT_ID_TEXT_INPUT,                   /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_TEXT,                        /* selected text color            */
+    GX_COLOR_ID_TEXT,                        /* disabled text color            */
+    GX_COLOR_ID_SHADOW,                      /* readonly fill color            */
+    GX_COLOR_ID_READONLY_TEXT,               /* readonly text color            */
+    PrimaryTemplate_SerialNumber_TextInput_buffer, /* buffer                   */
+    32,                                      /* buffer size                    */
 };
 
 GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_EEPROM_Expired_Button_define =
@@ -381,6 +438,78 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_LimitSwitch_Button_define =
     (void *) &PrimaryTemplate_LimitSwitch_Button_properties /* extended properties */
 };
 
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_SerialNumber_TextInput_define =
+{
+    "SerialNumber_TextInput",
+    GX_TYPE_SINGLE_LINE_TEXT_INPUT,          /* widget type                    */
+    SERIAL_NUMBER_TEXT_INPUT_ID,             /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_SINGLE_LINE_TEXT_INPUT),       /* control block size             */
+    GX_COLOR_ID_SHADOW,                      /* normal color id                */
+    GX_COLOR_ID_SHADOW,                      /* selected color id              */
+    GX_COLOR_ID_SHADOW,                      /* disabled color id              */
+    gx_studio_text_input_create,             /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {94, 424, 147, 453},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_SerialNumber_TextInput), /* control block */
+    (void *) &PrimaryTemplate_SerialNumber_TextInput_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_SerialNumber_Prompt_define =
+{
+    "SerialNumber_Prompt",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    SERIAL_NUMBER_PROMPT_ID,                 /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_SHADOW,                      /* normal color id                */
+    GX_COLOR_ID_SHADOW,                      /* selected color id              */
+    GX_COLOR_ID_SHADOW,                      /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {38, 423, 158, 454},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    &PrimaryTemplate_SerialNumber_TextInput_define, /* child widget definition */
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_SerialNumber_Prompt), /* control block */
+    (void *) &PrimaryTemplate_SerialNumber_Prompt_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Mouthpiece_Label_define =
+{
+    "Mouthpiece_Label",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    MOUTCHPIECE_IS_LABEL_ID,                 /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TEXT_CENTER,   /* style flags                */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_SHADOW,                      /* normal color id                */
+    GX_COLOR_ID_SHADOW,                      /* selected color id              */
+    GX_COLOR_ID_SHADOW,                      /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {28, 394, 171, 417},                     /* widget size                    */
+    &PrimaryTemplate_SerialNumber_Prompt_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_Mouthpiece_Label), /* control block */
+    (void *) &PrimaryTemplate_Mouthpiece_Label_properties /* extended properties */
+};
+
 GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Mouthpiece_Prompt_define =
 {
     "Mouthpiece_Prompt",
@@ -399,7 +528,7 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Mouthpiece_Prompt_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {20, 328, 309, 381},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    &PrimaryTemplate_Mouthpiece_Label_define, /* next widget definition        */
     &PrimaryTemplate_LimitSwitch_Button_define, /* child widget definition     */
     offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_Mouthpiece_Prompt), /* control block */
     (void *) &PrimaryTemplate_Mouthpiece_Prompt_properties /* extended properties */
