@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 10:41                        */
+/*  Date (dd.mm.yyyy): 21. 2.2022   Time (hh:mm): 09:38                        */
 /*******************************************************************************/
 
 
@@ -57,6 +57,37 @@ UINT gx_studio_multi_line_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX
 #else
         gx_text_button_text_color_set((GX_TEXT_BUTTON *) button, props->normal_text_color_id, props->selected_text_color_id, props->disabled_text_color_id);
 #endif
+    }
+    return status;
+}
+
+UINT gx_studio_checkbox_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent)
+{
+    UINT status;
+    GX_CHECKBOX *button = (GX_CHECKBOX *) control_block;
+    GX_TEXT_BUTTON *text_button = (GX_TEXT_BUTTON *) button;
+    GX_CHECKBOX_PROPERTIES *props = (GX_CHECKBOX_PROPERTIES *) info->properties;
+    status = gx_checkbox_create(button, info->widget_name, parent, props->string_id, info->style, info->widget_id, &info->size);
+    if (status == GX_SUCCESS)
+    {
+        gx_text_button_font_set(text_button, props->font_id);
+#if defined(GUIX_5_4_0_COMPATIBILITY)
+        gx_text_button_text_color_set(text_button, props->normal_text_color_id, props->selected_text_color_id);
+ #else
+        gx_text_button_text_color_set(text_button, props->normal_text_color_id, props->selected_text_color_id, props->disabled_text_color_id);
+#endif
+
+        if (props->unchecked_pixelmap_id ||
+            props->checked_pixelmap_id ||
+            props->unchecked_disabled_pixelmap_id ||
+            props->checked_disabled_pixelmap_id)
+        {
+            gx_checkbox_pixelmap_set(button,
+                                     props->unchecked_pixelmap_id,
+                                     props->checked_pixelmap_id,
+                                     props->unchecked_disabled_pixelmap_id,
+                                     props->checked_disabled_pixelmap_id);
+        }
     }
     return status;
 }
@@ -668,17 +699,17 @@ GX_RADIAL_PROGRESS_BAR_INFO ReadyScreen_TherpayTime_RadialProgressBar_properties
 {
     160,                                     /* xcenter                        */
     159,                                     /* ycenter                        */
-    96,                                      /* radius                         */
+    90,                                      /* radius                         */
     359,                                     /* current val                    */
     90,                                      /* anchor val                     */
     GX_FONT_ID_SYSTEM,                       /* font_id                        */
     GX_COLOR_ID_WHITE,                       /* normal text color              */
     GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
     GX_COLOR_ID_WHITE,                       /* disabled text color            */
-    8,                                       /* normal brush width             */
-    10,                                      /* selected brush width           */
+    10,                                      /* normal brush width             */
+    18,                                      /* selected brush width           */
     GX_COLOR_ID_CANVAS,                      /* normal brush color             */
-    GX_COLOR_ID_GREEN_BRIGHT,                /* selected brush color           */
+    GX_COLOR_ID_GREEN_SUBTLE,                /* selected brush color           */
 };
 GX_ICON_BUTTON_PROPERTIES ReadyScreen_PauseIcon_Button_properties =
 {
@@ -710,6 +741,42 @@ GX_ICON_PROPERTIES ReadyScreen_WhiteBox_Icon_properties =
     GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
     0                                        /* selected pixelmap id           */
 };
+GX_CHECKBOX_PROPERTIES ReadyScreen_AlternateTime_CheckBox_properties =
+{
+    GX_STRING_ID_STRING_37,                  /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    0,                                       /* unchecked pixelmap id          */
+    0,                                       /* checked pixelmap id            */
+    0,                                       /* unchecked disabled pixelmap id */
+    0                                        /* checked disabled pixelmap id   */
+};
+
+GX_CONST GX_STUDIO_WIDGET ReadyScreen_AlternateTime_CheckBox_define =
+{
+    "AlternateTime_CheckBox",
+    GX_TYPE_CHECKBOX,                        /* widget type                    */
+    ALTERNATE_TIME_CHECK_BOX,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_BUTTON_TOGGLE|GX_STYLE_TEXT_LEFT,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_CHECKBOX),                     /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_checkbox_create,               /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {249, 467, 328, 490},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_AlternateTime_CheckBox), /* control block */
+    (void *) &ReadyScreen_AlternateTime_CheckBox_properties /* extended properties */
+};
 
 GX_CONST GX_STUDIO_WIDGET ReadyScreen_WhiteBox_Icon_define =
 {
@@ -729,7 +796,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_WhiteBox_Icon_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {65, 84, 254, 233},                      /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    &ReadyScreen_AlternateTime_CheckBox_define, /* next widget definition      */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_WhiteBox_Icon), /* control block */
     (void *) &ReadyScreen_WhiteBox_Icon_properties /* extended properties      */
@@ -848,7 +915,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_TherpayTime_RadialProgressBar_define =
     gx_studio_radial_progress_bar_create,     /* create function               */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {83, 79, 245, 241},                      /* widget size                    */
+    {61, 60, 259, 258},                      /* widget size                    */
     &ReadyScreen_PauseIcon_Button_define,    /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_TherpayTime_RadialProgressBar), /* control block */
@@ -918,11 +985,11 @@ GX_ICON_PROPERTIES Splash_Window_StatusRing_Icon_properties =
     GX_PIXELMAP_ID_STATUSRING_OFF,           /* normal pixelmap id             */
     GX_PIXELMAP_ID_STATUSRING_GREEN          /* selected pixelmap id           */
 };
-GX_PROMPT_PROPERTIES Splash_Window_prompt_properties =
+GX_PROMPT_PROPERTIES Splash_Window_Version_Prompt_properties =
 {
-    GX_STRING_ID_STRING_21,                  /* string id                      */
+    GX_STRING_ID_STRING_38,                  /* string id                      */
     GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal text color              */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal text color              */
     GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
@@ -956,9 +1023,9 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_Mureva_Logo_320x240_define =
     (void *) &Splash_Window_Mureva_Logo_320x240_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET Splash_Window_prompt_define =
+GX_CONST GX_STUDIO_WIDGET Splash_Window_Version_Prompt_define =
 {
-    "prompt",
+    "Version_Prompt",
     GX_TYPE_PROMPT,                          /* widget type                    */
     GX_ID_NONE,                              /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
@@ -973,11 +1040,11 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_prompt_define =
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {120, 216, 210, 239},                    /* widget size                    */
+    {20, 300, 110, 323},                     /* widget size                    */
     &Splash_Window_Mureva_Logo_320x240_define, /* next widget definition       */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(SPLASH_WINDOW_CONTROL_BLOCK, Splash_Window_prompt), /* control block */
-    (void *) &Splash_Window_prompt_properties /* extended properties           */
+    offsetof(SPLASH_WINDOW_CONTROL_BLOCK, Splash_Window_Version_Prompt), /* control block */
+    (void *) &Splash_Window_Version_Prompt_properties /* extended properties   */
 };
 
 GX_CONST GX_STUDIO_WIDGET Splash_Window_StatusRing_Icon_define =
@@ -998,7 +1065,7 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_StatusRing_Icon_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {14, 14, 303, 303},                      /* widget size                    */
-    &Splash_Window_prompt_define,            /* next widget definition         */
+    &Splash_Window_Version_Prompt_define,    /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SPLASH_WINDOW_CONTROL_BLOCK, Splash_Window_StatusRing_Icon), /* control block */
     (void *) &Splash_Window_StatusRing_Icon_properties /* extended properties  */

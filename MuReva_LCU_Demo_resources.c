@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 10:41                        */
+/*  Date (dd.mm.yyyy): 21. 2.2022   Time (hh:mm): 09:38                        */
 /*******************************************************************************/
 
 
@@ -50,7 +50,8 @@ GX_CONST GX_COLOR LCU_MainDisplay_theme_1_color_table[] =
     0xffffe900,
     0xff27303f,
     0xffffffff,
-    0xffa01008
+    0xffa01008,
+    0xff008f00
 };
 
 
@@ -20189,10 +20190,14 @@ GX_CONST GX_UBYTE LCU_MainDisplay_STRING_33_English[26] = "CONTINUE?\rPress     
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_34_English[27] = "Select\rMouthpiece\rStatus";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_39_English[7] = "  S/N:";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_40_English[2] = "1";
+GX_CONST GX_UBYTE LCU_MainDisplay_STRING_35_English[9] = "checkbox";
+GX_CONST GX_UBYTE LCU_MainDisplay_STRING_36_English[4] = "ALT";
+GX_CONST GX_UBYTE LCU_MainDisplay_STRING_37_English[5] = "Time";
+GX_CONST GX_UBYTE LCU_MainDisplay_STRING_38_English[12] = "Version 1.4";
 
 /* String Table for LCU_MainDisplay language English                           */
 
-GX_CONST GX_UBYTE *LCU_MainDisplay_English_string_table[37] =
+GX_CONST GX_UBYTE *LCU_MainDisplay_English_string_table[41] =
 {
     GX_NULL,
     LCU_MainDisplay_STRING_1_English,
@@ -20230,7 +20235,11 @@ GX_CONST GX_UBYTE *LCU_MainDisplay_English_string_table[37] =
     LCU_MainDisplay_STRING_33_English,
     LCU_MainDisplay_STRING_34_English,
     LCU_MainDisplay_STRING_39_English,
-    LCU_MainDisplay_STRING_40_English
+    LCU_MainDisplay_STRING_40_English,
+    LCU_MainDisplay_STRING_35_English,
+    LCU_MainDisplay_STRING_36_English,
+    LCU_MainDisplay_STRING_37_English,
+    LCU_MainDisplay_STRING_38_English
 
 };
 
@@ -20278,7 +20287,7 @@ GX_THEME LCU_MainDisplay_theme_1 =
     },
     GX_SCROLLBAR_RELATIVE_THUMB|GX_SCROLLBAR_END_BUTTONS|GX_SCROLLBAR_VERTICAL,
     GX_SCROLLBAR_RELATIVE_THUMB|GX_SCROLLBAR_END_BUTTONS|GX_SCROLLBAR_HORIZONTAL,
-    34,                                      /* color table size               */
+    35,                                      /* color table size               */
     10,                                      /* font table size                */
     25,                                      /* pixelmap table size            */
     0                                        /* palette size                   */

@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 10:41                        */
+/*  Date (dd.mm.yyyy): 21. 2.2022   Time (hh:mm): 09:38                        */
 /*******************************************************************************/
 
 
@@ -27,17 +27,18 @@ extern   "C" {
 #define INFORMATION_BUTTON 3
 #define GREEN_TICK_ICON 4
 #define WHITE_BOX_ICON 5
-#define SPLASH_WINDOW 6
-#define EEPROM_FAIL_BTN_ID 7
-#define EEPROM_OK_BTN_ID 8
-#define EEPROM_EXPIRED_BTN_ID 9
-#define PLAY_BTN_ID 10
-#define SYSTEM_ERROR_BTN_ID 11
-#define MOUTHPIECE_PROMPT_ID 12
-#define LIMIT_SWITCH_BTN_ID 13
-#define MOUTCHPIECE_IS_LABEL_ID 14
-#define SERIAL_NUMBER_PROMPT_ID 15
-#define SERIAL_NUMBER_TEXT_INPUT_ID 16
+#define ALTERNATE_TIME_CHECK_BOX 6
+#define SPLASH_WINDOW 7
+#define EEPROM_FAIL_BTN_ID 8
+#define EEPROM_OK_BTN_ID 9
+#define EEPROM_EXPIRED_BTN_ID 10
+#define PLAY_BTN_ID 11
+#define SYSTEM_ERROR_BTN_ID 12
+#define MOUTHPIECE_PROMPT_ID 13
+#define LIMIT_SWITCH_BTN_ID 14
+#define MOUTCHPIECE_IS_LABEL_ID 15
+#define SERIAL_NUMBER_PROMPT_ID 16
+#define SERIAL_NUMBER_TEXT_INPUT_ID 17
 
 
 /* Define animation ids                                                        */
@@ -99,6 +100,19 @@ typedef struct
     GX_RESOURCE_ID selected_text_color_id;
     GX_RESOURCE_ID disabled_text_color_id;
 } GX_ML_TEXT_BUTTON_PROPERTIES;
+
+typedef struct
+{
+    GX_RESOURCE_ID string_id; 
+    GX_RESOURCE_ID font_id;
+    GX_RESOURCE_ID normal_text_color_id;
+    GX_RESOURCE_ID selected_text_color_id;
+    GX_RESOURCE_ID disabled_text_color_id;
+    GX_RESOURCE_ID unchecked_pixelmap_id;
+    GX_RESOURCE_ID checked_pixelmap_id;
+    GX_RESOURCE_ID unchecked_disabled_pixelmap_id;
+    GX_RESOURCE_ID checked_disabled_pixelmap_id;
+} GX_CHECKBOX_PROPERTIES;
 
 typedef struct
 {
@@ -176,6 +190,7 @@ typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
     GX_MULTI_LINE_TEXT_BUTTON ReadyScreen_Information_Button;
     GX_ICON ReadyScreen_GreenTick_Icon;
     GX_ICON ReadyScreen_WhiteBox_Icon;
+    GX_CHECKBOX ReadyScreen_AlternateTime_CheckBox;
 } READYSCREEN_CONTROL_BLOCK;
 
 typedef struct SPLASH_WINDOW_CONTROL_BLOCK_STRUCT
@@ -183,7 +198,7 @@ typedef struct SPLASH_WINDOW_CONTROL_BLOCK_STRUCT
     PRIMARYTEMPLATE_CONTROL_BLOCK base;
     GX_ICON Splash_Window_MuReva_Logo;
     GX_ICON Splash_Window_StatusRing_Icon;
-    GX_PROMPT Splash_Window_prompt;
+    GX_PROMPT Splash_Window_Version_Prompt;
     GX_ICON Splash_Window_Mureva_Logo_320x240;
 } SPLASH_WINDOW_CONTROL_BLOCK;
 
@@ -235,6 +250,7 @@ typedef struct GX_STUDIO_DISPLAY_INFO_STRUCT
 
 UINT gx_studio_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_multi_line_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
+UINT gx_studio_checkbox_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_icon_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_icon_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_radial_progress_bar_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);

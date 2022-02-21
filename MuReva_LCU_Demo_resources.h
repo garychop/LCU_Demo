@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 16. 2.2022   Time (hh:mm): 10:41                        */
+/*  Date (dd.mm.yyyy): 21. 2.2022   Time (hh:mm): 09:38                        */
 /*******************************************************************************/
 
 
@@ -65,7 +65,8 @@
 #define GX_COLOR_ID_RADIAL_PROGRESS_BAR_FILL 31
 #define GX_COLOR_ID_WHITE 32
 #define GX_COLOR_ID_RED_BURNT 33
-#define LCU_MAINDISPLAY_COLOR_TABLE_SIZE 34
+#define GX_COLOR_ID_GREEN_SUBTLE 34
+#define LCU_MAINDISPLAY_COLOR_TABLE_SIZE 35
 
 /* Font ID definitions                                                         */
 
@@ -147,6 +148,10 @@
 #define GX_STRING_ID_STRING_34 34
 #define GX_STRING_ID_STRING_39 35
 #define GX_STRING_ID_STRING_40 36
-#define LCU_MAINDISPLAY_STRING_TABLE_SIZE 37
+#define GX_STRING_ID_STRING_35 37
+#define GX_STRING_ID_STRING_36 38
+#define GX_STRING_ID_STRING_37 39
+#define GX_STRING_ID_STRING_38 40
+#define LCU_MAINDISPLAY_STRING_TABLE_SIZE 41
 
 #endif                                       /* sentry                         */
