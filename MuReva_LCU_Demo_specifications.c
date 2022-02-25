@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 21. 2.2022   Time (hh:mm): 09:38                        */
+/*  Date (dd.mm.yyyy): 21. 2.2022   Time (hh:mm): 17:30                        */
 /*******************************************************************************/
 
 
@@ -843,7 +843,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_Information_Button_define =
     gx_studio_multi_line_text_button_create,     /* create function            */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {92, 110, 231, 200},                     /* widget size                    */
+    {92, 116, 231, 206},                     /* widget size                    */
     &ReadyScreen_GreenTick_Icon_define,      /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_Information_Button), /* control block */
@@ -891,7 +891,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_PauseIcon_Button_define =
     gx_studio_icon_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {164, 156, 189, 173},                    /* widget size                    */
+    {164, 160, 189, 177},                    /* widget size                    */
     &ReadyScreen_Time_Prompt_define,         /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_PauseIcon_Button), /* control block */

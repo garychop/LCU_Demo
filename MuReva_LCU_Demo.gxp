@@ -2587,7 +2587,7 @@
 <string_record>
 <id>STRING_27</id>
 <font>0</font>
-<val>MOUTHPIECEREADINGERROR</val>
+<val>READINGERRORREINSERTMOUTHPIECE</val>
 </string_record>
 <string_record>
 <id>STRING_28</id>
@@ -2647,7 +2647,7 @@
 <string_record>
 <id>STRING_9</id>
 <font>0</font>
-<val>READY?Press         </val>
+<val>Ready?    Press     To Start  Therapy   </val>
 </string_record>
 <string_record>
 <id>STRING_11</id>
@@ -2848,9 +2848,9 @@
 <app_name>PauseIcon_Button</app_name>
 <size>
 <left>164</left>
-<top>156</top>
+<top>160</top>
 <right>189</right>
-<bottom>173</bottom>
+<bottom>177</bottom>
 </size>
 <style>1342767104</style>
 <allocation>0</allocation>
@@ -2891,9 +2891,9 @@
 <app_name>Information_Button</app_name>
 <size>
 <left>92</left>
-<top>110</top>
+<top>116</top>
 <right>231</right>
-<bottom>200</bottom>
+<bottom>206</bottom>
 </size>
 <style>1342193664</style>
 <allocation>0</allocation>

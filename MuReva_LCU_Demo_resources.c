@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 21. 2.2022   Time (hh:mm): 09:38                        */
+/*  Date (dd.mm.yyyy): 21. 2.2022   Time (hh:mm): 17:30                        */
 /*******************************************************************************/
 
 
@@ -20157,7 +20157,7 @@ GX_CONST GX_PIXELMAP *LCU_MainDisplay_theme_1_pixelmap_table[] =
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_1_English[7] = "prompt";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_25_English[20] = "MOUTHPIECE\rREAD OK";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_26_English[13] = "LIMIT SWITCH";
-GX_CONST GX_UBYTE LCU_MainDisplay_STRING_27_English[27] = "MOUTHPIECE\rREADING\rERROR";
+GX_CONST GX_UBYTE LCU_MainDisplay_STRING_27_English[37] = "READING\rERROR\rREINSERT\rMOUTHPIECE";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_28_English[3] = "ON";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_29_English[11] = "PAUSED\r\r";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_30_English[5] = "OPEN";
@@ -20169,7 +20169,7 @@ GX_CONST GX_UBYTE LCU_MainDisplay_STRING_6_English[19] = "  MOUTHPIECE IS...";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_7_English[22] = "Press\r   to\rRestart";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_10_English[19] = "INSERT\rMOUTHPIECE";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_8_English[44] = "SN:\rMCA000001\rPress          \rif correct";
-GX_CONST GX_UBYTE LCU_MainDisplay_STRING_9_English[23] = "READY?\rPress         ";
+GX_CONST GX_UBYTE LCU_MainDisplay_STRING_9_English[47] = "Ready?    \rPress     \rTo Start  \rTherapy   ";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_11_English[14] = "Operation\r\r";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_12_English[18] = "THERAPY\rCOMPLETE";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_13_English[21] = "MOUTHPIECE\rDETACHED";

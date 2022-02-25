@@ -123,6 +123,10 @@ VOID ReadyScreen_Draw_Function (GX_WINDOW *window)
 	//status = gx_canvas_arc_draw(100, 100, 100, 0, 90); 
 }
 
+void DisplayReadStateVerbiage (GX_WINDOW *window)
+{
+}
+
 //*************************************************************************************
 
 UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
@@ -172,7 +176,8 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 			break;
 
 		case STATE_READY_TO_GO:
-			gx_multi_line_text_button_text_id_set (&ReadyScreen.ReadyScreen_Information_Button, GX_STRING_ID_STRING_11);	// "THERAPY IN PROCESS"
+			//gx_multi_line_text_button_text_id_set (&ReadyScreen.ReadyScreen_Information_Button, GX_STRING_ID_STRING_11);	// "THERAPY IN PROCESS"
+			gx_widget_hide (&ReadyScreen.ReadyScreen_Information_Button);
 			gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
 			gx_widget_hide (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 			g_State = STATE_THERAPY_IN_PROCESS;
@@ -194,6 +199,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		case STATE_THERAPY_IN_PROCESS:
 			g_State = STATE_THERAPY_PAUSED;
 			gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
+			gx_widget_show (&ReadyScreen.ReadyScreen_Information_Button);
 			gx_widget_show (&ReadyScreen.ReadyScreen_Time_Prompt);
 			gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
 			gx_multi_line_text_button_text_id_set (&ReadyScreen.ReadyScreen_Information_Button, GX_STRING_ID_STRING_29);	// "PAUSED"
@@ -210,6 +216,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 			gx_widget_show (&ReadyScreen.ReadyScreen_Time_Prompt);
 			gx_widget_show (&ReadyScreen.ReadyScreen_GreenTick_Icon);
 			gx_widget_show (&ReadyScreen.ReadyScreen_TherpayTime_RadialProgressBar);
+			gx_widget_show (&ReadyScreen.ReadyScreen_Information_Button);
 			gx_radial_progress_bar_value_set(&ReadyScreen.ReadyScreen_TherpayTime_RadialProgressBar, g_TherapyTime);
 			gx_system_timer_start(window, THERAPY_TIMER_ID, 2, 0);
 			gx_system_timer_stop (window, PAUSE_TIMER_ID);
@@ -267,7 +274,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 			gx_icon_button_pixelmap_set (&ReadyScreen.base.PrimaryTemplate_LimitSwitchStatus_IconButton, GX_PIXELMAP_ID_RADIO_OFF);
 			gx_prompt_text_id_set (&ReadyScreen.base.PrimaryTemplate_LimitSwitchStatus_prompt, GX_ID_NONE);	// none
 			gx_widget_hide (&ReadyScreen.ReadyScreen_Time_Prompt);
-			if ((g_State == STATE_THERAPY_IN_PROCESS)  || (g_State == STATE_THERAPY_RECOVER) || (g_State == STATE_CABLE_INSERTED))
+			if ((g_State == STATE_THERAPY_IN_PROCESS)  || (g_State == STATE_THERAPY_RECOVER) || (g_State == STATE_CABLE_INSERTED) || (g_State == STATE_THERAPY_PAUSED))
 			{
 				gx_multi_line_text_button_text_id_set (&ReadyScreen.ReadyScreen_Information_Button, GX_STRING_ID_STRING_10);	// "INSERT MOUTHPIECE"
 				gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_WHITE, GX_PIXELMAP_ID_STATUSRING_WHITE);
@@ -301,7 +308,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		{
 			gx_single_line_text_input_buffer_get (&ReadyScreen.base.PrimaryTemplate_SerialNumber_TextInput, &g_PromptString, &mySize, &myBufSize);
 			g_MouthPiece_SerialNumber = atoi (g_PromptString);
-			sprintf (g_SerialNumberString, "SN:\rMCA%06d\rPress          \rif correct", g_MouthPiece_SerialNumber);
+			sprintf (g_SerialNumberString, "Serial Number:\rMCA%06d\r Press          \rTo continue", g_MouthPiece_SerialNumber);
 			//gx_multi_line_text_button_text_id_set (&ReadyScreen.ReadyScreen_Information_Button, GX_STRING_ID_STRING_8); // "SN: xxxxxxxxx, OK? PRESS PLAY"
 			gx_multi_line_text_button_text_set (&ReadyScreen.ReadyScreen_Information_Button, g_SerialNumberString);
 			gx_widget_show (&ReadyScreen.ReadyScreen_PauseIcon_Button);
@@ -387,6 +394,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 				gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
 				gx_widget_hide (&ReadyScreen.ReadyScreen_TherpayTime_RadialProgressBar);
 				gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
+				gx_widget_show (&ReadyScreen.ReadyScreen_Information_Button);
 				gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_GREEN, GX_PIXELMAP_ID_STATUSRING_GREEN);
 				gx_system_timer_start(window, THERAPY_COMPLETE_TIMER_ID, 20, 0);	// Resume the timer
 				g_RingOn = TRUE;
@@ -407,7 +415,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 				else
 				{
 					// Display only the remaining minutes.
-					sprintf_s (g_TimeString, sizeof (g_TimeString), "%d", g_TherapyTime / 60 + 1);
+					sprintf_s (g_TimeString, sizeof (g_TimeString), "%d MIN", g_TherapyTime / 60);
 					gx_prompt_text_set (&ReadyScreen.ReadyScreen_Time_Prompt, g_TimeString);
 					// The following draws a full green ring and "erases" it going clockwise.
 					gx_radial_progress_bar_value_set(&ReadyScreen.ReadyScreen_TherpayTime_RadialProgressBar, (g_TherapyTime % 60) * 6);
