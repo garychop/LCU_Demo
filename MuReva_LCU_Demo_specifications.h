@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 21. 2.2022   Time (hh:mm): 17:30                        */
+/*  Date (dd.mm.yyyy): 28. 2.2022   Time (hh:mm): 12:35                        */
 /*******************************************************************************/
 
 
@@ -27,18 +27,21 @@ extern   "C" {
 #define INFORMATION_BUTTON 3
 #define GREEN_TICK_ICON 4
 #define WHITE_BOX_ICON 5
-#define ALTERNATE_TIME_CHECK_BOX 6
-#define SPLASH_WINDOW 7
-#define EEPROM_FAIL_BTN_ID 8
-#define EEPROM_OK_BTN_ID 9
-#define EEPROM_EXPIRED_BTN_ID 10
+#define TIME_TICK_PROMPT 6
+#define INFORMATION_TEXT_VIEW_ID 7
+#define MINUTE_PROMPT_ID 8
+#define SPLASH_WINDOW 9
+#define TIME_PROMPT 10
 #define PLAY_BTN_ID 11
 #define SYSTEM_ERROR_BTN_ID 12
 #define MOUTHPIECE_PROMPT_ID 13
 #define LIMIT_SWITCH_BTN_ID 14
-#define MOUTCHPIECE_IS_LABEL_ID 15
-#define SERIAL_NUMBER_PROMPT_ID 16
-#define SERIAL_NUMBER_TEXT_INPUT_ID 17
+#define EEPROM_EXPIRED_BTN_ID 15
+#define EEPROM_OK_BTN_ID 16
+#define EEPROM_FAIL_BTN_ID 17
+#define SERIAL_NUMBER_PROMPT_ID 18
+#define SERIAL_NUMBER_TEXT_INPUT_ID 19
+#define EEPROM_12HOUR_BTN_ID 20
 
 
 /* Define animation ids                                                        */
@@ -103,19 +106,6 @@ typedef struct
 
 typedef struct
 {
-    GX_RESOURCE_ID string_id; 
-    GX_RESOURCE_ID font_id;
-    GX_RESOURCE_ID normal_text_color_id;
-    GX_RESOURCE_ID selected_text_color_id;
-    GX_RESOURCE_ID disabled_text_color_id;
-    GX_RESOURCE_ID unchecked_pixelmap_id;
-    GX_RESOURCE_ID checked_pixelmap_id;
-    GX_RESOURCE_ID unchecked_disabled_pixelmap_id;
-    GX_RESOURCE_ID checked_disabled_pixelmap_id;
-} GX_CHECKBOX_PROPERTIES;
-
-typedef struct
-{
     GX_RESOURCE_ID pixelmap_id;
 } GX_ICON_BUTTON_PROPERTIES;
 
@@ -154,6 +144,17 @@ typedef struct
 
 typedef struct
 {
+    GX_RESOURCE_ID string_id;
+    GX_RESOURCE_ID font_id;
+    GX_RESOURCE_ID normal_text_color_id;
+    GX_RESOURCE_ID selected_text_color_id;
+    GX_RESOURCE_ID disabled_text_color_id;
+    GX_BYTE        whitespace;
+    GX_BYTE        line_space;
+} GX_ML_TEXT_VIEW_PROPERTIES;
+
+typedef struct
+{
    GX_CONST GX_STUDIO_WIDGET *base_info;
    UINT (*base_create_function) (GX_CONST struct GX_STUDIO_WIDGET_STRUCT *, GX_WIDGET *, GX_WIDGET *);
    GX_RECTANGLE size;
@@ -165,19 +166,18 @@ typedef struct
 typedef struct PRIMARYTEMPLATE_CONTROL_BLOCK_STRUCT
 {
     GX_WINDOW_MEMBERS_DECLARE
-    GX_ICON_BUTTON PrimaryTemplate_LimitSwitchStatus_IconButton;
-    GX_PROMPT PrimaryTemplate_EEPROM_Is_Prompt;
-    GX_TEXT_BUTTON PrimaryTemplate_EEPROM_Fail_Button;
-    GX_TEXT_BUTTON PrimaryTemplate_EEPROM_OK_Button;
-    GX_TEXT_BUTTON PrimaryTemplate_EEPROM_Expired_Button;
+    GX_ICON_BUTTON PrimaryTemplate_Attach_IconButton;
     GX_ICON_BUTTON PrimaryTemplate_Play_Button;
     GX_MULTI_LINE_TEXT_BUTTON PrimaryTemplate_SystemError_Button;
-    GX_PROMPT PrimaryTemplate_Mouthpiece_Prompt;
+    GX_PROMPT PrimaryTemplate_Mouthpiece_PromptBox;
     GX_TEXT_BUTTON PrimaryTemplate_LimitSwitch_Button;
-    GX_PROMPT PrimaryTemplate_LimitSwitchStatus_prompt;
-    GX_PROMPT PrimaryTemplate_Mouthpiece_Label;
+    GX_TEXT_BUTTON PrimaryTemplate_EEPROM_Expired_Button;
+    GX_TEXT_BUTTON PrimaryTemplate_EEPROM_OK_Button;
+    GX_TEXT_BUTTON PrimaryTemplate_EEPROM_Fail_Button;
     GX_PROMPT PrimaryTemplate_SerialNumber_Prompt;
     GX_SINGLE_LINE_TEXT_INPUT PrimaryTemplate_SerialNumber_TextInput;
+    GX_PROMPT PrimaryTemplate_Mouthpiece_Label;
+    GX_TEXT_BUTTON PrimaryTemplate_EEPROM_12HOUR_Button;
 } PRIMARYTEMPLATE_CONTROL_BLOCK;
 
 typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
@@ -190,7 +190,9 @@ typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
     GX_MULTI_LINE_TEXT_BUTTON ReadyScreen_Information_Button;
     GX_ICON ReadyScreen_GreenTick_Icon;
     GX_ICON ReadyScreen_WhiteBox_Icon;
-    GX_CHECKBOX ReadyScreen_AlternateTime_CheckBox;
+    GX_PROMPT ReadyScreen_TimeTick_Prompt;
+    GX_MULTI_LINE_TEXT_VIEW ReadyScreen_Information_TextView;
+    GX_PROMPT ReadyScreen_Minute_Prompt;
 } READYSCREEN_CONTROL_BLOCK;
 
 typedef struct SPLASH_WINDOW_CONTROL_BLOCK_STRUCT
@@ -206,6 +208,8 @@ typedef struct SAMPLE_TICK_WINDOW_CONTROL_BLOCK_STRUCT
 {
     PRIMARYTEMPLATE_CONTROL_BLOCK base;
     GX_ICON Sample_Tick_Window_OneOfSixtyTicks_icon;
+    GX_ICON Sample_Tick_Window_icon;
+    GX_PROMPT Sample_Tick_Window_Time_Prompt;
 } SAMPLE_TICK_WINDOW_CONTROL_BLOCK;
 
 
@@ -223,6 +227,8 @@ extern PRIMARYTEMPLATE_CONTROL_BLOCK PrimaryTemplate;
 UINT ReadyScreen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID ReadyScreen_Draw_Function(GX_WINDOW *widget);
 UINT SplashScreen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+UINT Sample_Tick_Window_event_function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Sample_Tick_Window_draw_function(GX_WINDOW *widget);
 
 /* Declare the GX_STUDIO_DISPLAY_INFO structure                                */
 
@@ -250,13 +256,13 @@ typedef struct GX_STUDIO_DISPLAY_INFO_STRUCT
 
 UINT gx_studio_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_multi_line_text_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
-UINT gx_studio_checkbox_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_icon_button_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_icon_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_radial_progress_bar_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_prompt_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_window_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_text_input_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
+UINT gx_studio_multi_line_text_view_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 UINT gx_studio_template_create(GX_CONST GX_STUDIO_WIDGET *info, GX_WIDGET *control_block, GX_WIDGET *parent);
 GX_WIDGET *gx_studio_widget_create(GX_BYTE *storage, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
 UINT gx_studio_named_widget_create(char *name, GX_WIDGET *parent, GX_WIDGET **new_widget);

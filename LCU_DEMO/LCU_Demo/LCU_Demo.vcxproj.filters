@@ -30,6 +30,9 @@
     <ClCompile Include="..\..\ReadyScreen_Handler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Sample_Tick_Window_Handler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\MuReva_LCU_Demo_resources.h">

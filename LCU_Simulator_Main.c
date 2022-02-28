@@ -129,6 +129,7 @@ VOID  start_guix(VOID)
         LANGUAGE_ENGLISH, LCU_MAINDISPLAY_THEME_1, &root);
 
     myError = gx_studio_named_widget_create("ReadyScreen", GX_NULL, GX_NULL);
+    myError = gx_studio_named_widget_create("Sample_Tick_Window", GX_NULL, GX_NULL);
     myError = gx_studio_named_widget_create("Splash_Window", (GX_WIDGET *)root, GX_NULL);
 
 	/* Show the root window.  */

@@ -8,6 +8,7 @@
 *.pdb
 *.opensdf
 *.ipch
+*.cache
 
 
 

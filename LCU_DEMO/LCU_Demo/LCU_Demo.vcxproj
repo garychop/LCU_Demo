@@ -71,6 +71,7 @@
     <ClCompile Include="..\..\MuReva_LCU_Demo_resources.c" />
     <ClCompile Include="..\..\MuReva_LCU_Demo_specifications.c" />
     <ClCompile Include="..\..\ReadyScreen_Handler.c" />
+    <ClCompile Include="..\..\Sample_Tick_Window_Handler.c" />
     <ClCompile Include="..\..\SplashScreen_Handler.c" />
   </ItemGroup>
   <ItemGroup>
