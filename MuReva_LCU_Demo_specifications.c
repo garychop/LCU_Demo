@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 28. 2.2022   Time (hh:mm): 12:35                        */
+/*  Date (dd.mm.yyyy):  1. 3.2022   Time (hh:mm): 17:24                        */
 /*******************************************************************************/
 
 
@@ -1006,7 +1006,7 @@ GX_ICON_PROPERTIES Splash_Window_StatusRing_Icon_properties =
 };
 GX_PROMPT_PROPERTIES Splash_Window_Version_Prompt_properties =
 {
-    GX_STRING_ID_VERSION,                    /* string id                      */
+    GX_STRING_ID_STRING_21,                  /* string id                      */
     GX_FONT_ID_PROMPT,                       /* font id                        */
     GX_COLOR_ID_WINDOW_FILL,                 /* normal text color              */
     GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */

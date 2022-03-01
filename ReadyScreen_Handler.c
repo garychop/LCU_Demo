@@ -239,6 +239,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 	ULONG widgetStyle;
 	UINT mySize, myBufSize;
 	GX_RECTANGLE rect;
+	INT thisSerialNumber;
 
 	switch (event_ptr->gx_event_type)
 	{
@@ -467,19 +468,39 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		}
 		else if (g_State == STATE_THERAPY_CONTINUE)	// We are recovering from a Mouthpiece detached condition.
 		{
-			gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
-			gx_widget_hide (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
-			gx_widget_show (&ReadyScreen.ReadyScreen_Minute_Prompt);
-			gx_widget_show (&ReadyScreen.ReadyScreen_Time_Prompt);
-			//gx_widget_show (&ReadyScreen.ReadyScreen_TherpayTime_RadialProgressBar);
-			g_ShowTicks = TRUE;
-			DisplayInformation (window, "PAUSED", 4, GX_COLOR_ID_WHITE);
-			//gx_multi_line_text_view_text_set (&ReadyScreen.ReadyScreen_Information_TextView, "\rPAUSED");
-			//gx_multi_line_text_button_text_id_set (&ReadyScreen.ReadyScreen_Information_Button, GX_STRING_ID_STRING_29);	// "PAUSED"
-			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_BLUE, GX_PIXELMAP_ID_STATUSRING_BLUE);
-			gx_system_timer_start(window, PAUSE_TIMER_ID, 2, 0);
-			EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
-			g_State = STATE_THERAPY_PAUSED;
+			gx_single_line_text_input_buffer_get (&ReadyScreen.base.PrimaryTemplate_SerialNumber_TextInput, &g_PromptString, &mySize, &myBufSize);
+			thisSerialNumber = atoi (g_PromptString);
+			if (thisSerialNumber == g_MouthPiece_SerialNumber)
+			{
+				gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
+				gx_widget_hide (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
+				gx_widget_show (&ReadyScreen.ReadyScreen_Minute_Prompt);
+				gx_widget_show (&ReadyScreen.ReadyScreen_Time_Prompt);
+				//gx_widget_show (&ReadyScreen.ReadyScreen_TherpayTime_RadialProgressBar);
+				g_ShowTicks = TRUE;
+				DisplayInformation (window, "PAUSED", 4, GX_COLOR_ID_WHITE);
+				//gx_multi_line_text_view_text_set (&ReadyScreen.ReadyScreen_Information_TextView, "\rPAUSED");
+				//gx_multi_line_text_button_text_id_set (&ReadyScreen.ReadyScreen_Information_Button, GX_STRING_ID_STRING_29);	// "PAUSED"
+				gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_BLUE, GX_PIXELMAP_ID_STATUSRING_BLUE);
+				gx_system_timer_start(window, PAUSE_TIMER_ID, 2, 0);
+				EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
+				g_State = STATE_THERAPY_PAUSED;
+			}
+			else // Different serial number
+			{
+				g_TherapyInProcess = FALSE;
+				g_MouthPiece_SerialNumber = thisSerialNumber;	// Update the used device.
+				sprintf_s (g_SerialNumberString, sizeof (g_SerialNumberString), "Serial Number:\rMCA%06d\r  Press      \rto continue", g_MouthPiece_SerialNumber);
+				DisplayInformation (window, g_SerialNumberString, 4, GX_COLOR_ID_WHITE);
+				rect.gx_rectangle_top = 160;
+				rect.gx_rectangle_bottom = rect.gx_rectangle_top + 18;
+				rect.gx_rectangle_left = 176;
+				rect.gx_rectangle_right = rect.gx_rectangle_left + 26;
+				gx_widget_resize (&ReadyScreen.ReadyScreen_PauseIcon_Button, &rect);
+				gx_widget_show (&ReadyScreen.ReadyScreen_PauseIcon_Button);
+				g_State = STATE_SERIAL_NUMBER_PROMPT;
+				EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
+			}
 			break;
 		}
 		break;

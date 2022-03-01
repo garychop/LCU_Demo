@@ -3236,7 +3236,7 @@
 <English>TRUE</English>
 <string_table>
 <sort_column>0</sort_column>
-<num_strings>51</num_strings>
+<num_strings>52</num_strings>
 <num_languages>1</num_languages>
 <string_record>
 <id>STRING_1</id>
@@ -3487,6 +3487,11 @@
 <id>STRING_49</id>
 <font>0</font>
 <val>&lt; 12 HRS</val>
+</string_record>
+<string_record>
+<id>STRING_21</id>
+<font>0</font>
+<val>Version 1.5.1</val>
 </string_record>
 </string_table>
 <widget_folder>
@@ -3822,7 +3827,7 @@
 <disabled_fill_color>DISABLED_FILL</disabled_fill_color>
 <template>FALSE</template>
 <visible_at_startup>FALSE</visible_at_startup>
-<string_id>VERSION</string_id>
+<string_id>STRING_21</string_id>
 <font_id>PROMPT</font_id>
 <normal_text_color>WINDOW_FILL</normal_text_color>
 <selected_text_color>SELECTED_TEXT</selected_text_color>
