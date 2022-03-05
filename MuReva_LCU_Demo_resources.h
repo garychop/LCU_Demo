@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  1. 3.2022   Time (hh:mm): 17:24                        */
+/*  Date (dd.mm.yyyy):  5. 3.2022   Time (hh:mm): 11:36                        */
 /*******************************************************************************/
 
 
@@ -109,13 +109,14 @@
 #define GX_PIXELMAP_ID_PAUSEBUTTON_30X30 18
 #define GX_PIXELMAP_ID_RED_TEXT_BOX 19
 #define GX_PIXELMAP_ID_RIGHTARROW_80X60 20
-#define GX_PIXELMAP_ID_STATUSRING_BLUE 21
-#define GX_PIXELMAP_ID_STATUSRING_GREEN 22
-#define GX_PIXELMAP_ID_STATUSRING_OFF 23
-#define GX_PIXELMAP_ID_STATUSRING_RED 24
-#define GX_PIXELMAP_ID_STATUSRING_WHITE 25
-#define GX_PIXELMAP_ID_WHITE_TEXT_BOX 26
-#define LCU_MAINDISPLAY_PIXELMAP_TABLE_SIZE 27
+#define GX_PIXELMAP_ID_SCREENSAVER_TRANSPARENT 21
+#define GX_PIXELMAP_ID_STATUSRING_BLUE 22
+#define GX_PIXELMAP_ID_STATUSRING_GREEN 23
+#define GX_PIXELMAP_ID_STATUSRING_OFF 24
+#define GX_PIXELMAP_ID_STATUSRING_RED 25
+#define GX_PIXELMAP_ID_STATUSRING_WHITE 26
+#define GX_PIXELMAP_ID_WHITE_TEXT_BOX 27
+#define LCU_MAINDISPLAY_PIXELMAP_TABLE_SIZE 28
 
 /* String Ids                                                                  */
 
@@ -170,6 +171,7 @@
 #define GX_STRING_ID_STRING_11 49
 #define GX_STRING_ID_STRING_49 50
 #define GX_STRING_ID_STRING_21 51
-#define LCU_MAINDISPLAY_STRING_TABLE_SIZE 52
+#define GX_STRING_ID_STRING_38 52
+#define LCU_MAINDISPLAY_STRING_TABLE_SIZE 53
 
 #endif                                       /* sentry                         */

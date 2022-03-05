@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  1. 3.2022   Time (hh:mm): 17:24                        */
+/*  Date (dd.mm.yyyy):  5. 3.2022   Time (hh:mm): 11:36                        */
 /*******************************************************************************/
 
 
@@ -329,6 +329,30 @@ GX_TEXT_BUTTON_PROPERTIES PrimaryTemplate_EEPROM_12HOUR_Button_properties =
     GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
+GX_TEXT_BUTTON_PROPERTIES PrimaryTemplate_IdleTime_Button_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_BUTTON,                       /* font id                        */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal text color              */
+    GX_COLOR_ID_BTN_TEXT,                    /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES PrimaryTemplate_prompt_properties =
+{
+    GX_STRING_ID_STRING_38,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_TEXT,                        /* selected text color            */
+    GX_COLOR_ID_TEXT                         /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES PrimaryTemplate_Idle_Time_Prompt_properties =
+{
+    GX_STRING_ID_STRING_41,                  /* string id                      */
+    GX_FONT_ID_VERA_24,                      /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_TEXT,                        /* selected text color            */
+    GX_COLOR_ID_TEXT                         /* disabled text color            */
+};
 
 GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_SerialNumber_TextInput_define =
 {
@@ -522,6 +546,78 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_LimitSwitch_Button_define =
     (void *) &PrimaryTemplate_LimitSwitch_Button_properties /* extended properties */
 };
 
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Idle_Time_Prompt_define =
+{
+    "Idle_Time_Prompt",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    IDLE_TIME_PROMPT_ID,                     /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {211, 484, 288, 527},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_Idle_Time_Prompt), /* control block */
+    (void *) &PrimaryTemplate_Idle_Time_Prompt_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_prompt_define =
+{
+    "prompt",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {210, 465, 289, 488},                    /* widget size                    */
+    &PrimaryTemplate_Idle_Time_Prompt_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_prompt), /* control block */
+    (void *) &PrimaryTemplate_prompt_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_IdleTime_Button_define =
+{
+    "IdleTime_Button",
+    GX_TYPE_TEXT_BUTTON,                     /* widget type                    */
+    IDLE_TIME_BUTTON_ID,                     /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_RAISED|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_TEXT_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_text_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {211, 464, 290, 527},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    &PrimaryTemplate_prompt_define,          /* child widget definition        */
+    offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_IdleTime_Button), /* control block */
+    (void *) &PrimaryTemplate_IdleTime_Button_properties /* extended properties */
+};
+
 GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Mouthpiece_PromptBox_define =
 {
     "Mouthpiece_PromptBox",
@@ -540,7 +636,7 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Mouthpiece_PromptBox_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {17, 314, 306, 449},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    &PrimaryTemplate_IdleTime_Button_define, /* next widget definition         */
     &PrimaryTemplate_LimitSwitch_Button_define, /* child widget definition     */
     offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_Mouthpiece_PromptBox), /* control block */
     (void *) &PrimaryTemplate_Mouthpiece_PromptBox_properties /* extended properties */
@@ -563,7 +659,7 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_SystemError_Button_define =
     gx_studio_multi_line_text_button_create,     /* create function            */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {165, 470, 244, 533},                    /* widget size                    */
+    {114, 464, 193, 527},                    /* widget size                    */
     &PrimaryTemplate_Mouthpiece_PromptBox_define, /* next widget definition    */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_SystemError_Button), /* control block */
@@ -587,7 +683,7 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_Play_Button_define =
     gx_studio_icon_button_create,            /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {59, 471, 138, 530},                     /* widget size                    */
+    {17, 466, 96, 525},                      /* widget size                    */
     &PrimaryTemplate_SystemError_Button_define, /* next widget definition      */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(PRIMARYTEMPLATE_CONTROL_BLOCK, PrimaryTemplate_Play_Button), /* control block */
@@ -724,6 +820,35 @@ GX_PROMPT_PROPERTIES ReadyScreen_Minute_Prompt_properties =
     GX_COLOR_ID_WHITE,                       /* selected text color            */
     GX_COLOR_ID_WHITE                        /* disabled text color            */
 };
+GX_ICON_PROPERTIES ReadyScreen_ScreenSaver_Icon_properties =
+{
+    GX_PIXELMAP_ID_SCREENSAVER_TRANSPARENT,  /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+
+GX_CONST GX_STUDIO_WIDGET ReadyScreen_ScreenSaver_Icon_define =
+{
+    "ScreenSaver_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    SCREENSAVER_ICON_ID,                     /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {226, 130, 265, 182},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_ScreenSaver_Icon), /* control block */
+    (void *) &ReadyScreen_ScreenSaver_Icon_properties /* extended properties   */
+};
 
 GX_CONST GX_STUDIO_WIDGET ReadyScreen_Minute_Prompt_define =
 {
@@ -743,7 +868,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_Minute_Prompt_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {160, 165, 205, 188},                    /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    &ReadyScreen_ScreenSaver_Icon_define,    /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_Minute_Prompt), /* control block */
     (void *) &ReadyScreen_Minute_Prompt_properties /* extended properties      */

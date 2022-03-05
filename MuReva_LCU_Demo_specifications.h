@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  1. 3.2022   Time (hh:mm): 17:24                        */
+/*  Date (dd.mm.yyyy):  5. 3.2022   Time (hh:mm): 11:36                        */
 /*******************************************************************************/
 
 
@@ -30,18 +30,21 @@ extern   "C" {
 #define TIME_TICK_PROMPT 6
 #define INFORMATION_TEXT_VIEW_ID 7
 #define MINUTE_PROMPT_ID 8
-#define SPLASH_WINDOW 9
-#define TIME_PROMPT 10
-#define PLAY_BTN_ID 11
-#define SYSTEM_ERROR_BTN_ID 12
-#define MOUTHPIECE_PROMPT_ID 13
-#define LIMIT_SWITCH_BTN_ID 14
-#define EEPROM_EXPIRED_BTN_ID 15
-#define EEPROM_OK_BTN_ID 16
-#define EEPROM_FAIL_BTN_ID 17
-#define SERIAL_NUMBER_PROMPT_ID 18
-#define SERIAL_NUMBER_TEXT_INPUT_ID 19
-#define EEPROM_12HOUR_BTN_ID 20
+#define SCREENSAVER_ICON_ID 9
+#define SPLASH_WINDOW 10
+#define TIME_PROMPT 11
+#define PLAY_BTN_ID 12
+#define SYSTEM_ERROR_BTN_ID 13
+#define MOUTHPIECE_PROMPT_ID 14
+#define LIMIT_SWITCH_BTN_ID 15
+#define EEPROM_EXPIRED_BTN_ID 16
+#define EEPROM_OK_BTN_ID 17
+#define EEPROM_FAIL_BTN_ID 18
+#define SERIAL_NUMBER_PROMPT_ID 19
+#define SERIAL_NUMBER_TEXT_INPUT_ID 20
+#define EEPROM_12HOUR_BTN_ID 21
+#define IDLE_TIME_BUTTON_ID 22
+#define IDLE_TIME_PROMPT_ID 23
 
 
 /* Define animation ids                                                        */
@@ -178,6 +181,9 @@ typedef struct PRIMARYTEMPLATE_CONTROL_BLOCK_STRUCT
     GX_SINGLE_LINE_TEXT_INPUT PrimaryTemplate_SerialNumber_TextInput;
     GX_PROMPT PrimaryTemplate_Mouthpiece_Label;
     GX_TEXT_BUTTON PrimaryTemplate_EEPROM_12HOUR_Button;
+    GX_TEXT_BUTTON PrimaryTemplate_IdleTime_Button;
+    GX_PROMPT PrimaryTemplate_prompt;
+    GX_PROMPT PrimaryTemplate_Idle_Time_Prompt;
 } PRIMARYTEMPLATE_CONTROL_BLOCK;
 
 typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
@@ -193,6 +199,7 @@ typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
     GX_PROMPT ReadyScreen_TimeTick_Prompt;
     GX_MULTI_LINE_TEXT_VIEW ReadyScreen_Information_TextView;
     GX_PROMPT ReadyScreen_Minute_Prompt;
+    GX_ICON ReadyScreen_ScreenSaver_Icon;
 } READYSCREEN_CONTROL_BLOCK;
 
 typedef struct SPLASH_WINDOW_CONTROL_BLOCK_STRUCT
