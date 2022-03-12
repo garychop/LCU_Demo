@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  5. 3.2022   Time (hh:mm): 11:36                        */
+/*  Date (dd.mm.yyyy): 12. 3.2022   Time (hh:mm): 10:50                        */
 /*******************************************************************************/
 
 
@@ -41584,7 +41584,7 @@ GX_CONST GX_UBYTE LCU_MainDisplay_STRING_48_English[11] = "Mouthpiece";
 GX_CONST GX_UBYTE LCU_MainDisplay_ATTACH_English[7] = "ATTACH";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_11_English[5] = "GOOD";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_49_English[9] = "< 12 HRS";
-GX_CONST GX_UBYTE LCU_MainDisplay_STRING_21_English[14] = "Version 1.5.1";
+GX_CONST GX_UBYTE LCU_MainDisplay_STRING_21_English[14] = "Version 1.5.2";
 GX_CONST GX_UBYTE LCU_MainDisplay_STRING_38_English[14] = "Idle Time\r\r";
 
 /* String Table for LCU_MainDisplay language English                           */
