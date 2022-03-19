@@ -247,6 +247,7 @@ void DisplayInformation (GX_WINDOW *window, GX_CHAR *myString, INT numberOfLines
 {
 	GX_RECTANGLE rectangle;
 
+	gx_widget_show (&ReadyScreen.ReadyScreen_Information_TextView);
 	// font height is 20 pixels.
 	// full height is 100 pixels which is 5 lines.
 	rectangle.gx_rectangle_left = ReadyScreen.ReadyScreen_Information_TextView.gx_widget_size.gx_rectangle_left;
@@ -258,6 +259,33 @@ void DisplayInformation (GX_WINDOW *window, GX_CHAR *myString, INT numberOfLines
 	gx_widget_show (&ReadyScreen.ReadyScreen_Information_TextView);
 	gx_widget_resize (&ReadyScreen.ReadyScreen_Information_TextView, &rectangle);
 	gx_multi_line_text_view_text_set (&ReadyScreen.ReadyScreen_Information_TextView, myString);
+}
+
+//*************************************************************************************
+void DisplayInstruction (GX_WINDOW *window, GX_CHAR *myString, INT numberOfLines, GX_RESOURCE_ID myColor)
+{
+	GX_RECTANGLE rectangle;
+
+	gx_widget_show (&ReadyScreen.ReadyScreen_Instruction_TextView);
+	// font height is 20 pixels.
+	// full height is 100 pixels which is 5 lines.
+	rectangle.gx_rectangle_left = ReadyScreen.ReadyScreen_Instruction_TextView.gx_widget_size.gx_rectangle_left;
+	rectangle.gx_rectangle_right = ReadyScreen.ReadyScreen_Instruction_TextView.gx_widget_size.gx_rectangle_right;
+
+	gx_multi_line_text_view_text_color_set (&ReadyScreen.ReadyScreen_Instruction_TextView, myColor, myColor, myColor);
+	rectangle.gx_rectangle_top = 108 + (11*(5 - numberOfLines));
+	rectangle.gx_rectangle_bottom = rectangle.gx_rectangle_top + (20 * numberOfLines);
+	gx_widget_resize (&ReadyScreen.ReadyScreen_Instruction_TextView, &rectangle);
+	gx_multi_line_text_view_text_set (&ReadyScreen.ReadyScreen_Instruction_TextView, myString);
+}
+
+//*************************************************************************************
+// This function displays two kinds of strings.
+// The first string is destined for the "Information" box.
+// The second string is destined for the "Instuction" box.
+//*************************************************************************************
+void DisplayMultiInformation ()
+{
 }
 
 //*************************************************************************************
@@ -279,9 +307,12 @@ void EnterInsertMouthpieceState (GX_WINDOW *window, STATES_ENUM nextState)
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Minute_Prompt);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_ScreenSaver_Icon);
+	gx_widget_hide (&ReadyScreen.ReadyScreen_Information_TextView);
 
+	//gx_widget_show (&ReadyScreen.ReadyScreen_Instruction_TextView);
 	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
-	// This button may have been disabled.... we need to enable it.
+
+	// The limit switch button may have been disabled.... we need to enable it.
 	gx_widget_style_get ((GX_WIDGET*) &ReadyScreen.base.PrimaryTemplate_LimitSwitch_Button, &widgetStyle);
 	widgetStyle |= GX_STYLE_ENABLED;
 	gx_widget_style_set ((GX_WIDGET*) &ReadyScreen.base.PrimaryTemplate_LimitSwitch_Button, widgetStyle);
@@ -289,11 +320,12 @@ void EnterInsertMouthpieceState (GX_WINDOW *window, STATES_ENUM nextState)
 
 	gx_multi_line_text_button_text_id_set (&ReadyScreen.base.PrimaryTemplate_SystemError_Button, GX_STRING_ID_STRING_24);	// "Cause System Error"
 
-	sprintf_s (g_TimeString, sizeof (g_TimeString), "%d:%02d", g_TherapyTime / 60, g_TherapyTime % 60);
+	//sprintf_s (g_TimeString, sizeof (g_TimeString), "%d:%02d", g_TherapyTime / 60, g_TherapyTime % 60);
 	EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_WHITE, GX_PIXELMAP_ID_STATUSRING_WHITE);
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_WHITE_TEXT_BOX, GX_PIXELMAP_ID_WHITE_TEXT_BOX);
-	DisplayInformation (window, "Insert\rMouthpiece", 2, GX_COLOR_ID_WHITE);
+	//DisplayInformation (window, "Insert\rMouthpiece", 2, GX_COLOR_ID_WHITE);
+	DisplayInstruction (window, "Insert\rMouthpiece", 2, GX_COLOR_ID_WHITE);
 }
 
 //*************************************************************************************
@@ -303,14 +335,17 @@ void EnterReadingEEPROM_State (GX_WINDOW *window, STATES_ENUM nextState)
 {
 	g_ShowTicks = FALSE;
 
+	gx_widget_hide (&ReadyScreen.ReadyScreen_Instruction_TextView);
 	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
+
 	gx_icon_button_pixelmap_set (&ReadyScreen.base.PrimaryTemplate_Attach_IconButton, GX_PIXELMAP_ID_RADIO_ON);
 	gx_text_button_text_id_set (&ReadyScreen.base.PrimaryTemplate_LimitSwitch_Button, GX_STRING_ID_DETACH);
+
 	EnableEEPROMPT_Button (GX_TRUE, GX_TRUE, GX_TRUE, GX_TRUE, GX_TRUE);
+
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_BLUE, GX_PIXELMAP_ID_STATUSRING_BLUE);
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_WHITE_TEXT_BOX, GX_PIXELMAP_ID_WHITE_TEXT_BOX);
-	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
-	// Change to "READING..."
+
 	DisplayInformation (window, "Reading...", 1, GX_COLOR_ID_WHITE);
 	g_State = nextState;
 }
@@ -325,24 +360,29 @@ void EnterSerialNumber_State (GX_WINDOW *window, STATES_ENUM nextState)
 
 	g_ShowTicks = FALSE;
 
-	// Set to Blue LED ring
+	// Set LED ring to Blue
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_BLUE, GX_PIXELMAP_ID_STATUSRING_BLUE);
-	// Set to White Text Box
+	// Set Text Box to White
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_WHITE_TEXT_BOX, GX_PIXELMAP_ID_WHITE_TEXT_BOX);
 	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 
+	// Display "Serial Number: MCAxxxxxx" in the information box
 	gx_single_line_text_input_buffer_get (&ReadyScreen.base.PrimaryTemplate_SerialNumber_TextInput, &g_PromptString, &mySize, &myBufSize);
 	g_MouthPiece_SerialNumber = atoi (g_PromptString);
-	sprintf_s (g_SerialNumberString, sizeof (g_SerialNumberString), "Serial Number:\rMCA%06d\r  Press      \rto Continue", g_MouthPiece_SerialNumber);
+	sprintf_s (g_SerialNumberString, sizeof (g_SerialNumberString), "Serial Number:\rMCA%06d\r\r", g_MouthPiece_SerialNumber);
 	DisplayInformation (window, g_SerialNumberString, 4, GX_COLOR_ID_WHITE);
+	// Display Press in the Instruction box
+	DisplayInstruction (window, "\r\r  Press      \rto Continue", 4, GX_COLOR_ID_WHITE);
 	rect.gx_rectangle_top = 160;
 	rect.gx_rectangle_bottom = rect.gx_rectangle_top + 18;
 	rect.gx_rectangle_left = 176;
 	rect.gx_rectangle_right = rect.gx_rectangle_left + 26;
 	gx_widget_resize (&ReadyScreen.ReadyScreen_PauseIcon_Button, &rect);
 	gx_widget_show (&ReadyScreen.ReadyScreen_PauseIcon_Button);
-	g_State = nextState;
+
 	EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
+
+	g_State = nextState;
 }
 
 //*************************************************************************************
@@ -354,20 +394,22 @@ void EnterStartTherapy_State (GX_WINDOW *window, STATES_ENUM nextState)
 
 	g_ShowTicks = FALSE;
 
-	// Set to Blue LED ring
+	gx_widget_hide (&ReadyScreen.ReadyScreen_Information_TextView);
+
+	// Set LED ring to Blue
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_BLUE, GX_PIXELMAP_ID_STATUSRING_BLUE);
-	// Set to White Text Box
+	// Set Text Box to White
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_WHITE_TEXT_BOX, GX_PIXELMAP_ID_WHITE_TEXT_BOX);
 	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
-
-	gx_widget_show (&ReadyScreen.ReadyScreen_Information_TextView);
-	DisplayInformation (window, "Press     \nto Start\nTherapy", 3, GX_COLOR_ID_WHITE);
-	rect.gx_rectangle_top = 128 + 0;	// "10" is used for 2 lines, remove for 3 lines
+	DisplayInstruction (window, "Press     \nto Start\nTherapy", 3, GX_COLOR_ID_WHITE);
+	// Display Play/pause icon
+	rect.gx_rectangle_top = 128 + 2;	// "10" is used for 2 lines, "2" is for 3 lines
 	rect.gx_rectangle_bottom = rect.gx_rectangle_top + 18;
 	rect.gx_rectangle_left = 176; // + 12;
 	rect.gx_rectangle_right = rect.gx_rectangle_left + 26;
 	gx_widget_resize (&ReadyScreen.ReadyScreen_PauseIcon_Button, &rect);
 	gx_widget_show (&ReadyScreen.ReadyScreen_PauseIcon_Button);
+	
 	g_State = nextState;
 }
 
@@ -380,20 +422,23 @@ void EnterResumeTherapy_State (GX_WINDOW *window, STATES_ENUM nextState)
 
 	g_ShowTicks = FALSE;
 
+	gx_widget_hide (&ReadyScreen.ReadyScreen_Information_TextView);
+
+	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
+
 	// Set to Blue LED ring
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_BLUE, GX_PIXELMAP_ID_STATUSRING_BLUE);
 	// Set to White Text Box
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_WHITE_TEXT_BOX, GX_PIXELMAP_ID_WHITE_TEXT_BOX);
-	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 
-	gx_widget_show (&ReadyScreen.ReadyScreen_Information_TextView);
-	DisplayInformation (window, "Press     \nto Resume\nTherapy", 3, GX_COLOR_ID_WHITE);
-	rect.gx_rectangle_top = 128 + 0;	// "10" is used for 2 lines, remove for 3 lines
+	DisplayInstruction (window, "Press     \nto Resume\nTherapy", 3, GX_COLOR_ID_WHITE);
+	rect.gx_rectangle_top = 128 + 2;	// "10" is used for 2 lines, remove for 3 lines
 	rect.gx_rectangle_bottom = rect.gx_rectangle_top + 18;
 	rect.gx_rectangle_left = 176; //  + 12;
 	rect.gx_rectangle_right = rect.gx_rectangle_left + 26;
 	gx_widget_resize (&ReadyScreen.ReadyScreen_PauseIcon_Button, &rect);
 	gx_widget_show (&ReadyScreen.ReadyScreen_PauseIcon_Button);
+	
 	g_State = nextState;
 }
 
@@ -403,10 +448,13 @@ void EnterResumeTherapy_State (GX_WINDOW *window, STATES_ENUM nextState)
 void EnterTherapyInProgress_State (GX_WINDOW *window, STATES_ENUM nextState)
 {
 	gx_system_timer_stop (window, PAUSE_TIMER_ID);	// we may be coming for the PAUSED state, so let's ensure the PAUSED timer is off.
+
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Information_TextView);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Information_Button);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
+	gx_widget_hide (&ReadyScreen.ReadyScreen_Instruction_TextView);
+
 	if (!g_TherapyInProcess)
 	{
 		g_TherapyInProcess = TRUE;
@@ -430,12 +478,15 @@ void EnterTherapyInProgress_State (GX_WINDOW *window, STATES_ENUM nextState)
 void EnterPaused_State (GX_WINDOW *window, STATES_ENUM nextState)
 {
 	gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
+	gx_widget_hide (&ReadyScreen.ReadyScreen_Instruction_TextView);
+	gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
+	gx_widget_hide (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
+
 	gx_widget_show (&ReadyScreen.ReadyScreen_Information_TextView);
 	//gx_widget_show (&ReadyScreen.ReadyScreen_Information_Button);
 	gx_widget_show (&ReadyScreen.ReadyScreen_Time_Prompt);
 	gx_widget_show (&ReadyScreen.ReadyScreen_Minute_Prompt);
-	gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
-	gx_widget_hide (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
+
 	sprintf_s (g_TimeString, sizeof (g_TimeString), "%d", g_TherapyTime / 60);
 	gx_prompt_text_set (&ReadyScreen.ReadyScreen_Time_Prompt, g_TimeString);
 	DisplayInformation (window, "PAUSED", 4, GX_COLOR_ID_WHITE);
@@ -453,12 +504,16 @@ void EnterPaused_State (GX_WINDOW *window, STATES_ENUM nextState)
 
 void EnterTherapyComplete_State (GX_WINDOW *window, STATES_ENUM nextState)
 {
-	gx_widget_show (&ReadyScreen.ReadyScreen_Information_TextView);
-	DisplayInformation (window, "Therapy\rComplete", 2, GX_COLOR_ID_WHITE);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Minute_Prompt);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Time_Prompt);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
 	g_ShowTicks = FALSE;
+
+	//gx_widget_show (&ReadyScreen.ReadyScreen_Information_TextView);
+	gx_widget_hide (&ReadyScreen.ReadyScreen_Instruction_TextView);
+	DisplayInformation (window, "Therapy\rComplete", 2, GX_COLOR_ID_WHITE);
+	//DisplayInstruction (window, "\r\rRemove Mouthpiece", 4, GX_COLOR_ID_WHITE);
+
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_WHITE_TEXT_BOX, GX_PIXELMAP_ID_WHITE_TEXT_BOX);
 	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 	gx_widget_show (&ReadyScreen.ReadyScreen_Information_Button);
@@ -479,12 +534,33 @@ void EnterReadingError_State (GX_WINDOW *window, STATES_ENUM nextState)
 {
 	gx_system_timer_stop (window, THERAPY_TIMER_ID);	// We may have gotten here during Therapy
 
-	DisplayInformation (window, "READING\nERROR\rREINSERT MOUTHPIECE", 4, GX_COLOR_ID_RED);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Minute_Prompt);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Time_Prompt);
 	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
-	//gx_widget_show (&ReadyScreen.ReadyScreen_TherpayTime_RadialProgressBar);
+	//gx_widget_show (&ReadyScreen.ReadyScreen_Instruction_TextView);
+	DisplayInformation (window, "READING\nERROR\r\r\r", 4, GX_COLOR_ID_RED);
+	DisplayInstruction (window, "\r\rREINSERT\rMOUTHPIECE", 4, GX_COLOR_ID_RED);
+	//DisplayInstruction (window, "\r\rReinsert\rMouthpiece", 4, GX_COLOR_ID_RED);
+	g_ShowTicks = FALSE;
+	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
+	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
+	EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
+	g_State = nextState;
+}
+
+void EnterMouthpieceDetachedError_State (GX_WINDOW *window, STATES_ENUM nextState)
+{
+	gx_system_timer_stop (window, THERAPY_TIMER_ID);	// We may have gotten here during Therapy
+
+	gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
+	gx_widget_hide (&ReadyScreen.ReadyScreen_Minute_Prompt);
+	gx_widget_hide (&ReadyScreen.ReadyScreen_Time_Prompt);
+	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
+	//gx_widget_show (&ReadyScreen.ReadyScreen_Instruction_TextView);
+	DisplayInformation (window, "MOUTHPIECE\nDETACHED\r\r\r", 4, GX_COLOR_ID_RED);
+	DisplayInstruction (window, "\r\rREINSERT\rMOUTHPIECE", 4, GX_COLOR_ID_RED);
+	//DisplayInstruction (window, "\r\rReinsert\rMouthpiece", 4, GX_COLOR_ID_RED);
 	g_ShowTicks = FALSE;
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
@@ -505,6 +581,8 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 	UINT mySize, myBufSize;
 	GX_RECTANGLE rect;
 	INT thisSerialNumber;
+
+    gx_window_event_process(window, event_ptr);
 
 	switch (event_ptr->gx_event_type)
 	{
@@ -616,15 +694,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 			gx_widget_hide (&ReadyScreen.ReadyScreen_Time_Prompt);
 			if ((g_State == STATE_THERAPY_IN_PROCESS) || (g_State == STATE_THERAPY_PAUSED))
 			{
-				gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
-				gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
-				gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
-				gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
-				gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
-				gx_system_timer_stop(window, THERAPY_TIMER_ID);
-				EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
-				g_State = STATE_THERAPY_MOUTHPIECE_FAULT;
-				DisplayInformation (window, "MOUTHPIECE DETACHED", 2, GX_COLOR_ID_RED);
+				EnterMouthpieceDetachedError_State (window, STATE_THERAPY_MOUTHPIECE_FAULT);
 			}
 			else if (g_State == STATE_THERAPY_RECOVER)
 			{
@@ -673,7 +743,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		{
 			gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
-			DisplayInformation (window, "MOUTHPIECE\rEXPIRED", 2, GX_COLOR_ID_RED);
+			DisplayInformation (window, "MOUTHPIECE\rDAILY LIMIT REACHED", 3, GX_COLOR_ID_RED);
 			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
 			EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
 			g_State = STATE_MOUTHPIECE_EXPIRED;
@@ -712,7 +782,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
 			gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 			// Update USER Information
-			DisplayInformation (window, "MOUTHPIECE\rALREADY\nUSED TODAY", 3, GX_COLOR_ID_RED);
+			DisplayInformation (window, "MOUTHPIECE DAILY LIMIT REACHED", 3, GX_COLOR_ID_RED);
 			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
 			g_ShowTicks = FALSE;
 			gx_system_timer_stop (window, THERAPY_TIMER_ID);
@@ -773,13 +843,13 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 			// We're in standby, float the Standby Icon around the screen.
 			rect = ReadyScreen.ReadyScreen_ScreenSaver_Icon.gx_widget_size;
 			rect.gx_rectangle_top += 5;
-			if (rect.gx_rectangle_top > 202)
-				rect.gx_rectangle_top = 60;
-			rect.gx_rectangle_bottom = rect.gx_rectangle_top + 53;
+			if (rect.gx_rectangle_top > 148)
+				rect.gx_rectangle_top = 70;
+			rect.gx_rectangle_bottom = rect.gx_rectangle_top + 80;
 			rect.gx_rectangle_left += 5;
-			if (rect.gx_rectangle_left > 218)
-				rect.gx_rectangle_left = 64;
-			rect.gx_rectangle_right = rect.gx_rectangle_left + 40;
+			if (rect.gx_rectangle_left > 180)
+				rect.gx_rectangle_left = 74;
+			rect.gx_rectangle_right = rect.gx_rectangle_left + 60;
 			gx_widget_resize (&ReadyScreen.ReadyScreen_ScreenSaver_Icon, &rect);
 			gx_system_timer_start(window, STANDBY_TIMER, 20, 0);
 		}
@@ -797,6 +867,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 			gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
 			gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
 			gx_widget_hide (&ReadyScreen.ReadyScreen_ScreenSaver_Icon);
+			gx_widget_hide (&ReadyScreen.ReadyScreen_Instruction_TextView);
 			g_ShowTicks = FALSE;
 			gx_multi_line_text_button_text_id_set (&ReadyScreen.base.PrimaryTemplate_SystemError_Button, GX_STRING_ID_STRING_7);
 			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
@@ -836,6 +907,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
 		gx_widget_hide (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 		gx_widget_hide (&ReadyScreen.ReadyScreen_Information_TextView);
+		gx_widget_hide (&ReadyScreen.ReadyScreen_Instruction_TextView);
 		g_ShowTicks = FALSE;
 
 		// Turn off LED ring
@@ -853,8 +925,6 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 
 		break;
 	}
-
-    gx_window_event_process(window, event_ptr);
 
 	return (GX_SUCCESS);
 }

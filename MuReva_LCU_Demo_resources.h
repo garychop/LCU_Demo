@@ -6,7 +6,7 @@
 /*  site at www.expresslogic.com.                                              */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 12. 3.2022   Time (hh:mm): 10:50                        */
+/*  Date (dd.mm.yyyy): 19. 3.2022   Time (hh:mm): 11:34                        */
 /*******************************************************************************/
 
 
@@ -81,11 +81,13 @@
 #define GX_FONT_ID_ARIAL_16 7
 #define GX_FONT_ID_ARIAL_20 8
 #define GX_FONT_ID_ARIAL_11PT 9
-#define GX_FONT_ID_VERABI_12 10
+#define GX_FONT_ID_VERABI_20 10
 #define GX_FONT_ID_VERABD_48 11
 #define GX_FONT_ID_ARIAL_52 12
 #define GX_FONT_ID_ARIALBOLD_52 13
-#define LCU_MAINDISPLAY_FONT_TABLE_SIZE 14
+#define GX_FONT_ID_ARIALBD_20 14
+#define GX_FONT_ID_ARIALBI_20 15
+#define LCU_MAINDISPLAY_FONT_TABLE_SIZE 16
 
 /* Pixelmap ID definitions                                                     */
 
@@ -109,14 +111,15 @@
 #define GX_PIXELMAP_ID_PAUSEBUTTON_30X30 18
 #define GX_PIXELMAP_ID_RED_TEXT_BOX 19
 #define GX_PIXELMAP_ID_RIGHTARROW_80X60 20
-#define GX_PIXELMAP_ID_SCREENSAVER_TRANSPARENT 21
-#define GX_PIXELMAP_ID_STATUSRING_BLUE 22
-#define GX_PIXELMAP_ID_STATUSRING_GREEN 23
-#define GX_PIXELMAP_ID_STATUSRING_OFF 24
-#define GX_PIXELMAP_ID_STATUSRING_RED 25
-#define GX_PIXELMAP_ID_STATUSRING_WHITE 26
-#define GX_PIXELMAP_ID_WHITE_TEXT_BOX 27
-#define LCU_MAINDISPLAY_PIXELMAP_TABLE_SIZE 28
+#define GX_PIXELMAP_ID_SCREENSAVER_LG 21
+#define GX_PIXELMAP_ID_SCREENSAVER_TRANSPARENT 22
+#define GX_PIXELMAP_ID_STATUSRING_BLUE 23
+#define GX_PIXELMAP_ID_STATUSRING_GREEN 24
+#define GX_PIXELMAP_ID_STATUSRING_OFF 25
+#define GX_PIXELMAP_ID_STATUSRING_RED 26
+#define GX_PIXELMAP_ID_STATUSRING_WHITE 27
+#define GX_PIXELMAP_ID_WHITE_TEXT_BOX 28
+#define LCU_MAINDISPLAY_PIXELMAP_TABLE_SIZE 29
 
 /* String Ids                                                                  */
 
@@ -172,6 +175,7 @@
 #define GX_STRING_ID_STRING_49 50
 #define GX_STRING_ID_STRING_21 51
 #define GX_STRING_ID_STRING_38 52
-#define LCU_MAINDISPLAY_STRING_TABLE_SIZE 53
+#define GX_STRING_ID_STRING_50 53
+#define LCU_MAINDISPLAY_STRING_TABLE_SIZE 54
 
 #endif                                       /* sentry                         */

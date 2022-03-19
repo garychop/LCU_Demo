@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 12. 3.2022   Time (hh:mm): 10:50                        */
+/*  Date (dd.mm.yyyy): 19. 3.2022   Time (hh:mm): 11:35                        */
 /*******************************************************************************/
 
 
@@ -804,7 +804,7 @@ GX_PROMPT_PROPERTIES ReadyScreen_TimeTick_Prompt_properties =
 };
 GX_ML_TEXT_VIEW_PROPERTIES ReadyScreen_Information_TextView_properties =
 {
-    GX_STRING_ID_DETACH,                     /* string id                      */
+    GX_STRING_ID_STRING_27,                  /* string id                      */
     GX_FONT_ID_ARIAL_20,                     /* font id                        */
     GX_COLOR_ID_WHITE,                       /* normal text color              */
     GX_COLOR_ID_WHITE,                       /* selected text color            */
@@ -815,15 +815,49 @@ GX_ML_TEXT_VIEW_PROPERTIES ReadyScreen_Information_TextView_properties =
 GX_PROMPT_PROPERTIES ReadyScreen_Minute_Prompt_properties =
 {
     GX_STRING_ID_STRING_46,                  /* string id                      */
-    GX_FONT_ID_VERABI_12,                    /* font id                        */
+    GX_FONT_ID_VERABI_20,                    /* font id                        */
     GX_COLOR_ID_WHITE,                       /* normal text color              */
     GX_COLOR_ID_WHITE,                       /* selected text color            */
     GX_COLOR_ID_WHITE                        /* disabled text color            */
 };
 GX_ICON_PROPERTIES ReadyScreen_ScreenSaver_Icon_properties =
 {
-    GX_PIXELMAP_ID_SCREENSAVER_TRANSPARENT,  /* normal pixelmap id             */
+    GX_PIXELMAP_ID_SCREENSAVER_LG,           /* normal pixelmap id             */
     0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES ReadyScreen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET ReadyScreen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_Instruction_TextView), /* control block */
+    (void *) &ReadyScreen_Instruction_TextView_properties /* extended properties */
 };
 
 GX_CONST GX_STUDIO_WIDGET ReadyScreen_ScreenSaver_Icon_define =
@@ -843,8 +877,8 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_ScreenSaver_Icon_define =
     gx_studio_icon_create,                   /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {226, 130, 265, 182},                    /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
+    {180, 158, 239, 236},                    /* widget size                    */
+    &ReadyScreen_Instruction_TextView_define, /* next widget definition        */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_ScreenSaver_Icon), /* control block */
     (void *) &ReadyScreen_ScreenSaver_Icon_properties /* extended properties   */
@@ -867,7 +901,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_Minute_Prompt_define =
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {160, 165, 205, 188},                    /* widget size                    */
+    {156, 162, 201, 185},                    /* widget size                    */
     &ReadyScreen_ScreenSaver_Icon_define,    /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_Minute_Prompt), /* control block */
@@ -1011,7 +1045,7 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_Time_Prompt_define =
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {140, 142, 169, 189},                    /* widget size                    */
+    {126, 142, 155, 189},                    /* widget size                    */
     &ReadyScreen_Information_Button_define,  /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(READYSCREEN_CONTROL_BLOCK, ReadyScreen_Time_Prompt), /* control block */
@@ -1184,7 +1218,7 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_Version_Prompt_define =
     gx_studio_prompt_create,                 /* create function                */
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
-    {20, 280, 111, 303},                     /* widget size                    */
+    {20, 280, 129, 303},                     /* widget size                    */
     &Splash_Window_Mureva_Logo_320x240_define, /* next widget definition       */
     GX_NULL,                                 /* no child widgets               */ 
     offsetof(SPLASH_WINDOW_CONTROL_BLOCK, Splash_Window_Version_Prompt), /* control block */

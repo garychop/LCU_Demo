@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 12. 3.2022   Time (hh:mm): 10:50                        */
+/*  Date (dd.mm.yyyy): 19. 3.2022   Time (hh:mm): 11:35                        */
 /*******************************************************************************/
 
 
@@ -31,20 +31,21 @@ extern   "C" {
 #define INFORMATION_TEXT_VIEW_ID 7
 #define MINUTE_PROMPT_ID 8
 #define SCREENSAVER_ICON_ID 9
-#define SPLASH_WINDOW 10
-#define TIME_PROMPT 11
-#define PLAY_BTN_ID 12
-#define SYSTEM_ERROR_BTN_ID 13
-#define MOUTHPIECE_PROMPT_ID 14
-#define LIMIT_SWITCH_BTN_ID 15
-#define EEPROM_EXPIRED_BTN_ID 16
-#define EEPROM_OK_BTN_ID 17
-#define EEPROM_FAIL_BTN_ID 18
-#define SERIAL_NUMBER_PROMPT_ID 19
-#define SERIAL_NUMBER_TEXT_INPUT_ID 20
-#define EEPROM_12HOUR_BTN_ID 21
-#define IDLE_TIME_BUTTON_ID 22
-#define IDLE_TIME_PROMPT_ID 23
+#define INSTRUCTION_TEXT_VIEW_ID 10
+#define SPLASH_WINDOW 11
+#define TIME_PROMPT 12
+#define PLAY_BTN_ID 13
+#define SYSTEM_ERROR_BTN_ID 14
+#define MOUTHPIECE_PROMPT_ID 15
+#define LIMIT_SWITCH_BTN_ID 16
+#define EEPROM_EXPIRED_BTN_ID 17
+#define EEPROM_OK_BTN_ID 18
+#define EEPROM_FAIL_BTN_ID 19
+#define SERIAL_NUMBER_PROMPT_ID 20
+#define SERIAL_NUMBER_TEXT_INPUT_ID 21
+#define EEPROM_12HOUR_BTN_ID 22
+#define IDLE_TIME_BUTTON_ID 23
+#define IDLE_TIME_PROMPT_ID 24
 
 
 /* Define animation ids                                                        */
@@ -200,6 +201,7 @@ typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
     GX_MULTI_LINE_TEXT_VIEW ReadyScreen_Information_TextView;
     GX_PROMPT ReadyScreen_Minute_Prompt;
     GX_ICON ReadyScreen_ScreenSaver_Icon;
+    GX_MULTI_LINE_TEXT_VIEW ReadyScreen_Instruction_TextView;
 } READYSCREEN_CONTROL_BLOCK;
 
 typedef struct SPLASH_WINDOW_CONTROL_BLOCK_STRUCT
