@@ -3837,7 +3837,7 @@
 <string_record>
 <id>STRING_21</id>
 <font>0</font>
-<val>Version 1.5.4</val>
+<val>Version 1.5.6</val>
 </string_record>
 <string_record>
 <id>STRING_38</id>
@@ -4222,9 +4222,9 @@
 <right>129</right>
 <bottom>303</bottom>
 </size>
-<style>1342193664</style>
+<style>1073758208</style>
 <allocation>0</allocation>
-<accepts_focus>TRUE</accepts_focus>
+<accepts_focus>FALSE</accepts_focus>
 <normal_fill_color>WIDGET_FILL</normal_fill_color>
 <selected_fill_color>SELECTED_FILL</selected_fill_color>
 <disabled_fill_color>DISABLED_FILL</disabled_fill_color>
@@ -4232,7 +4232,7 @@
 <visible_at_startup>FALSE</visible_at_startup>
 <string_id>STRING_21</string_id>
 <font_id>PROMPT</font_id>
-<normal_text_color>WINDOW_FILL</normal_text_color>
+<normal_text_color>SELECTED_TEXT</normal_text_color>
 <selected_text_color>SELECTED_TEXT</selected_text_color>
 <disabled_text_color>DISABLED_TEXT</disabled_text_color>
 </widget>
@@ -4245,7 +4245,7 @@
 <right>319</right>
 <bottom>319</bottom>
 </size>
-<style>269615104</style>
+<style>1179648</style>
 <allocation>0</allocation>
 <accepts_focus>FALSE</accepts_focus>
 <normal_fill_color>WIDGET_FILL</normal_fill_color>

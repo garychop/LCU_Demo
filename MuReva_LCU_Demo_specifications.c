@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 19. 3.2022   Time (hh:mm): 11:35                        */
+/*  Date (dd.mm.yyyy): 28. 3.2022   Time (hh:mm): 17:44                        */
 /*******************************************************************************/
 
 
@@ -1167,7 +1167,7 @@ GX_PROMPT_PROPERTIES Splash_Window_Version_Prompt_properties =
 {
     GX_STRING_ID_STRING_21,                  /* string id                      */
     GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WINDOW_FILL,                 /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* normal text color              */
     GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
@@ -1185,7 +1185,7 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_Mureva_Logo_320x240_define =
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STYLE_BORDER_NONE|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
     0,                                       /* status flags                   */
     sizeof(GX_ICON),                         /* control block size             */
     GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
@@ -1209,8 +1209,8 @@ GX_CONST GX_STUDIO_WIDGET Splash_Window_Version_Prompt_define =
     #if defined(GX_WIDGET_USER_DATA)
     0,                                       /* user data                      */
     #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
     sizeof(GX_PROMPT),                       /* control block size             */
     GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
     GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */

@@ -298,6 +298,7 @@ void EnterInsertMouthpieceState (GX_WINDOW *window, STATES_ENUM nextState)
 	g_State = nextState;
 	g_LimitSwitchClosed = FALSE;
 	g_TherapyInProcess = FALSE;
+	g_TherapyTime = 0;
 	g_ShowTicks = FALSE;
 
 	//gx_widget_hide (&ReadyScreen.ReadyScreen_TherpayTime_RadialProgressBar);
@@ -372,7 +373,7 @@ void EnterSerialNumber_State (GX_WINDOW *window, STATES_ENUM nextState)
 	sprintf_s (g_SerialNumberString, sizeof (g_SerialNumberString), "Serial Number:\rMCA%06d\r\r", g_MouthPiece_SerialNumber);
 	DisplayInformation (window, g_SerialNumberString, 4, GX_COLOR_ID_WHITE);
 	// Display Press in the Instruction box
-	DisplayInstruction (window, "\r\r  Press      \rto Continue", 4, GX_COLOR_ID_WHITE);
+	DisplayInstruction (window, "\r\r Press       \rto Continue", 4, GX_COLOR_ID_WHITE);
 	rect.gx_rectangle_top = 160;
 	rect.gx_rectangle_bottom = rect.gx_rectangle_top + 18;
 	rect.gx_rectangle_left = 176;
@@ -540,8 +541,7 @@ void EnterReadingError_State (GX_WINDOW *window, STATES_ENUM nextState)
 	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 	//gx_widget_show (&ReadyScreen.ReadyScreen_Instruction_TextView);
 	DisplayInformation (window, "READING\nERROR\r\r\r", 4, GX_COLOR_ID_RED);
-	DisplayInstruction (window, "\r\rREINSERT\rMOUTHPIECE", 4, GX_COLOR_ID_RED);
-	//DisplayInstruction (window, "\r\rReinsert\rMouthpiece", 4, GX_COLOR_ID_RED);
+	DisplayInstruction (window, "\r\rReinsert\rMouthpiece", 4, GX_COLOR_ID_RED);
 	g_ShowTicks = FALSE;
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
@@ -559,7 +559,7 @@ void EnterMouthpieceDetachedError_State (GX_WINDOW *window, STATES_ENUM nextStat
 	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 	//gx_widget_show (&ReadyScreen.ReadyScreen_Instruction_TextView);
 	DisplayInformation (window, "MOUTHPIECE\nDETACHED\r\r\r", 4, GX_COLOR_ID_RED);
-	DisplayInstruction (window, "\r\rREINSERT\rMOUTHPIECE", 4, GX_COLOR_ID_RED);
+	DisplayInstruction (window, "\r\rReinsert\rMouthpiece", 4, GX_COLOR_ID_RED);
 	//DisplayInstruction (window, "\r\rReinsert\rMouthpiece", 4, GX_COLOR_ID_RED);
 	g_ShowTicks = FALSE;
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
@@ -598,7 +598,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		switch (g_State)
 		{
 		case STATE_SERIAL_NUMBER_PROMPT:
-			if (g_TherapyTime > 0)
+			if (g_TherapyInProcess)
 				EnterResumeTherapy_State (window, STATE_RESUME_THERAPY);
 			else
 				EnterStartTherapy_State (window, STATE_READY_TO_GO);
@@ -722,6 +722,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 			}
 			else // Different serial number
 			{
+				g_TherapyTime = 0;
 				g_TherapyInProcess = FALSE;
 				EnterSerialNumber_State(window, STATE_SERIAL_NUMBER_PROMPT);
 			}
@@ -730,25 +731,25 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		break;
 
 	case GX_SIGNAL (EEPROM_EXPIRED_BTN_ID, GX_EVENT_CLICKED):
-		if (g_State == STATE_READING_EEPROM)
-		{
+		//if (g_State == STATE_READING_EEPROM)
+		//{
 			gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
 			DisplayInformation (window, "MOUTHPIECE\rEXPIRED", 2, GX_COLOR_ID_RED);
 			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
 			EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
 			g_State = STATE_MOUTHPIECE_EXPIRED;
-		}
-		else if (g_State == STATE_THERAPY_CONTINUE)	// We are recovering from a Mouthpiece detached condition.
-		{
-			gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
-			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
-			DisplayInformation (window, "MOUTHPIECE\rDAILY LIMIT REACHED", 3, GX_COLOR_ID_RED);
-			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
-			EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
-			g_State = STATE_MOUTHPIECE_EXPIRED;
-			break;
-		}
+		//}
+		//else if (g_State == STATE_THERAPY_CONTINUE)	// We are recovering from a Mouthpiece detached condition.
+		//{
+		//	gx_widget_show (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
+		//	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
+		//	DisplayInformation (window, "MOUTHPIECE\rDAILY LIMIT REACHED", 3, GX_COLOR_ID_RED);
+		//	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
+		//	EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
+		//	g_State = STATE_MOUTHPIECE_EXPIRED;
+		//	break;
+		//}
 		break;
 
 	case GX_SIGNAL (EEPROM_FAIL_BTN_ID, GX_EVENT_CLICKED):
@@ -764,11 +765,12 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		}
 		else if (g_State == STATE_THERAPY_CONTINUE)	// We are recovering from a Mouthpiece detached condition.
 		{
-			DisplayInformation (window, "MOUTHPIECE\rFAULT", 2, GX_COLOR_ID_RED);
-			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
-			gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
-			EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
-			g_State = STATE_THERAPY_RECOVER;
+			EnterReadingError_State(window, STATE_THERAPY_RECOVER);
+			//DisplayInformation (window, "MOUTHPIECE\rFAULT", 2, GX_COLOR_ID_RED);
+			//gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
+			//gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_RED, GX_PIXELMAP_ID_STATUSRING_RED);
+			//EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
+			//g_State = STATE_THERAPY_RECOVER;
 		}
 		break;
 
