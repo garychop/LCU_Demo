@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 28. 3.2022   Time (hh:mm): 17:44                        */
+/*  Date (dd.mm.yyyy):  1. 4.2022   Time (hh:mm): 07:51                        */
 /*******************************************************************************/
 
 
@@ -23,29 +23,30 @@ extern   "C" {
 /* Define widget ids                                                           */
 
 #define STATUS_RING_ICON 1
-#define TIME_PROMPT_ID 2
-#define INFORMATION_BUTTON 3
-#define GREEN_TICK_ICON 4
-#define WHITE_BOX_ICON 5
-#define TIME_TICK_PROMPT 6
-#define INFORMATION_TEXT_VIEW_ID 7
-#define MINUTE_PROMPT_ID 8
-#define SCREENSAVER_ICON_ID 9
-#define INSTRUCTION_TEXT_VIEW_ID 10
-#define SPLASH_WINDOW 11
-#define TIME_PROMPT 12
-#define PLAY_BTN_ID 13
-#define SYSTEM_ERROR_BTN_ID 14
-#define MOUTHPIECE_PROMPT_ID 15
-#define LIMIT_SWITCH_BTN_ID 16
-#define EEPROM_EXPIRED_BTN_ID 17
-#define EEPROM_OK_BTN_ID 18
-#define EEPROM_FAIL_BTN_ID 19
-#define SERIAL_NUMBER_PROMPT_ID 20
-#define SERIAL_NUMBER_TEXT_INPUT_ID 21
-#define EEPROM_12HOUR_BTN_ID 22
-#define IDLE_TIME_BUTTON_ID 23
-#define IDLE_TIME_PROMPT_ID 24
+#define WHITE_BOX_ICON 2
+#define INFORMATION_TEXT_VIEW_ID 3
+#define INSTRUCTION_TEXT_VIEW_ID 4
+#define TIME_PROMPT_ID 5
+#define INFORMATION_BUTTON 6
+#define GREEN_TICK_ICON 7
+#define TIME_TICK_PROMPT 8
+#define MINUTE_PROMPT_ID 9
+#define MUREVA_ICON 10
+#define SCREENSAVER_ICON_ID 11
+#define SPLASH_WINDOW 12
+#define TIME_PROMPT 13
+#define PLAY_BTN_ID 14
+#define SYSTEM_ERROR_BTN_ID 15
+#define MOUTHPIECE_PROMPT_ID 16
+#define LIMIT_SWITCH_BTN_ID 17
+#define EEPROM_EXPIRED_BTN_ID 18
+#define EEPROM_OK_BTN_ID 19
+#define EEPROM_FAIL_BTN_ID 20
+#define SERIAL_NUMBER_PROMPT_ID 21
+#define SERIAL_NUMBER_TEXT_INPUT_ID 22
+#define EEPROM_12HOUR_BTN_ID 23
+#define IDLE_TIME_BUTTON_ID 24
+#define IDLE_TIME_PROMPT_ID 25
 
 
 /* Define animation ids                                                        */
@@ -187,6 +188,118 @@ typedef struct PRIMARYTEMPLATE_CONTROL_BLOCK_STRUCT
     GX_PROMPT PrimaryTemplate_Idle_Time_Prompt;
 } PRIMARYTEMPLATE_CONTROL_BLOCK;
 
+typedef struct MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON MouthpieceDetached_Screen_StatusRing_Icon;
+    GX_ICON MouthpieceDetached_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW MouthpieceDetached_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW MouthpieceDetached_Screen_Instruction_TextView;
+} MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK;
+
+typedef struct THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON TherapyComplete_Screen_StatusRing_Icon;
+    GX_ICON TherapyComplete_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW TherapyComplete_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW TherapyComplete_Screen_Instruction_TextView;
+} THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK;
+
+typedef struct THERAPY_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON Therapy_Screen_StatusRing_Icon;
+    GX_PROMPT Therapy_Screen_Time_Prompt;
+    GX_MULTI_LINE_TEXT_BUTTON Therapy_Screen_Information_Button;
+    GX_ICON Therapy_Screen_GreenTick_Icon;
+    GX_ICON Therapy_Screen_WhiteBox_Icon;
+    GX_PROMPT Therapy_Screen_TimeTick_Prompt;
+    GX_MULTI_LINE_TEXT_VIEW Therapy_Screen_Information_TextView;
+    GX_PROMPT Therapy_Screen_Minute_Prompt;
+    GX_MULTI_LINE_TEXT_VIEW Therapy_Screen_Instruction_TextView;
+} THERAPY_SCREEN_CONTROL_BLOCK;
+
+typedef struct PRESSTOSTART_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON PressToStart_Screen_StatusRing_Icon;
+    GX_ICON PressToStart_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW PressToStart_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW PressToStart_Screen_Instruction_TextView;
+    GX_ICON_BUTTON PressToStart_Screen_PauseIcon_Button;
+} PRESSTOSTART_SCREEN_CONTROL_BLOCK;
+
+typedef struct STANDBY_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON Standby_Screen_Mureva_Icon;
+} STANDBY_SCREEN_CONTROL_BLOCK;
+
+typedef struct EXPIRED_ERROR_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON Expired_Error_Screen_StatusRing_Icon;
+    GX_ICON Expired_Error_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW Expired_Error_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW Expired_Error_Screen_Instruction_TextView;
+} EXPIRED_ERROR_SCREEN_CONTROL_BLOCK;
+
+typedef struct DAILYLIMITREACHED_ERROR_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON DailyLimitReached_Error_Screen_StatusRing_Icon;
+    GX_ICON DailyLimitReached_Error_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW DailyLimitReached_Error_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW DailyLimitReached_Error_Screen_Instruction_TextView;
+} DAILYLIMITREACHED_ERROR_SCREEN_CONTROL_BLOCK;
+
+typedef struct READINGERROR_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON ReadingError_Screen_StatusRing_Icon;
+    GX_ICON ReadingError_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW ReadingError_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW ReadingError_Screen_Instruction_TextView;
+} READINGERROR_SCREEN_CONTROL_BLOCK;
+
+typedef struct SERIALNUMBER_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON SerialNumber_Screen_StatusRing_Icon;
+    GX_ICON SerialNumber_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW SerialNumber_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW SerialNumber_Screen_Instruction_TextView;
+    GX_ICON_BUTTON SerialNumber_Screen_PauseIcon_Button;
+} SERIALNUMBER_SCREEN_CONTROL_BLOCK;
+
+typedef struct READING_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON Reading_Screen_StatusRing_Icon;
+    GX_ICON Reading_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW Reading_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW Reading_Screen_Instruction_TextView;
+} READING_SCREEN_CONTROL_BLOCK;
+
+typedef struct ERROR_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON Error_Screen_StatusRing_Icon;
+    GX_ICON Error_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW Error_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW Error_Screen_Instruction_TextView;
+} ERROR_SCREEN_CONTROL_BLOCK;
+
+typedef struct INSERTMOUTHPIECE_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON InsertMouthpiece_Screen_StatusRing_Icon;
+    GX_ICON InsertMouthpiece_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW InsertMouthpiece_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW InsertMouthpiece_Screen_Instruction_TextView;
+} INSERTMOUTHPIECE_SCREEN_CONTROL_BLOCK;
+
 typedef struct READYSCREEN_CONTROL_BLOCK_STRUCT
 {
     PRIMARYTEMPLATE_CONTROL_BLOCK base;
@@ -225,6 +338,18 @@ typedef struct SAMPLE_TICK_WINDOW_CONTROL_BLOCK_STRUCT
 /* extern statically defined control blocks                                    */
 
 #ifndef GUIX_STUDIO_GENERATED_FILE
+extern MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK MouthpieceDetached_Screen;
+extern THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK TherapyComplete_Screen;
+extern THERAPY_SCREEN_CONTROL_BLOCK Therapy_Screen;
+extern PRESSTOSTART_SCREEN_CONTROL_BLOCK PressToStart_Screen;
+extern STANDBY_SCREEN_CONTROL_BLOCK Standby_Screen;
+extern EXPIRED_ERROR_SCREEN_CONTROL_BLOCK Expired_Error_Screen;
+extern DAILYLIMITREACHED_ERROR_SCREEN_CONTROL_BLOCK DailyLimitReached_Error_Screen;
+extern READINGERROR_SCREEN_CONTROL_BLOCK ReadingError_Screen;
+extern SERIALNUMBER_SCREEN_CONTROL_BLOCK SerialNumber_Screen;
+extern READING_SCREEN_CONTROL_BLOCK Reading_Screen;
+extern ERROR_SCREEN_CONTROL_BLOCK Error_Screen;
+extern INSERTMOUTHPIECE_SCREEN_CONTROL_BLOCK InsertMouthpiece_Screen;
 extern READYSCREEN_CONTROL_BLOCK ReadyScreen;
 extern SPLASH_WINDOW_CONTROL_BLOCK Splash_Window;
 extern SAMPLE_TICK_WINDOW_CONTROL_BLOCK Sample_Tick_Window;
@@ -233,6 +358,30 @@ extern PRIMARYTEMPLATE_CONTROL_BLOCK PrimaryTemplate;
 
 /* Declare event process functions, draw functions, and callback functions     */
 
+UINT MouthpieceDetached_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID MouthpieceDetached_Screen_Draw_Function(GX_WINDOW *widget);
+UINT TherapyComplete_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID TherapyComplete_Screen_Draw_Function(GX_WINDOW *widget);
+UINT Therapy_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Therapy_Screen_Draw_Function(GX_WINDOW *widget);
+UINT PressToStart_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID PressToStart_Screen_Draw_Function(GX_WINDOW *widget);
+UINT Standby_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Standby_Screen_Draw_Function(GX_WINDOW *widget);
+UINT Expired_Error_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Expired_Error_Screen_Draw_Function(GX_WINDOW *widget);
+UINT DailyLimitReached_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID DailyLimitReached_Draw_Function(GX_WINDOW *widget);
+UINT ReadingError_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID ReadingError_Screen_Draw_Function(GX_WINDOW *widget);
+UINT SerialNumber_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID SerialNumber_Screen_Draw_Function(GX_WINDOW *widget);
+UINT Reading_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Reading_Screen_Draw_Function(GX_WINDOW *widget);
+UINT Error_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Error_Screen_Draw_Function(GX_WINDOW *widget);
+UINT InsertMouthpiece_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID InsertMouthpiece_Screen_Draw_Function(GX_WINDOW *widget);
 UINT ReadyScreen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID ReadyScreen_Draw_Function(GX_WINDOW *widget);
 UINT SplashScreen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);

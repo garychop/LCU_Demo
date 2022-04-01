@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy): 28. 3.2022   Time (hh:mm): 17:44                        */
+/*  Date (dd.mm.yyyy):  1. 4.2022   Time (hh:mm): 07:51                        */
 /*******************************************************************************/
 
 
@@ -16,6 +16,18 @@
 #include "MuReva_LCU_Demo_specifications.h"
 
 static GX_WIDGET *gx_studio_nested_widget_create(GX_BYTE *control, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
+MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK MouthpieceDetached_Screen;
+THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK TherapyComplete_Screen;
+THERAPY_SCREEN_CONTROL_BLOCK Therapy_Screen;
+PRESSTOSTART_SCREEN_CONTROL_BLOCK PressToStart_Screen;
+STANDBY_SCREEN_CONTROL_BLOCK Standby_Screen;
+EXPIRED_ERROR_SCREEN_CONTROL_BLOCK Expired_Error_Screen;
+DAILYLIMITREACHED_ERROR_SCREEN_CONTROL_BLOCK DailyLimitReached_Error_Screen;
+READINGERROR_SCREEN_CONTROL_BLOCK ReadingError_Screen;
+SERIALNUMBER_SCREEN_CONTROL_BLOCK SerialNumber_Screen;
+READING_SCREEN_CONTROL_BLOCK Reading_Screen;
+ERROR_SCREEN_CONTROL_BLOCK Error_Screen;
+INSERTMOUTHPIECE_SCREEN_CONTROL_BLOCK InsertMouthpiece_Screen;
 READYSCREEN_CONTROL_BLOCK ReadyScreen;
 SPLASH_WINDOW_CONTROL_BLOCK Splash_Window;
 SAMPLE_TICK_WINDOW_CONTROL_BLOCK Sample_Tick_Window;
@@ -737,6 +749,1994 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_define =
     0,                                       /* control block                  */
     (void *) &PrimaryTemplate_properties     /* extended properties            */
 };
+GX_TEMPLATE_PROPERTIES MouthpieceDetached_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES MouthpieceDetached_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_RED,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES MouthpieceDetached_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES MouthpieceDetached_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES MouthpieceDetached_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET MouthpieceDetached_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK, MouthpieceDetached_Screen_Instruction_TextView), /* control block */
+    (void *) &MouthpieceDetached_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET MouthpieceDetached_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &MouthpieceDetached_Screen_Instruction_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK, MouthpieceDetached_Screen_Information_TextView), /* control block */
+    (void *) &MouthpieceDetached_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET MouthpieceDetached_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &MouthpieceDetached_Screen_Information_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK, MouthpieceDetached_Screen_WhiteBox_Icon), /* control block */
+    (void *) &MouthpieceDetached_Screen_WhiteBox_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET MouthpieceDetached_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &MouthpieceDetached_Screen_WhiteBox_Icon_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK, MouthpieceDetached_Screen_StatusRing_Icon), /* control block */
+    (void *) &MouthpieceDetached_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET MouthpieceDetached_Screen_define =
+{
+    "MouthpieceDetached_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK), /* control block size     */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) MouthpieceDetached_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) MouthpieceDetached_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &MouthpieceDetached_Screen_StatusRing_Icon_define, /* child widget         */
+    0,                                       /* control block                  */
+    (void *) &MouthpieceDetached_Screen_properties /* extended properties      */
+};
+GX_TEMPLATE_PROPERTIES TherapyComplete_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES TherapyComplete_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_BLUE,          /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES TherapyComplete_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES TherapyComplete_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES TherapyComplete_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET TherapyComplete_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK, TherapyComplete_Screen_Instruction_TextView), /* control block */
+    (void *) &TherapyComplete_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET TherapyComplete_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &TherapyComplete_Screen_Instruction_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK, TherapyComplete_Screen_Information_TextView), /* control block */
+    (void *) &TherapyComplete_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET TherapyComplete_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &TherapyComplete_Screen_Information_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK, TherapyComplete_Screen_WhiteBox_Icon), /* control block */
+    (void *) &TherapyComplete_Screen_WhiteBox_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET TherapyComplete_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &TherapyComplete_Screen_WhiteBox_Icon_define, /* next widget definition    */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK, TherapyComplete_Screen_StatusRing_Icon), /* control block */
+    (void *) &TherapyComplete_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET TherapyComplete_Screen_define =
+{
+    "TherapyComplete_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK), /* control block size        */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) TherapyComplete_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) TherapyComplete_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &TherapyComplete_Screen_StatusRing_Icon_define, /* child widget            */
+    0,                                       /* control block                  */
+    (void *) &TherapyComplete_Screen_properties /* extended properties         */
+};
+GX_TEMPLATE_PROPERTIES Therapy_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES Therapy_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_BLUE,          /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_PROMPT_PROPERTIES Therapy_Screen_Time_Prompt_properties =
+{
+    GX_STRING_ID_STRING_47,                  /* string id                      */
+    GX_FONT_ID_ARIALBOLD_52,                 /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE                        /* disabled text color            */
+};
+GX_ML_TEXT_BUTTON_PROPERTIES Therapy_Screen_Information_Button_properties =
+{
+    GX_STRING_ID_STRING_34,                  /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_ICON_PROPERTIES Therapy_Screen_GreenTick_Icon_properties =
+{
+    GX_PIXELMAP_ID_GREENTICKS,               /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES Therapy_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_PROMPT_PROPERTIES Therapy_Screen_TimeTick_Prompt_properties =
+{
+    GX_STRING_ID_STRING_43,                  /* string id                      */
+    GX_FONT_ID_ARIAL_11PT,                   /* font id                        */
+    GX_COLOR_ID_TEXT,                        /* normal text color              */
+    GX_COLOR_ID_TEXT,                        /* selected text color            */
+    GX_COLOR_ID_WHITE                        /* disabled text color            */
+};
+GX_ML_TEXT_VIEW_PROPERTIES Therapy_Screen_Information_TextView_properties =
+{
+    GX_STRING_ID_STRING_27,                  /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_PROMPT_PROPERTIES Therapy_Screen_Minute_Prompt_properties =
+{
+    GX_STRING_ID_STRING_46,                  /* string id                      */
+    GX_FONT_ID_VERABI_20,                    /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE                        /* disabled text color            */
+};
+GX_ML_TEXT_VIEW_PROPERTIES Therapy_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPY_SCREEN_CONTROL_BLOCK, Therapy_Screen_Instruction_TextView), /* control block */
+    (void *) &Therapy_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_Minute_Prompt_define =
+{
+    "Minute_Prompt",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    MINUTE_PROMPT_ID,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {156, 162, 201, 185},                    /* widget size                    */
+    &Therapy_Screen_Instruction_TextView_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPY_SCREEN_CONTROL_BLOCK, Therapy_Screen_Minute_Prompt), /* control block */
+    (void *) &Therapy_Screen_Minute_Prompt_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &Therapy_Screen_Minute_Prompt_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPY_SCREEN_CONTROL_BLOCK, Therapy_Screen_Information_TextView), /* control block */
+    (void *) &Therapy_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_TimeTick_Prompt_define =
+{
+    "TimeTick_Prompt",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    TIME_TICK_PROMPT,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_TEXT,                        /* normal color id                */
+    GX_COLOR_ID_TEXT,                        /* selected color id              */
+    GX_COLOR_ID_TEXT,                        /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {148, 260, 163, 273},                    /* widget size                    */
+    &Therapy_Screen_Information_TextView_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPY_SCREEN_CONTROL_BLOCK, Therapy_Screen_TimeTick_Prompt), /* control block */
+    (void *) &Therapy_Screen_TimeTick_Prompt_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &Therapy_Screen_TimeTick_Prompt_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPY_SCREEN_CONTROL_BLOCK, Therapy_Screen_WhiteBox_Icon), /* control block */
+    (void *) &Therapy_Screen_WhiteBox_Icon_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_GreenTick_Icon_define =
+{
+    "GreenTick_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    GREEN_TICK_ICON,                         /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {475, 70, 646, 246},                     /* widget size                    */
+    &Therapy_Screen_WhiteBox_Icon_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPY_SCREEN_CONTROL_BLOCK, Therapy_Screen_GreenTick_Icon), /* control block */
+    (void *) &Therapy_Screen_GreenTick_Icon_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_Information_Button_define =
+{
+    "Information_Button",
+    GX_TYPE_MULTI_LINE_TEXT_BUTTON,          /* widget type                    */
+    INFORMATION_BUTTON,                      /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_BUTTON),       /* control block size             */
+    GX_COLOR_ID_BTN_TEXT,                    /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_button_create,     /* create function            */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {492, 116, 631, 206},                    /* widget size                    */
+    &Therapy_Screen_GreenTick_Icon_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPY_SCREEN_CONTROL_BLOCK, Therapy_Screen_Information_Button), /* control block */
+    (void *) &Therapy_Screen_Information_Button_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_Time_Prompt_define =
+{
+    "Time_Prompt",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    TIME_PROMPT_ID,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {126, 142, 155, 189},                    /* widget size                    */
+    &Therapy_Screen_Information_Button_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPY_SCREEN_CONTROL_BLOCK, Therapy_Screen_Time_Prompt), /* control block */
+    (void *) &Therapy_Screen_Time_Prompt_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &Therapy_Screen_Time_Prompt_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(THERAPY_SCREEN_CONTROL_BLOCK, Therapy_Screen_StatusRing_Icon), /* control block */
+    (void *) &Therapy_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Therapy_Screen_define =
+{
+    "Therapy_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(THERAPY_SCREEN_CONTROL_BLOCK),    /* control block size             */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) Therapy_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Therapy_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &Therapy_Screen_StatusRing_Icon_define,  /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &Therapy_Screen_properties      /* extended properties            */
+};
+GX_TEMPLATE_PROPERTIES PressToStart_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES PressToStart_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_BLUE,          /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES PressToStart_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES PressToStart_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES PressToStart_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ICON_BUTTON_PROPERTIES PressToStart_Screen_PauseIcon_Button_properties =
+{
+    GX_PIXELMAP_ID_PAUSEBUTTON_24X16         /* pixelmap id                    */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToStart_Screen_PauseIcon_Button_define =
+{
+    "PauseIcon_Button",
+    GX_TYPE_ICON_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_HALIGN_CENTER|GX_STYLE_VALIGN_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {147, 261, 172, 278},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTOSTART_SCREEN_CONTROL_BLOCK, PressToStart_Screen_PauseIcon_Button), /* control block */
+    (void *) &PressToStart_Screen_PauseIcon_Button_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToStart_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    &PressToStart_Screen_PauseIcon_Button_define, /* next widget definition    */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTOSTART_SCREEN_CONTROL_BLOCK, PressToStart_Screen_Instruction_TextView), /* control block */
+    (void *) &PressToStart_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToStart_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &PressToStart_Screen_Instruction_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTOSTART_SCREEN_CONTROL_BLOCK, PressToStart_Screen_Information_TextView), /* control block */
+    (void *) &PressToStart_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToStart_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &PressToStart_Screen_Information_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTOSTART_SCREEN_CONTROL_BLOCK, PressToStart_Screen_WhiteBox_Icon), /* control block */
+    (void *) &PressToStart_Screen_WhiteBox_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToStart_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &PressToStart_Screen_WhiteBox_Icon_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTOSTART_SCREEN_CONTROL_BLOCK, PressToStart_Screen_StatusRing_Icon), /* control block */
+    (void *) &PressToStart_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToStart_Screen_define =
+{
+    "PressToStart_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(PRESSTOSTART_SCREEN_CONTROL_BLOCK), /* control block size           */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) PressToStart_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) PressToStart_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &PressToStart_Screen_StatusRing_Icon_define, /* child widget               */
+    0,                                       /* control block                  */
+    (void *) &PressToStart_Screen_properties /* extended properties            */
+};
+GX_TEMPLATE_PROPERTIES Standby_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES Standby_Screen_Mureva_Icon_properties =
+{
+    GX_PIXELMAP_ID_SCREENSAVER_LG,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+
+GX_CONST GX_STUDIO_WIDGET Standby_Screen_Mureva_Icon_define =
+{
+    "Mureva_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    MUREVA_ICON,                             /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {130, 230, 189, 308},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(STANDBY_SCREEN_CONTROL_BLOCK, Standby_Screen_Mureva_Icon), /* control block */
+    (void *) &Standby_Screen_Mureva_Icon_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET Standby_Screen_define =
+{
+    "Standby_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(STANDBY_SCREEN_CONTROL_BLOCK),    /* control block size             */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) Standby_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Standby_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &Standby_Screen_Mureva_Icon_define,      /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &Standby_Screen_properties      /* extended properties            */
+};
+GX_TEMPLATE_PROPERTIES Expired_Error_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES Expired_Error_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_RED,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES Expired_Error_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES Expired_Error_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES Expired_Error_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET Expired_Error_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(EXPIRED_ERROR_SCREEN_CONTROL_BLOCK, Expired_Error_Screen_Instruction_TextView), /* control block */
+    (void *) &Expired_Error_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Expired_Error_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &Expired_Error_Screen_Instruction_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(EXPIRED_ERROR_SCREEN_CONTROL_BLOCK, Expired_Error_Screen_Information_TextView), /* control block */
+    (void *) &Expired_Error_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Expired_Error_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &Expired_Error_Screen_Information_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(EXPIRED_ERROR_SCREEN_CONTROL_BLOCK, Expired_Error_Screen_WhiteBox_Icon), /* control block */
+    (void *) &Expired_Error_Screen_WhiteBox_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Expired_Error_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &Expired_Error_Screen_WhiteBox_Icon_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(EXPIRED_ERROR_SCREEN_CONTROL_BLOCK, Expired_Error_Screen_StatusRing_Icon), /* control block */
+    (void *) &Expired_Error_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Expired_Error_Screen_define =
+{
+    "Expired_Error_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(EXPIRED_ERROR_SCREEN_CONTROL_BLOCK), /* control block size          */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) Expired_Error_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Expired_Error_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &Expired_Error_Screen_StatusRing_Icon_define, /* child widget              */
+    0,                                       /* control block                  */
+    (void *) &Expired_Error_Screen_properties /* extended properties           */
+};
+GX_TEMPLATE_PROPERTIES DailyLimitReached_Error_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES DailyLimitReached_Error_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_RED,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES DailyLimitReached_Error_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES DailyLimitReached_Error_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES DailyLimitReached_Error_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET DailyLimitReached_Error_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(DAILYLIMITREACHED_ERROR_SCREEN_CONTROL_BLOCK, DailyLimitReached_Error_Screen_Instruction_TextView), /* control block */
+    (void *) &DailyLimitReached_Error_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET DailyLimitReached_Error_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &DailyLimitReached_Error_Screen_Instruction_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(DAILYLIMITREACHED_ERROR_SCREEN_CONTROL_BLOCK, DailyLimitReached_Error_Screen_Information_TextView), /* control block */
+    (void *) &DailyLimitReached_Error_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET DailyLimitReached_Error_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &DailyLimitReached_Error_Screen_Information_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(DAILYLIMITREACHED_ERROR_SCREEN_CONTROL_BLOCK, DailyLimitReached_Error_Screen_WhiteBox_Icon), /* control block */
+    (void *) &DailyLimitReached_Error_Screen_WhiteBox_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET DailyLimitReached_Error_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &DailyLimitReached_Error_Screen_WhiteBox_Icon_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(DAILYLIMITREACHED_ERROR_SCREEN_CONTROL_BLOCK, DailyLimitReached_Error_Screen_StatusRing_Icon), /* control block */
+    (void *) &DailyLimitReached_Error_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET DailyLimitReached_Error_Screen_define =
+{
+    "DailyLimitReached_Error_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(DAILYLIMITREACHED_ERROR_SCREEN_CONTROL_BLOCK), /* control block size */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) DailyLimitReached_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) DailyLimitReached_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &DailyLimitReached_Error_Screen_StatusRing_Icon_define, /* child widget    */
+    0,                                       /* control block                  */
+    (void *) &DailyLimitReached_Error_Screen_properties /* extended properties */
+};
+GX_TEMPLATE_PROPERTIES ReadingError_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES ReadingError_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_RED,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES ReadingError_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES ReadingError_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES ReadingError_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET ReadingError_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READINGERROR_SCREEN_CONTROL_BLOCK, ReadingError_Screen_Instruction_TextView), /* control block */
+    (void *) &ReadingError_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET ReadingError_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &ReadingError_Screen_Instruction_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READINGERROR_SCREEN_CONTROL_BLOCK, ReadingError_Screen_Information_TextView), /* control block */
+    (void *) &ReadingError_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET ReadingError_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &ReadingError_Screen_Information_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READINGERROR_SCREEN_CONTROL_BLOCK, ReadingError_Screen_WhiteBox_Icon), /* control block */
+    (void *) &ReadingError_Screen_WhiteBox_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET ReadingError_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &ReadingError_Screen_WhiteBox_Icon_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READINGERROR_SCREEN_CONTROL_BLOCK, ReadingError_Screen_StatusRing_Icon), /* control block */
+    (void *) &ReadingError_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET ReadingError_Screen_define =
+{
+    "ReadingError_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(READINGERROR_SCREEN_CONTROL_BLOCK), /* control block size           */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) ReadingError_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) ReadingError_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &ReadingError_Screen_StatusRing_Icon_define, /* child widget               */
+    0,                                       /* control block                  */
+    (void *) &ReadingError_Screen_properties /* extended properties            */
+};
+GX_TEMPLATE_PROPERTIES SerialNumber_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES SerialNumber_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_BLUE,          /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES SerialNumber_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES SerialNumber_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES SerialNumber_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ICON_BUTTON_PROPERTIES SerialNumber_Screen_PauseIcon_Button_properties =
+{
+    GX_PIXELMAP_ID_PAUSEBUTTON_24X16         /* pixelmap id                    */
+};
+
+GX_CONST GX_STUDIO_WIDGET SerialNumber_Screen_PauseIcon_Button_define =
+{
+    "PauseIcon_Button",
+    GX_TYPE_ICON_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_HALIGN_CENTER|GX_STYLE_VALIGN_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {147, 261, 172, 278},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SERIALNUMBER_SCREEN_CONTROL_BLOCK, SerialNumber_Screen_PauseIcon_Button), /* control block */
+    (void *) &SerialNumber_Screen_PauseIcon_Button_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET SerialNumber_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    &SerialNumber_Screen_PauseIcon_Button_define, /* next widget definition    */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SERIALNUMBER_SCREEN_CONTROL_BLOCK, SerialNumber_Screen_Instruction_TextView), /* control block */
+    (void *) &SerialNumber_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET SerialNumber_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &SerialNumber_Screen_Instruction_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SERIALNUMBER_SCREEN_CONTROL_BLOCK, SerialNumber_Screen_Information_TextView), /* control block */
+    (void *) &SerialNumber_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET SerialNumber_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &SerialNumber_Screen_Information_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SERIALNUMBER_SCREEN_CONTROL_BLOCK, SerialNumber_Screen_WhiteBox_Icon), /* control block */
+    (void *) &SerialNumber_Screen_WhiteBox_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET SerialNumber_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &SerialNumber_Screen_WhiteBox_Icon_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(SERIALNUMBER_SCREEN_CONTROL_BLOCK, SerialNumber_Screen_StatusRing_Icon), /* control block */
+    (void *) &SerialNumber_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET SerialNumber_Screen_define =
+{
+    "SerialNumber_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(SERIALNUMBER_SCREEN_CONTROL_BLOCK), /* control block size           */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) SerialNumber_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) SerialNumber_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &SerialNumber_Screen_StatusRing_Icon_define, /* child widget               */
+    0,                                       /* control block                  */
+    (void *) &SerialNumber_Screen_properties /* extended properties            */
+};
+GX_TEMPLATE_PROPERTIES Reading_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES Reading_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_BLUE,          /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES Reading_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES Reading_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES Reading_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET Reading_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READING_SCREEN_CONTROL_BLOCK, Reading_Screen_Instruction_TextView), /* control block */
+    (void *) &Reading_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Reading_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &Reading_Screen_Instruction_TextView_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READING_SCREEN_CONTROL_BLOCK, Reading_Screen_Information_TextView), /* control block */
+    (void *) &Reading_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Reading_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &Reading_Screen_Information_TextView_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READING_SCREEN_CONTROL_BLOCK, Reading_Screen_WhiteBox_Icon), /* control block */
+    (void *) &Reading_Screen_WhiteBox_Icon_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET Reading_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &Reading_Screen_WhiteBox_Icon_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(READING_SCREEN_CONTROL_BLOCK, Reading_Screen_StatusRing_Icon), /* control block */
+    (void *) &Reading_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Reading_Screen_define =
+{
+    "Reading_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(READING_SCREEN_CONTROL_BLOCK),    /* control block size             */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) Reading_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Reading_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &Reading_Screen_StatusRing_Icon_define,  /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &Reading_Screen_properties      /* extended properties            */
+};
+GX_TEMPLATE_PROPERTIES Error_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES Error_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_RED,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES Error_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES Error_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES Error_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET Error_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(ERROR_SCREEN_CONTROL_BLOCK, Error_Screen_Instruction_TextView), /* control block */
+    (void *) &Error_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Error_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &Error_Screen_Instruction_TextView_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(ERROR_SCREEN_CONTROL_BLOCK, Error_Screen_Information_TextView), /* control block */
+    (void *) &Error_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET Error_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &Error_Screen_Information_TextView_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(ERROR_SCREEN_CONTROL_BLOCK, Error_Screen_WhiteBox_Icon), /* control block */
+    (void *) &Error_Screen_WhiteBox_Icon_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET Error_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &Error_Screen_WhiteBox_Icon_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(ERROR_SCREEN_CONTROL_BLOCK, Error_Screen_StatusRing_Icon), /* control block */
+    (void *) &Error_Screen_StatusRing_Icon_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET Error_Screen_define =
+{
+    "Error_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(ERROR_SCREEN_CONTROL_BLOCK),      /* control block size             */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) Error_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Error_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &Error_Screen_StatusRing_Icon_define,    /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &Error_Screen_properties        /* extended properties            */
+};
+GX_TEMPLATE_PROPERTIES InsertMouthpiece_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES InsertMouthpiece_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_BLUE,          /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES InsertMouthpiece_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES InsertMouthpiece_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES InsertMouthpiece_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+
+GX_CONST GX_STUDIO_WIDGET InsertMouthpiece_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(INSERTMOUTHPIECE_SCREEN_CONTROL_BLOCK, InsertMouthpiece_Screen_Instruction_TextView), /* control block */
+    (void *) &InsertMouthpiece_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET InsertMouthpiece_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &InsertMouthpiece_Screen_Instruction_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(INSERTMOUTHPIECE_SCREEN_CONTROL_BLOCK, InsertMouthpiece_Screen_Information_TextView), /* control block */
+    (void *) &InsertMouthpiece_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET InsertMouthpiece_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &InsertMouthpiece_Screen_Information_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(INSERTMOUTHPIECE_SCREEN_CONTROL_BLOCK, InsertMouthpiece_Screen_WhiteBox_Icon), /* control block */
+    (void *) &InsertMouthpiece_Screen_WhiteBox_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET InsertMouthpiece_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &InsertMouthpiece_Screen_WhiteBox_Icon_define, /* next widget definition   */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(INSERTMOUTHPIECE_SCREEN_CONTROL_BLOCK, InsertMouthpiece_Screen_StatusRing_Icon), /* control block */
+    (void *) &InsertMouthpiece_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET InsertMouthpiece_Screen_define =
+{
+    "InsertMouthpiece_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(INSERTMOUTHPIECE_SCREEN_CONTROL_BLOCK), /* control block size       */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) InsertMouthpiece_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) InsertMouthpiece_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &InsertMouthpiece_Screen_StatusRing_Icon_define, /* child widget           */
+    0,                                       /* control block                  */
+    (void *) &InsertMouthpiece_Screen_properties /* extended properties        */
+};
 GX_TEMPLATE_PROPERTIES ReadyScreen_properties =
 {
     &PrimaryTemplate_define,                 /* base info                      */
@@ -1418,6 +3418,18 @@ GX_CONST GX_STUDIO_WIDGET Sample_Tick_Window_define =
 };
 GX_CONST GX_STUDIO_WIDGET_ENTRY MuReva_LCU_Demo_widget_table[] =
 {
+    { &MouthpieceDetached_Screen_define, (GX_WIDGET *) &MouthpieceDetached_Screen },
+    { &TherapyComplete_Screen_define, (GX_WIDGET *) &TherapyComplete_Screen },
+    { &Therapy_Screen_define, (GX_WIDGET *) &Therapy_Screen },
+    { &PressToStart_Screen_define, (GX_WIDGET *) &PressToStart_Screen },
+    { &Standby_Screen_define, (GX_WIDGET *) &Standby_Screen },
+    { &Expired_Error_Screen_define, (GX_WIDGET *) &Expired_Error_Screen },
+    { &DailyLimitReached_Error_Screen_define, (GX_WIDGET *) &DailyLimitReached_Error_Screen },
+    { &ReadingError_Screen_define, (GX_WIDGET *) &ReadingError_Screen },
+    { &SerialNumber_Screen_define, (GX_WIDGET *) &SerialNumber_Screen },
+    { &Reading_Screen_define, (GX_WIDGET *) &Reading_Screen },
+    { &Error_Screen_define, (GX_WIDGET *) &Error_Screen },
+    { &InsertMouthpiece_Screen_define, (GX_WIDGET *) &InsertMouthpiece_Screen },
     { &ReadyScreen_define, (GX_WIDGET *) &ReadyScreen },
     { &Splash_Window_define, (GX_WIDGET *) &Splash_Window },
     { &Sample_Tick_Window_define, (GX_WIDGET *) &Sample_Tick_Window },

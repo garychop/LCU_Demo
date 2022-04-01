@@ -58,19 +58,12 @@ typedef enum {
 STATES_ENUM g_State;
 STATES_ENUM g_RecoveryState;	// Used to recover from Standby
 
-UINT g_Used = 39;
-GX_BOOL g_RingOn = FALSE;
 char g_TimeString[16];
 char g_TimeTickString[8];
-GX_BOOL g_ShowTicks = FALSE;
+extern GX_BOOL g_ShowTicks;
 
-int g_MouthPiece_SerialNumber = 1;
-char g_SerialNumberString[64] = "1";
+//char g_SerialNumberString[64] = "1";
 GX_CHAR *g_PromptString = NULL;
-
-GX_BOOL g_LimitSwitchClosed = FALSE;
-INT g_TherapyTime = 0;
-GX_BOOL g_TherapyInProcess = FALSE;
 
 struct WIDGET_ATTRIBUTE_STRUCT 
 {
@@ -85,6 +78,8 @@ struct WIDGET_ATTRIBUTE_STRUCT
 } g_WidgetAttibute;
 
 void (*gp_State)(void);
+
+extern MOUTHPIECE_DATABASE_STRUCT g_Mouthpiece_DB[MOUTHPIECE_DB_SIZE];
 
 void InsertMouthpieceState(void)
 {
@@ -297,7 +292,7 @@ void EnterInsertMouthpieceState (GX_WINDOW *window, STATES_ENUM nextState)
 
 	g_State = nextState;
 	g_LimitSwitchClosed = FALSE;
-	g_TherapyInProcess = FALSE;
+	g_TherapyInProcess = THERAPY_IDLE;
 	g_TherapyTime = 0;
 	g_ShowTicks = FALSE;
 
@@ -358,6 +353,9 @@ void EnterSerialNumber_State (GX_WINDOW *window, STATES_ENUM nextState)
 {
 	GX_RECTANGLE rect;
 	UINT mySize, myBufSize;
+	int serialNumber;
+	int i;
+	//GX_BOOL found; 
 
 	g_ShowTicks = FALSE;
 
@@ -369,9 +367,24 @@ void EnterSerialNumber_State (GX_WINDOW *window, STATES_ENUM nextState)
 
 	// Display "Serial Number: MCAxxxxxx" in the information box
 	gx_single_line_text_input_buffer_get (&ReadyScreen.base.PrimaryTemplate_SerialNumber_TextInput, &g_PromptString, &mySize, &myBufSize);
-	g_MouthPiece_SerialNumber = atoi (g_PromptString);
-	sprintf_s (g_SerialNumberString, sizeof (g_SerialNumberString), "Serial Number:\rMCA%06d\r\r", g_MouthPiece_SerialNumber);
-	DisplayInformation (window, g_SerialNumberString, 4, GX_COLOR_ID_WHITE);
+	serialNumber = atoi (g_PromptString);
+	// Locate serial number in array. If not found then add it. If found, say "hurray"
+	//found = FALSE;
+	//for (i = 0; i < SERIAL_NUMBER_ARRAY_SIZE; ++i)
+	//{
+	//	if (g_MouthPiece_information[i][0] == 0)
+	//	{
+	//		g_MouthPiece_information[i][0] = serialNumber;
+	//		g_MouthPiece_information[i][1] = 0;	// set timer to 0.
+	//		break;
+	//	}
+	//	else if (g_MouthPiece_information[i][0] == serialNumber)
+	//	{
+	//		;
+	//	}
+	//}
+	//sprintf_s (g_SerialNumberString, sizeof (g_SerialNumberString), "Serial Number:\rMCA%06d\r\r", serialNumber);
+	//DisplayInformation (window, g_SerialNumberString, 4, GX_COLOR_ID_WHITE);
 	// Display Press in the Instruction box
 	DisplayInstruction (window, "\r\r Press       \rto Continue", 4, GX_COLOR_ID_WHITE);
 	rect.gx_rectangle_top = 160;
@@ -581,6 +594,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 	UINT mySize, myBufSize;
 	GX_RECTANGLE rect;
 	INT thisSerialNumber;
+	INT i;
 
     gx_window_event_process(window, event_ptr);
 
@@ -598,9 +612,9 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		switch (g_State)
 		{
 		case STATE_SERIAL_NUMBER_PROMPT:
-			if (g_TherapyInProcess)
-				EnterResumeTherapy_State (window, STATE_RESUME_THERAPY);
-			else
+			//if (g_TherapyInProcess)
+			//	EnterResumeTherapy_State (window, STATE_RESUME_THERAPY);
+			//else
 				EnterStartTherapy_State (window, STATE_READY_TO_GO);
 			break;
 
@@ -675,14 +689,14 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		{
 			g_LimitSwitchClosed = TRUE;
 			// If we are in a "Fault during Therapy Session" state, let's resume the Therapy
-			if (g_TherapyInProcess)
-			{
-				EnterReadingEEPROM_State(window, STATE_THERAPY_CONTINUE);
-			}
-			else
-			{
+			//if (g_TherapyInProcess)
+			//{
+			//	EnterReadingEEPROM_State(window, STATE_THERAPY_CONTINUE);
+			//}
+			//else
+			//{
 				EnterReadingEEPROM_State(window, STATE_READING_EEPROM);
-			}
+			//}
 		}
 		else	// Switch is CLOSED, let's open it.
 		{
@@ -708,6 +722,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		break;
 
 	case GX_SIGNAL (EEPROM_OK_BTN_ID, GX_EVENT_CLICKED):
+		// Locate serial number 
 		if (g_State == STATE_READING_EEPROM)
 		{
 			EnterSerialNumber_State(window, STATE_SERIAL_NUMBER_PROMPT);
@@ -716,16 +731,16 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		{
 			gx_single_line_text_input_buffer_get (&ReadyScreen.base.PrimaryTemplate_SerialNumber_TextInput, &g_PromptString, &mySize, &myBufSize);
 			thisSerialNumber = atoi (g_PromptString);
-			if (thisSerialNumber == g_MouthPiece_SerialNumber)
-			{
-				EnterPaused_State(window, STATE_THERAPY_PAUSED);
-			}
-			else // Different serial number
-			{
-				g_TherapyTime = 0;
-				g_TherapyInProcess = FALSE;
-				EnterSerialNumber_State(window, STATE_SERIAL_NUMBER_PROMPT);
-			}
+			//if (thisSerialNumber == g_MouthPiece_SerialNumber)
+			//{
+			//	EnterPaused_State(window, STATE_THERAPY_PAUSED);
+			//}
+			//else // Different serial number
+			//{
+			//	g_TherapyTime = 0;
+			//	g_TherapyInProcess = FALSE;
+			//	EnterSerialNumber_State(window, STATE_SERIAL_NUMBER_PROMPT);
+			//}
 			break;
 		}
 		break;

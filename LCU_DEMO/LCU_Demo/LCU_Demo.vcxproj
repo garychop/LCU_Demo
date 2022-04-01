@@ -67,12 +67,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\ConfirmSerialNumber_Screen_Handler.c" />
+    <ClCompile Include="..\..\DailyLimitReachedError_Screen_Handler.c" />
+    <ClCompile Include="..\..\Error_Screen_Handler.c" />
+    <ClCompile Include="..\..\Expired_Error_Screen_Handler.c" />
+    <ClCompile Include="..\..\InsertMouthpiece_Screen_Handler.c" />
     <ClCompile Include="..\..\LCU_Simulator_Main.c" />
+    <ClCompile Include="..\..\MouthpieceDetached_Screen_Handler.c" />
     <ClCompile Include="..\..\MuReva_LCU_Demo_resources.c" />
     <ClCompile Include="..\..\MuReva_LCU_Demo_specifications.c" />
+    <ClCompile Include="..\..\PressToStart_Screen_Handler.c" />
+    <ClCompile Include="..\..\ReadingError_Screen_Handler.c" />
+    <ClCompile Include="..\..\Reading_Screen_Handler.c" />
     <ClCompile Include="..\..\ReadyScreen_Handler.c" />
     <ClCompile Include="..\..\Sample_Tick_Window_Handler.c" />
     <ClCompile Include="..\..\SplashScreen_Handler.c" />
+    <ClCompile Include="..\..\Standby_Screen_Handler.c" />
+    <ClCompile Include="..\..\TherapyComplete_Screen_Handler.c" />
+    <ClCompile Include="..\..\TherapyScreen_Handler.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\LCU_Demo.h" />
