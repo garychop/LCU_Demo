@@ -24,7 +24,6 @@
 //*************************************************************************************
 
 extern GX_CHAR *g_SerialNumber_Prompt;
-extern MOUTHPIECE_DATABASE_STRUCT g_Mouthpiece_DB[MOUTHPIECE_DB_SIZE];
 extern VOID Enable_Limit_Switch (GX_WIDGET* limitSwitchButton, GX_BOOL enable);
 
 //*************************************************************************************
@@ -45,6 +44,7 @@ UINT Reading_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 {
 	UINT mySize, myBufSize;
 	long serialNumber;
+	int slot;
 
     gx_window_event_process(window, event_ptr);
 
@@ -71,27 +71,51 @@ UINT Reading_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 	//--------------------------------------------
 	case GX_SIGNAL (LIMIT_SWITCH_BTN_ID, GX_EVENT_CLICKED):
 		g_LimitSwitchClosed = FALSE;
+		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+			g_Mouthpiece_DB[slot].m_Attached = FALSE;
         screen_toggle((GX_WINDOW *)&InsertMouthpiece_Screen, window);
 		break;
 
 	//--------------------------------------------
 	case GX_SIGNAL (EEPROM_OK_BTN_ID, GX_EVENT_CLICKED):
-		if (g_TherapyInProcess == THERAPY_PAUSED)
+		gx_single_line_text_input_buffer_get (&Reading_Screen.base.PrimaryTemplate_SerialNumber_TextInput, &g_SerialNumber_Prompt, &mySize, &myBufSize);
+		serialNumber = atol (g_SerialNumber_Prompt);
+		// Remove any previously attached Mouthpieces.
+		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+			g_Mouthpiece_DB[slot].m_Attached = FALSE;
+
+		// Locate existing Mouthpiece Serial Number or next available slot for new Mouthpiece
+		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
 		{
-			gx_single_line_text_input_buffer_get (&Reading_Screen.base.PrimaryTemplate_SerialNumber_TextInput, &g_SerialNumber_Prompt, &mySize, &myBufSize);
-			serialNumber = atol (g_SerialNumber_Prompt);
-			if (g_Mouthpiece_DB[0].m_SerialNumber == serialNumber)
+			if (g_Mouthpiece_DB[slot].m_SerialNumber == 0)			// This slot is available for a new mouthpiece
 			{
-				screen_toggle((GX_WINDOW *)&Therapy_Screen, window);
+				g_Mouthpiece_DB[slot].m_TherapyStatus = THERAPY_READY_TO_START;
+				g_Mouthpiece_DB[slot].m_RemainingTherapyTime = 300;
+				g_Mouthpiece_DB[slot].m_SerialNumber = serialNumber;
 			}
-			else
+			// Go ahead and process this Mouthpiece.... even its a new one
+			if (g_Mouthpiece_DB[slot].m_SerialNumber == serialNumber)			// Same Serial Number?
 			{
-				screen_toggle((GX_WINDOW *)&SerialNumber_Screen, window);
+				g_Mouthpiece_DB[slot].m_Attached = TRUE;
+				switch (g_Mouthpiece_DB[slot].m_TherapyStatus)
+				{
+				case THERAPY_IDLE:
+				case THERAPY_READY_TO_START:
+					g_Mouthpiece_DB[slot].m_RemainingTherapyTime = 300;
+					screen_toggle((GX_WINDOW *)&SerialNumber_Screen, window);	// Go confirm the "new" mouthpiece
+					break;
+				case THERAPY_IN_PROGRESS:
+					screen_toggle((GX_WINDOW *)&PressToResume_Screen, window);
+					break;
+				case THERAPY_PAUSED:
+					screen_toggle((GX_WINDOW *)&Therapy_Screen, window);
+					break;
+				case THERAPY_COMPLETE:
+			        screen_toggle((GX_WINDOW *)&DailyLimitReached_Error_Screen, window);	// Yes, tell the user that we did.
+					break;
+				} // end switch m_TherapyStatus
+				break; // no need to continue looking.
 			}
-		}
-		else	// Therapy was not paused by operator or mouthpiece error
-		{
-			screen_toggle((GX_WINDOW *)&SerialNumber_Screen, window);
 		}
 		break;
 

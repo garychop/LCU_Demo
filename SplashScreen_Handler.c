@@ -41,10 +41,6 @@ UINT SplashScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
     case GX_EVENT_TIMER:
         if (event_ptr->gx_event_payload.gx_event_timer_id == SPLASH_STARTUP_TIMER_ID)
 		{
-//	        screen_toggle((GX_WINDOW *)&Sample_Tick_Window, window);
-//	        screen_toggle((GX_WINDOW *)&ReadyScreen, window);
-			g_TherapyTime = 0;
-			g_TherapyInProcess = THERAPY_IDLE;
 	        screen_toggle((GX_WINDOW *)&InsertMouthpiece_Screen, window);
 		}
 		break;

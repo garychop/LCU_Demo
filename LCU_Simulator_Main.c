@@ -30,8 +30,6 @@ TX_BYTE_POOL       memory_pool;
 GX_COLOR           scratchpad[SCRATCHPAD_PIXELS];
 
 GX_BOOL g_LimitSwitchClosed = FALSE;
-INT g_TherapyTime = 0;
-THERAPY_STATUS_IDS g_TherapyInProcess = THERAPY_IDLE;
 GX_BOOL g_RingOn = FALSE;
 
 MOUTHPIECE_DATABASE_STRUCT g_Mouthpiece_DB[MOUTHPIECE_DB_SIZE];
@@ -105,12 +103,13 @@ VOID  start_guix(VOID)
 	// Clear out the Mouthpiece Database
 	for (i = 0; i < MOUTHPIECE_DB_SIZE; ++i)
 	{
-		g_Mouthpiece_DB[i].m_Active = FALSE;
+		g_Mouthpiece_DB[i].m_TherapyStatus = THERAPY_IDLE;
 		g_Mouthpiece_DB[i].m_RemainingTherapyTime = 0;
 		g_Mouthpiece_DB[i].m_SerialNumber = 0L;
+		g_Mouthpiece_DB[i].m_Attached = FALSE;
 	}
 
-	g_TherapyInProcess = THERAPY_IDLE;
+	//g_TherapyInProcess = THERAPY_IDLE;
 
     myError = gx_studio_named_widget_create("ReadyScreen", GX_NULL, GX_NULL);
     myError = gx_studio_named_widget_create("Reading_Screen", GX_NULL, GX_NULL);
@@ -118,6 +117,7 @@ VOID  start_guix(VOID)
     myError = gx_studio_named_widget_create("Error_Screen", GX_NULL, GX_NULL);
     myError = gx_studio_named_widget_create("ReadingError_Screen", GX_NULL, GX_NULL);
     myError = gx_studio_named_widget_create("PressToStart_Screen", GX_NULL, GX_NULL);
+    myError = gx_studio_named_widget_create("PressToResume_Screen", GX_NULL, GX_NULL);
     myError = gx_studio_named_widget_create("Therapy_Screen", GX_NULL, GX_NULL);
     myError = gx_studio_named_widget_create("TherapyComplete_Screen", GX_NULL, GX_NULL);
     myError = gx_studio_named_widget_create("MouthpieceDetached_Screen", GX_NULL, GX_NULL);

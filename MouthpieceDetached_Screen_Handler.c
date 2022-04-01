@@ -42,6 +42,8 @@ VOID MouthpieceDetached_Screen_Draw_Function (GX_WINDOW *window)
 
 UINT MouthpieceDetached_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 {
+	int slot;
+
     gx_window_event_process(window, event_ptr);
 
 	switch (event_ptr->gx_event_type)
@@ -72,6 +74,8 @@ UINT MouthpieceDetached_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *even
 		else
 		{
 			g_LimitSwitchClosed = FALSE;
+			for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+				g_Mouthpiece_DB[slot].m_Attached = FALSE;
 		}
 		break;
 

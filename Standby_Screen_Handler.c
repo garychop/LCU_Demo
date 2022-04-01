@@ -52,6 +52,7 @@ VOID Standby_Screen_Draw_Function (GX_WINDOW *window)
 UINT Standby_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 {
 	GX_RECTANGLE rect;
+	int slot;
 
     gx_window_event_process(window, event_ptr);
 
@@ -63,6 +64,11 @@ UINT Standby_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 
 		// Disable ATTACH button, disable EEPROM buttons
 		Enable_EEPROM_Buttons (&Standby_Screen.base, GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
+
+		if (g_LimitSwitchClosed == TRUE)
+			gx_text_button_text_id_set (&Standby_Screen.base.PrimaryTemplate_LimitSwitch_Button, GX_STRING_ID_DETACH);
+		else
+			gx_text_button_text_id_set (&Standby_Screen.base.PrimaryTemplate_LimitSwitch_Button, GX_STRING_ID_ATTACH);
 
 		// Show Mureva Icon 
 		Standby_Screen.Standby_Screen_Mureva_Icon.gx_widget_size.gx_rectangle_top = 134;
@@ -86,18 +92,18 @@ UINT Standby_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		}
 		else
 		{
-			// Switch is open, let's close it
-			gx_system_timer_stop (window, STANDBY_TIMER);	// Stop the standby timer
-			g_LimitSwitchClosed = TRUE;
-			if (g_ReturnWindow)
-			{
-				screen_toggle(g_ReturnWindow, window);
-				g_ReturnWindow = NULL;
-			}
-			else
-				screen_toggle((GX_WINDOW *)&Reading_Screen, window);
 			g_LimitSwitchClosed = FALSE;
+			for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+				g_Mouthpiece_DB[slot].m_Attached = FALSE;
 		}
+		gx_system_timer_stop (window, STANDBY_TIMER);	// Stop the standby timer
+		if (g_ReturnWindow)
+		{
+			screen_toggle(g_ReturnWindow, window);
+			g_ReturnWindow = NULL;
+		}
+		else
+			screen_toggle((GX_WINDOW *)&Reading_Screen, window);
 		break;
 
 	//--------------------------------------------

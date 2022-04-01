@@ -76,10 +76,10 @@
     <ClCompile Include="..\..\MouthpieceDetached_Screen_Handler.c" />
     <ClCompile Include="..\..\MuReva_LCU_Demo_resources.c" />
     <ClCompile Include="..\..\MuReva_LCU_Demo_specifications.c" />
+    <ClCompile Include="..\..\PressToResume_Screen_Handler.c" />
     <ClCompile Include="..\..\PressToStart_Screen_Handler.c" />
     <ClCompile Include="..\..\ReadingError_Screen_Handler.c" />
     <ClCompile Include="..\..\Reading_Screen_Handler.c" />
-    <ClCompile Include="..\..\ReadyScreen_Handler.c" />
     <ClCompile Include="..\..\Sample_Tick_Window_Handler.c" />
     <ClCompile Include="..\..\SplashScreen_Handler.c" />
     <ClCompile Include="..\..\Standby_Screen_Handler.c" />

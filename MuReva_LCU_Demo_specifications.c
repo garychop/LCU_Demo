@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  1. 4.2022   Time (hh:mm): 07:51                        */
+/*  Date (dd.mm.yyyy):  1. 4.2022   Time (hh:mm): 10:55                        */
 /*******************************************************************************/
 
 
@@ -16,6 +16,7 @@
 #include "MuReva_LCU_Demo_specifications.h"
 
 static GX_WIDGET *gx_studio_nested_widget_create(GX_BYTE *control, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
+PRESSTORESUME_SCREEN_CONTROL_BLOCK PressToResume_Screen;
 MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK MouthpieceDetached_Screen;
 THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK TherapyComplete_Screen;
 THERAPY_SCREEN_CONTROL_BLOCK Therapy_Screen;
@@ -748,6 +749,190 @@ GX_CONST GX_STUDIO_WIDGET PrimaryTemplate_define =
     &PrimaryTemplate_Attach_IconButton_define, /* child widget                 */
     0,                                       /* control block                  */
     (void *) &PrimaryTemplate_properties     /* extended properties            */
+};
+GX_TEMPLATE_PROPERTIES PressToResume_Screen_properties =
+{
+    &PrimaryTemplate_define,                 /* base info                      */
+    gx_studio_window_create,                 /* base create function           */
+    {0, 0, 319, 539}                         /* widget size                    */
+};
+GX_ICON_PROPERTIES PressToResume_Screen_StatusRing_Icon_properties =
+{
+    GX_PIXELMAP_ID_STATUSRING_BLUE,          /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ICON_PROPERTIES PressToResume_Screen_WhiteBox_Icon_properties =
+{
+    GX_PIXELMAP_ID_WHITE_TEXT_BOX,           /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_ML_TEXT_VIEW_PROPERTIES PressToResume_Screen_Information_TextView_properties =
+{
+    0,                                       /* string id                      */
+    GX_FONT_ID_ARIAL_20,                     /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE,                       /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ML_TEXT_VIEW_PROPERTIES PressToResume_Screen_Instruction_TextView_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_ARIALBI_20,                   /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED,                         /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_ICON_BUTTON_PROPERTIES PressToResume_Screen_PauseIcon_Button_properties =
+{
+    GX_PIXELMAP_ID_PAUSEBUTTON_24X16         /* pixelmap id                    */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToResume_Screen_PauseIcon_Button_define =
+{
+    "PauseIcon_Button",
+    GX_TYPE_ICON_BUTTON,                     /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_HALIGN_CENTER|GX_STYLE_VALIGN_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON_BUTTON),                  /* control block size             */
+    GX_COLOR_ID_BTN_LOWER,                   /* normal color id                */
+    GX_COLOR_ID_BTN_UPPER,                   /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_button_create,            /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {147, 261, 172, 278},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTORESUME_SCREEN_CONTROL_BLOCK, PressToResume_Screen_PauseIcon_Button), /* control block */
+    (void *) &PressToResume_Screen_PauseIcon_Button_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToResume_Screen_Instruction_TextView_define =
+{
+    "Instruction_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INSTRUCTION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 166, 239, 209},                     /* widget size                    */
+    &PressToResume_Screen_PauseIcon_Button_define, /* next widget definition   */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTORESUME_SCREEN_CONTROL_BLOCK, PressToResume_Screen_Instruction_TextView), /* control block */
+    (void *) &PressToResume_Screen_Instruction_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToResume_Screen_Information_TextView_define =
+{
+    "Information_TextView",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    INFORMATION_TEXT_VIEW_ID,                /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_TEXT_INPUT_FILL,             /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {85, 108, 234, 207},                     /* widget size                    */
+    &PressToResume_Screen_Instruction_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTORESUME_SCREEN_CONTROL_BLOCK, PressToResume_Screen_Information_TextView), /* control block */
+    (void *) &PressToResume_Screen_Information_TextView_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToResume_Screen_WhiteBox_Icon_define =
+{
+    "WhiteBox_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    WHITE_BOX_ICON,                          /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_YELLOW,                      /* normal color id                */
+    GX_COLOR_ID_YELLOW,                      /* selected color id              */
+    GX_COLOR_ID_YELLOW,                      /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {65, 84, 254, 233},                      /* widget size                    */
+    &PressToResume_Screen_Information_TextView_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTORESUME_SCREEN_CONTROL_BLOCK, PressToResume_Screen_WhiteBox_Icon), /* control block */
+    (void *) &PressToResume_Screen_WhiteBox_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToResume_Screen_StatusRing_Icon_define =
+{
+    "StatusRing_Icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    STATUS_RING_ICON,                        /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {14, 14, 303, 303},                      /* widget size                    */
+    &PressToResume_Screen_WhiteBox_Icon_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(PRESSTORESUME_SCREEN_CONTROL_BLOCK, PressToResume_Screen_StatusRing_Icon), /* control block */
+    (void *) &PressToResume_Screen_StatusRing_Icon_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET PressToResume_Screen_define =
+{
+    "PressToResume_Screen",
+    GX_TYPE_TEMPLATE,                        /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED,   /* style flags                    */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(PRESSTORESUME_SCREEN_CONTROL_BLOCK), /* control block size          */
+    GX_COLOR_ID_WINDOW_FILL,                 /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_template_create,               /* create function                */
+    (VOID (*)(GX_WIDGET *)) PressToResume_Screen_Draw_Function, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) PressToResume_Screen_Event_Function, /* event function override */
+    {0, 0, 319, 539},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &PressToResume_Screen_StatusRing_Icon_define, /* child widget              */
+    0,                                       /* control block                  */
+    (void *) &PressToResume_Screen_properties /* extended properties           */
 };
 GX_TEMPLATE_PROPERTIES MouthpieceDetached_Screen_properties =
 {
@@ -3139,8 +3324,8 @@ GX_CONST GX_STUDIO_WIDGET ReadyScreen_define =
     GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
     GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
     gx_studio_template_create,               /* create function                */
-    (VOID (*)(GX_WIDGET *)) ReadyScreen_Draw_Function, /* drawing function override */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) ReadyScreen_Event_Function, /* event function override */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
     {0, 0, 319, 539},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
     &ReadyScreen_StatusRing_Icon_define,     /* child widget                   */
@@ -3418,6 +3603,7 @@ GX_CONST GX_STUDIO_WIDGET Sample_Tick_Window_define =
 };
 GX_CONST GX_STUDIO_WIDGET_ENTRY MuReva_LCU_Demo_widget_table[] =
 {
+    { &PressToResume_Screen_define, (GX_WIDGET *) &PressToResume_Screen },
     { &MouthpieceDetached_Screen_define, (GX_WIDGET *) &MouthpieceDetached_Screen },
     { &TherapyComplete_Screen_define, (GX_WIDGET *) &TherapyComplete_Screen },
     { &Therapy_Screen_define, (GX_WIDGET *) &Therapy_Screen },

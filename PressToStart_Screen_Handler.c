@@ -43,6 +43,7 @@ VOID PressToStart_Screen_Draw_Function (GX_WINDOW *window)
 UINT PressToStart_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 {
 	GX_RECTANGLE rect;
+	int slot;
 
     gx_window_event_process(window, event_ptr);
 
@@ -74,13 +75,14 @@ UINT PressToStart_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 
 	//--------------------------------------------
 	case GX_SIGNAL (PLAY_BTN_ID, GX_EVENT_CLICKED):
-		g_TherapyTime = 300;
         screen_toggle((GX_WINDOW *)&Therapy_Screen, window);
 		break;
 
 	//--------------------------------------------
 	case GX_SIGNAL (LIMIT_SWITCH_BTN_ID, GX_EVENT_CLICKED):
 		g_LimitSwitchClosed = FALSE;
+		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+			g_Mouthpiece_DB[slot].m_Attached = FALSE;
         screen_toggle((GX_WINDOW *)&InsertMouthpiece_Screen, window);
 		break;
 

@@ -42,6 +42,8 @@ VOID TherapyComplete_Screen_Draw_Function (GX_WINDOW *window)
 
 UINT TherapyComplete_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 {
+	int slot;
+
     gx_window_event_process(window, event_ptr);
 
 	switch (event_ptr->gx_event_type)
@@ -89,8 +91,9 @@ UINT TherapyComplete_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_p
 
 	//--------------------------------------------
 	case GX_SIGNAL (LIMIT_SWITCH_BTN_ID, GX_EVENT_CLICKED):
+		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+			g_Mouthpiece_DB[slot].m_Attached = FALSE;
 		g_LimitSwitchClosed = FALSE;
-		g_TherapyInProcess = THERAPY_IDLE;
         screen_toggle((GX_WINDOW *)&InsertMouthpiece_Screen, window);
 		break;
 

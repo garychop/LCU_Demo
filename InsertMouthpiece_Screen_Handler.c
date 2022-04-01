@@ -41,6 +41,8 @@ VOID InsertMouthpiece_Screen_Draw_Function (GX_WINDOW *window)
 
 UINT InsertMouthpiece_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 {
+	int slot;
+
     gx_window_event_process(window, event_ptr);
 
 	switch (event_ptr->gx_event_type)
@@ -60,6 +62,16 @@ UINT InsertMouthpiece_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_
 		gx_widget_show (&InsertMouthpiece_Screen.InsertMouthpiece_Screen_WhiteBox_Icon);
 		gx_icon_pixelmap_set (&InsertMouthpiece_Screen.InsertMouthpiece_Screen_WhiteBox_Icon, GX_PIXELMAP_ID_WHITE_TEXT_BOX, GX_PIXELMAP_ID_WHITE_TEXT_BOX);
 		DisplayInstruction_InBox (&InsertMouthpiece_Screen.InsertMouthpiece_Screen_Instruction_TextView, "Insert\rMouthpiece", 2, GX_COLOR_ID_WHITE);
+
+		if (g_LimitSwitchClosed == TRUE)
+		{
+			gx_text_button_text_id_set (&InsertMouthpiece_Screen.base.PrimaryTemplate_LimitSwitch_Button, GX_STRING_ID_DETACH);
+	        screen_toggle((GX_WINDOW *)&Reading_Screen, window);
+		}
+		else
+		{
+			gx_text_button_text_id_set (&InsertMouthpiece_Screen.base.PrimaryTemplate_LimitSwitch_Button, GX_STRING_ID_ATTACH);
+		}
 		break;
 
 	//----------------------------------------------------------------------------------------
@@ -74,6 +86,8 @@ UINT InsertMouthpiece_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_
 		}
 		else
 		{
+			for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+				g_Mouthpiece_DB[slot].m_Attached = FALSE;
 			g_LimitSwitchClosed = FALSE;
 		}
 		break;

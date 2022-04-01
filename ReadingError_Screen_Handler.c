@@ -42,6 +42,8 @@ VOID ReadingError_Screen_Draw_Function (GX_WINDOW *window)
 
 UINT ReadingError_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 {
+	int slot;
+
     gx_window_event_process(window, event_ptr);
 
 	switch (event_ptr->gx_event_type)
@@ -77,10 +79,24 @@ UINT ReadingError_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		{
 			g_LimitSwitchClosed = TRUE;		// OK, it's been plugged back in.
 			gx_text_button_text_id_set (&ReadingError_Screen.base.PrimaryTemplate_LimitSwitch_Button, GX_STRING_ID_DETACH);
-			if (g_TherapyInProcess == THERAPY_IDLE)
-				screen_toggle((GX_WINDOW *)&InsertMouthpiece_Screen, window);
-			else
-				screen_toggle((GX_WINDOW *)&Reading_Screen, window);
+			// locate currently used mouthpiece
+			for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+			{
+				switch (g_Mouthpiece_DB[slot].m_TherapyStatus)
+				{
+				case THERAPY_IDLE:
+					//screen_toggle((GX_WINDOW *)&InsertMouthpiece_Screen, window);
+					//break;
+				case THERAPY_READY_TO_START:
+				case THERAPY_IN_PROGRESS:
+				case THERAPY_PAUSED:
+					screen_toggle((GX_WINDOW *)&Reading_Screen, window);
+					break;
+				case THERAPY_COMPLETE:
+			        screen_toggle((GX_WINDOW *)&Therapy_Screen, window);	// Yes, tell the user that we did.
+					break;
+				} // end switch m_TherapyStatus
+			}
 		}
 		break;
 

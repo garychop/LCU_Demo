@@ -6,7 +6,7 @@
 /*  www.expresslogic.com.                                                      */
 /*                                                                             */
 /*  GUIX Studio Revision 5.4.2.9                                               */
-/*  Date (dd.mm.yyyy):  1. 4.2022   Time (hh:mm): 07:51                        */
+/*  Date (dd.mm.yyyy):  1. 4.2022   Time (hh:mm): 10:55                        */
 /*******************************************************************************/
 
 
@@ -188,6 +188,16 @@ typedef struct PRIMARYTEMPLATE_CONTROL_BLOCK_STRUCT
     GX_PROMPT PrimaryTemplate_Idle_Time_Prompt;
 } PRIMARYTEMPLATE_CONTROL_BLOCK;
 
+typedef struct PRESSTORESUME_SCREEN_CONTROL_BLOCK_STRUCT
+{
+    PRIMARYTEMPLATE_CONTROL_BLOCK base;
+    GX_ICON PressToResume_Screen_StatusRing_Icon;
+    GX_ICON PressToResume_Screen_WhiteBox_Icon;
+    GX_MULTI_LINE_TEXT_VIEW PressToResume_Screen_Information_TextView;
+    GX_MULTI_LINE_TEXT_VIEW PressToResume_Screen_Instruction_TextView;
+    GX_ICON_BUTTON PressToResume_Screen_PauseIcon_Button;
+} PRESSTORESUME_SCREEN_CONTROL_BLOCK;
+
 typedef struct MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK_STRUCT
 {
     PRIMARYTEMPLATE_CONTROL_BLOCK base;
@@ -338,6 +348,7 @@ typedef struct SAMPLE_TICK_WINDOW_CONTROL_BLOCK_STRUCT
 /* extern statically defined control blocks                                    */
 
 #ifndef GUIX_STUDIO_GENERATED_FILE
+extern PRESSTORESUME_SCREEN_CONTROL_BLOCK PressToResume_Screen;
 extern MOUTHPIECEDETACHED_SCREEN_CONTROL_BLOCK MouthpieceDetached_Screen;
 extern THERAPYCOMPLETE_SCREEN_CONTROL_BLOCK TherapyComplete_Screen;
 extern THERAPY_SCREEN_CONTROL_BLOCK Therapy_Screen;
@@ -358,6 +369,8 @@ extern PRIMARYTEMPLATE_CONTROL_BLOCK PrimaryTemplate;
 
 /* Declare event process functions, draw functions, and callback functions     */
 
+UINT PressToResume_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID PressToResume_Screen_Draw_Function(GX_WINDOW *widget);
 UINT MouthpieceDetached_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID MouthpieceDetached_Screen_Draw_Function(GX_WINDOW *widget);
 UINT TherapyComplete_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
@@ -382,8 +395,6 @@ UINT Error_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID Error_Screen_Draw_Function(GX_WINDOW *widget);
 UINT InsertMouthpiece_Screen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID InsertMouthpiece_Screen_Draw_Function(GX_WINDOW *widget);
-UINT ReadyScreen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
-VOID ReadyScreen_Draw_Function(GX_WINDOW *widget);
 UINT SplashScreen_Event_Function(GX_WINDOW *widget, GX_EVENT *event_ptr);
 UINT Sample_Tick_Window_event_function(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID Sample_Tick_Window_draw_function(GX_WINDOW *widget);

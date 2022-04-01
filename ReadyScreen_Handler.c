@@ -150,6 +150,7 @@ void EnableIdleButton (GX_BOOL enable)
 
 VOID ReadyScreen_Draw_Function (GX_WINDOW *window)
 {
+#if 0
 	UINT status;
 	INT secondsRemaining;
 	GX_BRUSH *brush, *originalBrush;
@@ -231,6 +232,7 @@ VOID ReadyScreen_Draw_Function (GX_WINDOW *window)
 	{
 		gx_widget_hide (&ReadyScreen.ReadyScreen_TimeTick_Prompt);
 	}
+#endif
 }
 
 //*************************************************************************************
@@ -288,11 +290,12 @@ void DisplayMultiInformation ()
 
 void EnterInsertMouthpieceState (GX_WINDOW *window, STATES_ENUM nextState)
 {
+#if 0
 	ULONG widgetStyle;
 
 	g_State = nextState;
 	g_LimitSwitchClosed = FALSE;
-	g_TherapyInProcess = THERAPY_IDLE;
+	//g_TherapyInProcess = THERAPY_IDLE;
 	g_TherapyTime = 0;
 	g_ShowTicks = FALSE;
 
@@ -322,6 +325,7 @@ void EnterInsertMouthpieceState (GX_WINDOW *window, STATES_ENUM nextState)
 	gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_WhiteBox_Icon, GX_PIXELMAP_ID_WHITE_TEXT_BOX, GX_PIXELMAP_ID_WHITE_TEXT_BOX);
 	//DisplayInformation (window, "Insert\rMouthpiece", 2, GX_COLOR_ID_WHITE);
 	DisplayInstruction (window, "Insert\rMouthpiece", 2, GX_COLOR_ID_WHITE);
+#endif
 }
 
 //*************************************************************************************
@@ -354,7 +358,7 @@ void EnterSerialNumber_State (GX_WINDOW *window, STATES_ENUM nextState)
 	GX_RECTANGLE rect;
 	UINT mySize, myBufSize;
 	int serialNumber;
-	int i;
+//	int i;
 	//GX_BOOL found; 
 
 	g_ShowTicks = FALSE;
@@ -469,12 +473,12 @@ void EnterTherapyInProgress_State (GX_WINDOW *window, STATES_ENUM nextState)
 	gx_widget_hide (&ReadyScreen.ReadyScreen_WhiteBox_Icon);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Instruction_TextView);
 
-	if (!g_TherapyInProcess)
-	{
-		g_TherapyInProcess = TRUE;
-		if (g_TherapyTime < 10)		// This allows resume from a "Power Cycle".
-			g_TherapyTime = 300;
-	}
+	//if (!g_TherapyInProcess)
+	//{
+	//	g_TherapyInProcess = TRUE;
+	//	if (g_TherapyTime < 10)		// This allows resume from a "Power Cycle".
+	//		g_TherapyTime = 300;
+	//}
 	gx_widget_show (&ReadyScreen.ReadyScreen_Time_Prompt);
 	gx_widget_show (&ReadyScreen.ReadyScreen_Minute_Prompt);
 	gx_prompt_text_set (&ReadyScreen.ReadyScreen_Time_Prompt, g_TimeString);
@@ -491,6 +495,7 @@ void EnterTherapyInProgress_State (GX_WINDOW *window, STATES_ENUM nextState)
 
 void EnterPaused_State (GX_WINDOW *window, STATES_ENUM nextState)
 {
+#if 0
 	gx_widget_hide (&ReadyScreen.ReadyScreen_PauseIcon_Button);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Instruction_TextView);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
@@ -511,6 +516,7 @@ void EnterPaused_State (GX_WINDOW *window, STATES_ENUM nextState)
 	EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
 	gx_system_timer_start(window, PAUSE_TIMER_ID, 2, 0);
 	g_State = nextState;
+#endif
 }
 
 //*************************************************************************************
@@ -518,6 +524,7 @@ void EnterPaused_State (GX_WINDOW *window, STATES_ENUM nextState)
 
 void EnterTherapyComplete_State (GX_WINDOW *window, STATES_ENUM nextState)
 {
+#if 0
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Minute_Prompt);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_Time_Prompt);
 	gx_widget_hide (&ReadyScreen.ReadyScreen_GreenTick_Icon);
@@ -536,8 +543,9 @@ void EnterTherapyComplete_State (GX_WINDOW *window, STATES_ENUM nextState)
 	g_RingOn = TRUE;
 	EnableEEPROMPT_Button (GX_FALSE, GX_FALSE, GX_FALSE, GX_FALSE, GX_TRUE);
 	g_TherapyTime = 0;
-	g_TherapyInProcess = FALSE;
+	//g_TherapyInProcess = FALSE;
 	g_State = nextState;
+#endif
 }
 
 //*************************************************************************************
@@ -594,7 +602,7 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 	UINT mySize, myBufSize;
 	GX_RECTANGLE rect;
 	INT thisSerialNumber;
-	INT i;
+//	INT i;
 
     gx_window_event_process(window, event_ptr);
 
@@ -823,53 +831,53 @@ UINT ReadyScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 				g_RingOn = TRUE;
 			}
 		}
-		else if (event_ptr->gx_event_payload.gx_event_timer_id == THERAPY_TIMER_ID)	// Therapy is done.
-		{
-			--g_TherapyTime;
-			if (g_TherapyTime <= 1)
-			{
-				EnableIdleButton (TRUE);
-				EnterTherapyComplete_State(window, STATE_THERAPY_IS_COMPLETE);
-			}
-			else
-			{
-				// Display only the remaining minutes.
-				sprintf_s (g_TimeString, sizeof (g_TimeString), "%d", g_TherapyTime / 60);
-				gx_prompt_text_set (&ReadyScreen.ReadyScreen_Time_Prompt, g_TimeString);
-				g_ShowTicks = TRUE;
-			    gx_system_dirty_mark(&ReadyScreen);      // This forces the gauge to be updated and redrawn
-				gx_system_timer_start(window, THERAPY_TIMER_ID, 2, 0);	// Resume the timer
-			}
-		}
-		else if (event_ptr->gx_event_payload.gx_event_timer_id == PAUSE_TIMER_ID)	// Pause is active.
-		{
-			gx_system_timer_start(window, PAUSE_TIMER_ID, 20, 0);	// Resume the timer
-			if (g_RingOn)
-			{
-				gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_OFF, GX_PIXELMAP_ID_STATUSRING_OFF);
-				g_RingOn = FALSE;
-			}
-			else
-			{
-				gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_BLUE, GX_PIXELMAP_ID_STATUSRING_BLUE);
-				g_RingOn = TRUE;
-			}
-		}
-		else if (event_ptr->gx_event_payload.gx_event_timer_id == STANDBY_TIMER)
-		{
-			// We're in standby, float the Standby Icon around the screen.
-			rect = ReadyScreen.ReadyScreen_ScreenSaver_Icon.gx_widget_size;
-			rect.gx_rectangle_top += 5;
-			if (rect.gx_rectangle_top > 148)
-				rect.gx_rectangle_top = 70;
-			rect.gx_rectangle_bottom = rect.gx_rectangle_top + 80;
-			rect.gx_rectangle_left += 5;
-			if (rect.gx_rectangle_left > 180)
-				rect.gx_rectangle_left = 74;
-			rect.gx_rectangle_right = rect.gx_rectangle_left + 60;
-			gx_widget_resize (&ReadyScreen.ReadyScreen_ScreenSaver_Icon, &rect);
-			gx_system_timer_start(window, STANDBY_TIMER, 20, 0);
-		}
+		//else if (event_ptr->gx_event_payload.gx_event_timer_id == THERAPY_TIMER_ID)	// Therapy is done.
+		//{
+		//	--g_TherapyTime;
+		//	if (g_TherapyTime <= 1)
+		//	{
+		//		EnableIdleButton (TRUE);
+		//		EnterTherapyComplete_State(window, STATE_THERAPY_IS_COMPLETE);
+		//	}
+		//	else
+		//	{
+		//		// Display only the remaining minutes.
+		//		sprintf_s (g_TimeString, sizeof (g_TimeString), "%d", g_TherapyTime / 60);
+		//		gx_prompt_text_set (&ReadyScreen.ReadyScreen_Time_Prompt, g_TimeString);
+		//		g_ShowTicks = TRUE;
+		//	    gx_system_dirty_mark(&ReadyScreen);      // This forces the gauge to be updated and redrawn
+		//		gx_system_timer_start(window, THERAPY_TIMER_ID, 2, 0);	// Resume the timer
+		//	}
+		//}
+		//else if (event_ptr->gx_event_payload.gx_event_timer_id == PAUSE_TIMER_ID)	// Pause is active.
+		//{
+		//	gx_system_timer_start(window, PAUSE_TIMER_ID, 20, 0);	// Resume the timer
+		//	if (g_RingOn)
+		//	{
+		//		gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_OFF, GX_PIXELMAP_ID_STATUSRING_OFF);
+		//		g_RingOn = FALSE;
+		//	}
+		//	else
+		//	{
+		//		gx_icon_pixelmap_set (&ReadyScreen.ReadyScreen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_BLUE, GX_PIXELMAP_ID_STATUSRING_BLUE);
+		//		g_RingOn = TRUE;
+		//	}
+		//}
+		//else if (event_ptr->gx_event_payload.gx_event_timer_id == STANDBY_TIMER)
+		//{
+		//	// We're in standby, float the Standby Icon around the screen.
+		//	rect = ReadyScreen.ReadyScreen_ScreenSaver_Icon.gx_widget_size;
+		//	rect.gx_rectangle_top += 5;
+		//	if (rect.gx_rectangle_top > 148)
+		//		rect.gx_rectangle_top = 70;
+		//	rect.gx_rectangle_bottom = rect.gx_rectangle_top + 80;
+		//	rect.gx_rectangle_left += 5;
+		//	if (rect.gx_rectangle_left > 180)
+		//		rect.gx_rectangle_left = 74;
+		//	rect.gx_rectangle_right = rect.gx_rectangle_left + 60;
+		//	gx_widget_resize (&ReadyScreen.ReadyScreen_ScreenSaver_Icon, &rect);
+		//	gx_system_timer_start(window, STANDBY_TIMER, 20, 0);
+		//}
 		break;
 
 	case GX_SIGNAL (SYSTEM_ERROR_BTN_ID, GX_EVENT_CLICKED):

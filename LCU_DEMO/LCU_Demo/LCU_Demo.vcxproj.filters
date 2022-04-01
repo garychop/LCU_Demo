@@ -27,9 +27,6 @@
     <ClCompile Include="..\..\SplashScreen_Handler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ReadyScreen_Handler.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Sample_Tick_Window_Handler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -67,6 +64,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\MouthpieceDetached_Screen_Handler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PressToResume_Screen_Handler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

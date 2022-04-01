@@ -46,8 +46,7 @@ VOID SerialNumber_Screen_Draw_Function (GX_WINDOW *window)
 UINT SerialNumber_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 {
 	GX_RECTANGLE rect;
-	UINT mySize, myBufSize;
-	long serialNumber;
+	int slot;
 
     gx_window_event_process(window, event_ptr);
 
@@ -60,14 +59,14 @@ UINT SerialNumber_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		gx_icon_pixelmap_set (&SerialNumber_Screen.SerialNumber_Screen_StatusRing_Icon, GX_PIXELMAP_ID_STATUSRING_BLUE, GX_PIXELMAP_ID_STATUSRING_BLUE);
 
 		// Display "Serial Number: MCAxxxxxx" in the information box
-		gx_single_line_text_input_buffer_get (&SerialNumber_Screen.base.PrimaryTemplate_SerialNumber_TextInput, &g_SerialNumber_Prompt, &mySize, &myBufSize);
-		serialNumber = atol (g_SerialNumber_Prompt);
-
-		sprintf_s (g_SerialNumberString, sizeof (g_SerialNumberString), "Serial Number:\rMCA%06d\r\r", serialNumber);
-
-		// force it into the first slot database slot for now.
-		g_Mouthpiece_DB[0].m_Active = TRUE;
-		g_Mouthpiece_DB[0].m_SerialNumber = serialNumber;
+		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+		{
+			if (g_Mouthpiece_DB[slot].m_TherapyStatus == THERAPY_READY_TO_START)
+			{
+				break;
+			}
+		}
+		sprintf_s (g_SerialNumberString, sizeof (g_SerialNumberString), "Serial Number:\rMCA%06d\r\r", g_Mouthpiece_DB[slot].m_SerialNumber);
 
 		// Show the box, color it and populate it.
 		gx_widget_show (&SerialNumber_Screen.SerialNumber_Screen_WhiteBox_Icon);
@@ -95,6 +94,8 @@ UINT SerialNumber_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 	//--------------------------------------------
 	case GX_SIGNAL (LIMIT_SWITCH_BTN_ID, GX_EVENT_CLICKED):
 		g_LimitSwitchClosed = FALSE;
+		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+			g_Mouthpiece_DB[slot].m_Attached = FALSE;
         screen_toggle((GX_WINDOW *)&InsertMouthpiece_Screen, window);
 		break;
 
