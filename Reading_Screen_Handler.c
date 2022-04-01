@@ -105,7 +105,8 @@ UINT Reading_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 					screen_toggle((GX_WINDOW *)&SerialNumber_Screen, window);	// Go confirm the "new" mouthpiece
 					break;
 				case THERAPY_IN_PROGRESS:
-					screen_toggle((GX_WINDOW *)&PressToResume_Screen, window);
+					screen_toggle((GX_WINDOW *)&SerialNumber_Screen, window);	// Go confirm the "new" mouthpiece
+					//screen_toggle((GX_WINDOW *)&PressToResume_Screen, window);
 					break;
 				case THERAPY_PAUSED:
 					screen_toggle((GX_WINDOW *)&Therapy_Screen, window);

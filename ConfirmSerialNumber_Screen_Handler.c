@@ -61,7 +61,7 @@ UINT SerialNumber_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		// Display "Serial Number: MCAxxxxxx" in the information box
 		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
 		{
-			if (g_Mouthpiece_DB[slot].m_TherapyStatus == THERAPY_READY_TO_START)
+			if (g_Mouthpiece_DB[slot].m_Attached == TRUE)
 			{
 				break;
 			}
@@ -88,7 +88,21 @@ UINT SerialNumber_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 
 	//--------------------------------------------
 	case GX_SIGNAL (PLAY_BTN_ID, GX_EVENT_CLICKED):
-        screen_toggle((GX_WINDOW *)&PressToStart_Screen, window);
+		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
+		{
+			if (g_Mouthpiece_DB[slot].m_Attached == TRUE)
+			{
+				if (g_Mouthpiece_DB[slot].m_TherapyStatus == THERAPY_IN_PROGRESS)
+				{
+					screen_toggle((GX_WINDOW *)&PressToResume_Screen, window);
+				}
+				else
+				{
+					screen_toggle((GX_WINDOW *)&PressToStart_Screen, window);
+				}
+			}
+		}
+
 		break;
 
 	//--------------------------------------------
