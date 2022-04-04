@@ -45,7 +45,7 @@ extern GX_BOOL g_LimitSwitchClosed;
 //extern INT g_TherapyTime;
 //extern THERAPY_STATUS_IDS g_TherapyInProcess;
 //extern INT g_ErrorType;
-//extern long g_SerialNumber;
+extern long g_LastAttachedSerialNumber;
 extern MOUTHPIECE_DATABASE_STRUCT g_Mouthpiece_DB[MOUTHPIECE_DB_SIZE];
 
 //-------------------------------------------------------------------------------------

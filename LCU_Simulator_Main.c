@@ -31,6 +31,7 @@ GX_COLOR           scratchpad[SCRATCHPAD_PIXELS];
 
 GX_BOOL g_LimitSwitchClosed = FALSE;
 GX_BOOL g_RingOn = FALSE;
+long g_LastAttachedSerialNumber = 0;
 
 MOUTHPIECE_DATABASE_STRUCT g_Mouthpiece_DB[MOUTHPIECE_DB_SIZE];
 

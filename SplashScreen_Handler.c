@@ -35,6 +35,7 @@ UINT SplashScreen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 	switch (event_ptr->gx_event_type)
 	{
 	case GX_EVENT_SHOW:
+		g_LastAttachedSerialNumber = 0;		// Reset the "last used mouthpiece serial number."
 		gx_system_timer_start(window, SPLASH_STARTUP_TIMER_ID, 100, 0);
 		break;
 

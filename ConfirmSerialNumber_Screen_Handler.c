@@ -92,14 +92,19 @@ UINT SerialNumber_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		{
 			if (g_Mouthpiece_DB[slot].m_Attached == TRUE)
 			{
-				if (g_Mouthpiece_DB[slot].m_TherapyStatus == THERAPY_IN_PROGRESS)
+				switch (g_Mouthpiece_DB[slot].m_TherapyStatus)
 				{
+				case THERAPY_IN_PROGRESS:
+				case THERAPY_PAUSED:
 					screen_toggle((GX_WINDOW *)&PressToResume_Screen, window);
-				}
-				else
-				{
+					break;
+				//case THERAPY_PAUSED:
+				//	screen_toggle((GX_WINDOW *)&Therapy_Screen, window);
+				//	break;
+				default:
 					screen_toggle((GX_WINDOW *)&PressToStart_Screen, window);
-				}
+					break;
+				} // end switch
 			}
 		}
 

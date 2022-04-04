@@ -78,8 +78,11 @@ UINT Reading_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 
 	//--------------------------------------------
 	case GX_SIGNAL (EEPROM_OK_BTN_ID, GX_EVENT_CLICKED):
+
+		// Get current Mouthpiece Serial Number
 		gx_single_line_text_input_buffer_get (&Reading_Screen.base.PrimaryTemplate_SerialNumber_TextInput, &g_SerialNumber_Prompt, &mySize, &myBufSize);
 		serialNumber = atol (g_SerialNumber_Prompt);
+
 		// Remove any previously attached Mouthpieces.
 		for (slot = 0; slot < MOUTHPIECE_DB_SIZE; ++slot)
 			g_Mouthpiece_DB[slot].m_Attached = FALSE;
@@ -104,17 +107,26 @@ UINT Reading_Screen_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 					g_Mouthpiece_DB[slot].m_RemainingTherapyTime = 300;
 					screen_toggle((GX_WINDOW *)&SerialNumber_Screen, window);	// Go confirm the "new" mouthpiece
 					break;
-				case THERAPY_IN_PROGRESS:
-					screen_toggle((GX_WINDOW *)&SerialNumber_Screen, window);	// Go confirm the "new" mouthpiece
-					//screen_toggle((GX_WINDOW *)&PressToResume_Screen, window);
-					break;
 				case THERAPY_PAUSED:
-					screen_toggle((GX_WINDOW *)&Therapy_Screen, window);
+				case THERAPY_IN_PROGRESS:										// It's this status if an error occurred during therapy.
+					if (g_Mouthpiece_DB[slot].m_SerialNumber == g_LastAttachedSerialNumber)	// Is it the same S/N mouthpiece?
+					{
+						screen_toggle((GX_WINDOW *)&Therapy_Screen, window);
+						//screen_toggle((GX_WINDOW *)&PressToResume_Screen, window);
+					}
+					else
+					{
+						screen_toggle((GX_WINDOW *)&SerialNumber_Screen, window);	// Go confirm the "new" mouthpiece
+					}
 					break;
+				//case THERAPY_PAUSED:
+				//	screen_toggle((GX_WINDOW *)&Therapy_Screen, window);
+				//	break;
 				case THERAPY_COMPLETE:
 			        screen_toggle((GX_WINDOW *)&DailyLimitReached_Error_Screen, window);	// Yes, tell the user that we did.
 					break;
 				} // end switch m_TherapyStatus
+				g_LastAttachedSerialNumber = g_Mouthpiece_DB[slot].m_SerialNumber;		// Save S/N as just used.
 				break; // no need to continue looking.
 			}
 		}

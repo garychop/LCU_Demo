@@ -62,6 +62,15 @@ UINT DailyLimitReached_Event_Function (GX_WINDOW *window, GX_EVENT *event_ptr)
 		gx_widget_show (&DailyLimitReached_Error_Screen.DailyLimitReached_Error_Screen_WhiteBox_Icon);
 		gx_icon_pixelmap_set (&DailyLimitReached_Error_Screen.DailyLimitReached_Error_Screen_WhiteBox_Icon, GX_PIXELMAP_ID_RED_TEXT_BOX, GX_PIXELMAP_ID_RED_TEXT_BOX);
 		DisplayInformation_InBox (&DailyLimitReached_Error_Screen.DailyLimitReached_Error_Screen_Information_TextView, "MOUTHPIECE DAILY LIMIT REACHED", 3, GX_COLOR_ID_RED);
+		// Populate the Limit Switch button with ATTACH or DETACH
+		if (g_LimitSwitchClosed == TRUE)
+		{
+			gx_text_button_text_id_set (&DailyLimitReached_Error_Screen.base.PrimaryTemplate_LimitSwitch_Button, GX_STRING_ID_DETACH);
+		}
+		else
+		{
+			gx_text_button_text_id_set (&DailyLimitReached_Error_Screen.base.PrimaryTemplate_LimitSwitch_Button, GX_STRING_ID_ATTACH);
+		}
 		break;
 
 	//--------------------------------------------
