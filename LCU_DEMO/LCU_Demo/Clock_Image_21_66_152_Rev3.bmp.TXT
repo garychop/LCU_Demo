@@ -1,0 +1,499 @@
+Color Table Follows
+
+[00] 0x231f20
+[01] 0x353335
+[02] 0x636466
+[03] 0xadafb1
+[04] 0xffffff
+[05] 0x939598
+[06] 0x7c7d80
+[07] 0xd5d6d7
+[08] 0x474749
+[09] 0xf1f1f2
+[10] 0x555658
+[11] 0xbabcbe
+[12] 0xe2e3e4
+[13] 0x88898c
+[14] 0xc8c9cb
+[15] 0xa0a2a5
+[16] 0x707173
+[17] 0x40443f
+[18] 0x75b949
+[19] 0x6a825c
+[20] 0x313231
+[21] 0x72bf44
+[22] 0x75b04d
+[23] 0x617059
+[24] 0x75a257
+[25] 0x495049
+[26] 0x71935c
+[27] 0x65795c
+[28] 0x535c50
+[29] 0x76a952
+[30] 0x739a5a
+[31] 0x6d8a5d
+[32] 0x818285
+[33] 0x666769
+[34] 0x49494b
+[35] 0x8d8f92
+[36] 0x58585a
+[37] 0x5a6756
+[38] 0xeff0f0
+[39] 0x9a9c9f
+[40] 0x363436
+[41] 0xdfe0e1
+[42] 0xa7a9ac
+[43] 0x747577
+
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 0
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 1
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 2
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 3
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 4
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 5
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 6
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 7
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 8
+Table Index = 0, Number of Pixels = 54
+------------------- Line # = 9
+Table Index = 0, Number of Pixels = 3
+Table Index = 1, Number of Pixels = 1
+Table Index = 2, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 49
+------------------- Line # = 10
+Table Index = 0, Number of Pixels = 3
+Table Index = 3, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 5, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 48
+------------------- Line # = 11
+Table Index = 0, Number of Pixels = 2
+Table Index = 6, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 3
+Table Index = 7, Number of Pixels = 1
+Table Index = 8, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 46
+------------------- Line # = 12
+Table Index = 0, Number of Pixels = 1
+Table Index = 8, Number of Pixels = 1
+Table Index = 9, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 4
+Table Index = 9, Number of Pixels = 1
+Table Index = 6, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 45
+------------------- Line # = 13
+Table Index = 0, Number of Pixels = 1
+Table Index = 10, Number of Pixels = 1
+Table Index = 9, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 3, Number of Pixels = 1
+Table Index = 1, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 43
+------------------- Line # = 14
+Table Index = 0, Number of Pixels = 2
+Table Index = 1, Number of Pixels = 1
+Table Index = 11, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 12, Number of Pixels = 1
+Table Index = 10, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 42
+------------------- Line # = 15
+Table Index = 0, Number of Pixels = 4
+Table Index = 13, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 7
+Table Index = 5, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 41
+------------------- Line # = 16
+Table Index = 0, Number of Pixels = 5
+Table Index = 10, Number of Pixels = 1
+Table Index = 7, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 14, Number of Pixels = 1
+Table Index = 1, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 39
+------------------- Line # = 17
+Table Index = 0, Number of Pixels = 6
+Table Index = 1, Number of Pixels = 1
+Table Index = 15, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 9, Number of Pixels = 1
+Table Index = 16, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 38
+------------------- Line # = 18
+Table Index = 0, Number of Pixels = 8
+Table Index = 16, Number of Pixels = 1
+Table Index = 9, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 15, Number of Pixels = 1
+Table Index = 1, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 36
+------------------- Line # = 19
+Table Index = 0, Number of Pixels = 9
+Table Index = 8, Number of Pixels = 1
+Table Index = 14, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 7, Number of Pixels = 1
+Table Index = 10, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 35
+------------------- Line # = 20
+Table Index = 0, Number of Pixels = 11
+Table Index = 5, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 9, Number of Pixels = 1
+Table Index = 13, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 34
+------------------- Line # = 21
+Table Index = 17, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 11
+Table Index = 10, Number of Pixels = 1
+Table Index = 12, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 11, Number of Pixels = 1
+Table Index = 1, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 32
+------------------- Line # = 22
+Table Index = 18, Number of Pixels = 1
+Table Index = 19, Number of Pixels = 1
+Table Index = 20, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 10
+Table Index = 1, Number of Pixels = 1
+Table Index = 3, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 9, Number of Pixels = 1
+Table Index = 2, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 31
+------------------- Line # = 23
+Table Index = 21, Number of Pixels = 2
+Table Index = 22, Number of Pixels = 1
+Table Index = 23, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 11
+Table Index = 6, Number of Pixels = 1
+Table Index = 9, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 5, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 30
+------------------- Line # = 24
+Table Index = 21, Number of Pixels = 4
+Table Index = 24, Number of Pixels = 1
+Table Index = 25, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 10
+Table Index = 8, Number of Pixels = 1
+Table Index = 7, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 7, Number of Pixels = 1
+Table Index = 8, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 28
+------------------- Line # = 25
+Table Index = 19, Number of Pixels = 1
+Table Index = 18, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 4
+Table Index = 26, Number of Pixels = 1
+Table Index = 20, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 10
+Table Index = 5, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 9, Number of Pixels = 1
+Table Index = 6, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 27
+------------------- Line # = 26
+Table Index = 0, Number of Pixels = 1
+Table Index = 17, Number of Pixels = 1
+Table Index = 26, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 4
+Table Index = 18, Number of Pixels = 1
+Table Index = 27, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 10
+Table Index = 2, Number of Pixels = 1
+Table Index = 9, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 11, Number of Pixels = 1
+Table Index = 1, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 25
+------------------- Line # = 27
+Table Index = 0, Number of Pixels = 3
+Table Index = 28, Number of Pixels = 1
+Table Index = 29, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 4
+Table Index = 22, Number of Pixels = 1
+Table Index = 28, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 9
+Table Index = 1, Number of Pixels = 1
+Table Index = 11, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 12, Number of Pixels = 1
+Table Index = 10, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 24
+------------------- Line # = 28
+Table Index = 0, Number of Pixels = 5
+Table Index = 23, Number of Pixels = 1
+Table Index = 18, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 4
+Table Index = 24, Number of Pixels = 1
+Table Index = 17, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 9
+Table Index = 13, Number of Pixels = 1
+Table Index = 9, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 5, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 23
+------------------- Line # = 29
+Table Index = 0, Number of Pixels = 6
+Table Index = 20, Number of Pixels = 1
+Table Index = 19, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 5
+Table Index = 19, Number of Pixels = 1
+Table Index = 20, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 8
+Table Index = 10, Number of Pixels = 1
+Table Index = 7, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 14, Number of Pixels = 1
+Table Index = 8, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 21
+------------------- Line # = 30
+Table Index = 0, Number of Pixels = 8
+Table Index = 17, Number of Pixels = 1
+Table Index = 24, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 4
+Table Index = 18, Number of Pixels = 1
+Table Index = 23, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 8
+Table Index = 1, Number of Pixels = 1
+Table Index = 15, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 9, Number of Pixels = 1
+Table Index = 16, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 20
+------------------- Line # = 31
+Table Index = 0, Number of Pixels = 10
+Table Index = 28, Number of Pixels = 1
+Table Index = 22, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 4
+Table Index = 24, Number of Pixels = 1
+Table Index = 28, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 8
+Table Index = 16, Number of Pixels = 1
+Table Index = 9, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 15, Number of Pixels = 1
+Table Index = 1, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 18
+------------------- Line # = 32
+Table Index = 0, Number of Pixels = 12
+Table Index = 19, Number of Pixels = 1
+Table Index = 18, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 4
+Table Index = 26, Number of Pixels = 1
+Table Index = 17, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 7
+Table Index = 1, Number of Pixels = 1
+Table Index = 14, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 7, Number of Pixels = 1
+Table Index = 10, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 17
+------------------- Line # = 33
+Table Index = 0, Number of Pixels = 13
+Table Index = 20, Number of Pixels = 1
+Table Index = 26, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 4
+Table Index = 18, Number of Pixels = 1
+Table Index = 19, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 8
+Table Index = 13, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 6
+Table Index = 9, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 17
+------------------- Line # = 34
+Table Index = 26, Number of Pixels = 1
+Table Index = 17, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 13
+Table Index = 25, Number of Pixels = 1
+Table Index = 24, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 4
+Table Index = 26, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 8
+Table Index = 10, Number of Pixels = 1
+Table Index = 12, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 4
+Table Index = 6, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 17
+------------------- Line # = 35
+Table Index = 21, Number of Pixels = 2
+Table Index = 30, Number of Pixels = 1
+Table Index = 28, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 13
+Table Index = 23, Number of Pixels = 1
+Table Index = 22, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 2
+Table Index = 28, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 9
+Table Index = 1, Number of Pixels = 1
+Table Index = 3, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 2
+Table Index = 11, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 18
+------------------- Line # = 36
+Table Index = 21, Number of Pixels = 4
+Table Index = 29, Number of Pixels = 1
+Table Index = 23, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 12
+Table Index = 20, Number of Pixels = 1
+Table Index = 19, Number of Pixels = 1
+Table Index = 30, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 12
+Table Index = 16, Number of Pixels = 1
+Table Index = 7, Number of Pixels = 1
+Table Index = 1, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 18
+------------------- Line # = 37
+Table Index = 24, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 5
+Table Index = 22, Number of Pixels = 1
+Table Index = 27, Number of Pixels = 1
+Table Index = 20, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 45
+------------------- Line # = 38
+Table Index = 0, Number of Pixels = 1
+Table Index = 28, Number of Pixels = 1
+Table Index = 26, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 5
+Table Index = 18, Number of Pixels = 1
+Table Index = 31, Number of Pixels = 1
+Table Index = 17, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 26
+Table Index = 32, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 5
+Table Index = 33, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 2
+Table Index = 33, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 6
+------------------- Line # = 39
+Table Index = 0, Number of Pixels = 3
+Table Index = 17, Number of Pixels = 1
+Table Index = 26, Number of Pixels = 1
+Table Index = 18, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 5
+Table Index = 26, Number of Pixels = 1
+Table Index = 25, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 24
+Table Index = 34, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 35, Number of Pixels = 1
+Table Index = 36, Number of Pixels = 3
+Table Index = 0, Number of Pixels = 3
+Table Index = 32, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 6
+------------------- Line # = 40
+Table Index = 0, Number of Pixels = 5
+Table Index = 20, Number of Pixels = 1
+Table Index = 19, Number of Pixels = 1
+Table Index = 22, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 5
+Table Index = 24, Number of Pixels = 1
+Table Index = 37, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 23
+Table Index = 35, Number of Pixels = 1
+Table Index = 38, Number of Pixels = 1
+Table Index = 39, Number of Pixels = 1
+Table Index = 40, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 4
+Table Index = 32, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 6
+------------------- Line # = 41
+Table Index = 0, Number of Pixels = 8
+Table Index = 23, Number of Pixels = 1
+Table Index = 22, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 5
+Table Index = 22, Number of Pixels = 1
+Table Index = 23, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 22
+Table Index = 33, Number of Pixels = 1
+Table Index = 41, Number of Pixels = 1
+Table Index = 38, Number of Pixels = 1
+Table Index = 33, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 3
+Table Index = 32, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 6
+------------------- Line # = 42
+Table Index = 0, Number of Pixels = 10
+Table Index = 28, Number of Pixels = 1
+Table Index = 24, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 5
+Table Index = 19, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 23
+Table Index = 39, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 40, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 2
+Table Index = 32, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 6
+------------------- Line # = 43
+Table Index = 0, Number of Pixels = 12
+Table Index = 17, Number of Pixels = 1
+Table Index = 26, Number of Pixels = 1
+Table Index = 21, Number of Pixels = 3
+Table Index = 17, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 19
+Table Index = 33, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 40, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 2
+Table Index = 4, Number of Pixels = 1
+Table Index = 32, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 3
+Table Index = 0, Number of Pixels = 6
+------------------- Line # = 44
+Table Index = 0, Number of Pixels = 14
+Table Index = 17, Number of Pixels = 1
+Table Index = 19, Number of Pixels = 2
+Table Index = 0, Number of Pixels = 20
+Table Index = 40, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 39, Number of Pixels = 1
+Table Index = 36, Number of Pixels = 1
+Table Index = 35, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 34, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 1
+Table Index = 40, Number of Pixels = 1
+Table Index = 42, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 6
+------------------- Line # = 45
+Table Index = 17, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 37
+Table Index = 33, Number of Pixels = 1
+Table Index = 41, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 38, Number of Pixels = 1
+Table Index = 43, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 3
+Table Index = 40, Number of Pixels = 1
+Table Index = 4, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 6
+------------------- Line # = 46
+Table Index = 21, Number of Pixels = 1
+Table Index = 29, Number of Pixels = 1
+Table Index = 27, Number of Pixels = 1
+Table Index = 17, Number of Pixels = 1
+Table Index = 0, Number of Pixels = 50
+------------------- Line # = 47
+
+
+Total Number of Bytes = 1604
